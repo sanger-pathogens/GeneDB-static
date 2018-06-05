@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FAVICON -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+
+  <!-- PAGE TITLE -->
+  <title>GeneDB - Data Release Policy</title>
+
+  <!-- PLUGIN CSS STYLES -->
+  <!-- BOOTSTRAP-4.0.0 -->
+  <link href="css/bootstrap-4.0.0/bootstrap.min.css" rel="stylesheet">
+  <!-- FONTAWESOME-5.0.13 -->
+  <link href="css/fontawesome-5.0.13/fontawesome-all.css" rel="stylesheet">
+
+  <!-- CUSTOM CSS STYLES -->
+  <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body class="body-wrapper static">
+  <!-- START MAIN WRAPPER -->
+  <div class="main-wrapper">
+    
+    <!-- HEADER INCLUDE -->
+    <div class="container include-me" id="header" data-location="./includes/header.html"></div>
+
+    <!-- START MAIN BODY CONTENT -->
+    <div class="container main-content">
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- START DATA RELEASE -->
+          <h1>Data Release Policy</h1>
+          <section class="data-release-section main-content-panel" id="dataReleaseSection">
+            <div class="card bg-light-grey border-rounded" id="data-release">
+              <div class="card-body">
+                <h3 class="card-sub-title">Our commitment</h3>
+                <p class="card-text">
+                   The <a href="https://sanger.ac.uk" target="_blank">Wellcome Sanger Institute</a> is committed to data sharing wherever possible. This maximises the value and scientific 
+                   impact of the data, and ensures transparency and equity in exploitation of the opportunities created.</p>
+                <p class="card-text">
+                  For more information about the Institute's data policies, please refer to our <a href="https://www.sanger.ac.uk/about/who-we-are/policies/open-access-science" target="_blank">policies</a> page, which has sections on 
+                  <a href="https://www.sanger.ac.uk/about/who-we-are/policies/open-access-science#data1" target="_blank">data sharing</a> and use. 
+                </p>
+
+                <h3 class="card-sub-title">Types of genome</h3>
+                <p class="card-text">Annotated sequences represented in GeneDB are of two main types:</p>
+                <ul class="card-text">
+                  <li>those already available from public sequence databases (e.g. NCBI or EMBL)</li>
+                  <li>for some organisms, unfinished, assembled shotgun contigs, with semi-automatic analyses and annotation</li>
+                </ul>
+                <p class="card-text">Sequence datasets are available for the organisms represented in GeneDB.</p>
+
+                <h3 class="card-sub-title">Obtaining permission</h3>
+                <p class="card-text">Please note that permission of the principal investigator should be obtained before publishing solely bioinformatic analyses (e.g. metabolic reconstruction, synteny) of unpublished sequence/open reading frames/genes on a chromosome- or genome-wide scale.</p>
+
+                <p class="card-text">Datasets (both sequence and analyses) are updated on a regular basis. As there has been a considerable investment in both acquiring the data, and undertaking these analyses, we request that you follow the accompanying guidelines when using data obtained directly from the GeneDB web site. Data or analyses obtained from "external" sources (e.g. keywords from <a href="http://www.ebi.ac.uk/swissprot/" target="_blank">SWISSPROT</a>) should be credited as appropriate to the originating source, which in some cases, holds copyright.</p>
+                
+                <h3 class="card-sub-title">Acknowledgement</h3>
+                <p class="card-text">Users of sequence data from the sequencing centres (see below) should not publish or otherwise disseminate the information without acknowledgement. An appropriate format is as follows:</p>
+                <p class="card-text"><b>These data were produced by the <em>xxx</em> Sequencing Group at the <em>yyy</em> Sequencing Centre and can be obtained from <em>zzz</em>.</b></p>
+                <p class="card-text">Where "<em>xxx</em>" is the name of the relevant sequencing project, such as "<em>Trypanosoma brucei</em>" , "<em>yyy</em>" is the sequencing centre/submitter, and "<em>zzz</em>" is either an appropriate ftp directory, or a http URL, whence the data have been obtained. If an EMBL/Genbank accession number has been assigned to a sequence, this should be also be quoted.</p>
+                <p class="card-text">For sequencing projects that are still in progress (e.g. <em>Leishmania</em>), please ensure that you use the latest available version of unfinished sequences.</p>
+
+                <table class="acknowledgement-table" id="acknowledgementTable">
+                  <tr>
+                    <th>Organism</th>
+                    <th>Sequencing Centres</th>
+                  </tr>
+                  <tr>
+                    <td><em>Aspergillus fumigatus</em></td>
+                    <td>
+                      <a href="http://www.sanger.ac.uk/Projects/A_fumigatus/" target="_blank">Sanger Institute</a>
+                      <br />
+                      <a href="http://www.jcvi.org/" target="_blank">JCVI</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><em>Leishmania</em></td>
+                    <td>
+                      <a href="http://www.sanger.ac.uk/Projects/L_major/" target="_blank">Sanger Institute/EULEISH</a>
+                      <br />
+                      <a href="http://www.sbri.org/Home/" target="_blank">Seattle Biomedical Research Institute</a>
+                      <br />
+                      <a href="http://www.fmrp.usp.br/" target="_blank">FMRP</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><em>Trypanosoma brucei</em></td>
+                    <td>
+                      <a href="http://www.sanger.ac.uk/Projects/T_brucei/" target="_blank">Sanger Institute/EULEISH</a>
+                      <br />
+                      <a href="http://www.jcvi.org/" target="_blank">JCVI</a>
+                    </td>
+                  </tr>
+                </table>
+
+                <h3 class="card-sub-title">Queries</h3>
+                <p class="card-text">If you have any questions regarding the sequencing data, analyses, or their use in publications, please contact the appropriate organism curator or project manager, whose details are available on the pertinent home pages. Please note that we welcome input and comments from the community, whose contribution will be credited accordingly (see our privacy policy).</p>
+
+                <h3 class="card-sub-title">DISCLAIMER</h3>
+                <p class="card-text">The data within GeneDB are provided in good faith, but no guarantee, express or implied, can be made as to their accuracy. We do not assume any legal liability or responsibility for any purpose for which the data are used.</p>
+              </div>
+            </div>
+          </section>
+          <!-- END DATA RELEASE -->
+        </div>
+      </div>
+    </div>
+    <!-- END MAIN BODY CONTENT -->
+
+    <!-- FOOTER INCLUDE -->
+    <div class="container include-me" id="footer" data-location="./includes/footer.html"></div>
+  </div>
+  <!-- END MAIN WRAPPER -->
+
+  <!-- SCRIPTS -->
+  <!-- jQuery 3.3.1 -->
+  <script src="js/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap 4.0.0 -->
+  <script src="js/bootstrap-4.0.0/bootstrap.min.js"></script>
+  <!-- Custom -->
+  <script src="js/custom.js"></script>
+
+</body>
+
+</html>

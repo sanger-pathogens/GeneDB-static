@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FAVICON -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+
+  <!-- PAGE TITLE -->
+  <title>GeneDB - Home</title>
+
+  <!-- PLUGIN CSS -->
+  <!-- BOOTSTRAP-4.0.0 -->
+  <link href="css/bootstrap-4.0.0/bootstrap.min.css" rel="stylesheet">
+  <!-- FONTAWESOME-5.0.13 -->
+  <link href="css/fontawesome-5.0.13/fontawesome-all.css" rel="stylesheet">
+
+  <!-- CUSTOM CSS -->
+  <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body class="body-wrapper static">
+  <!-- START MAIN WRAPPER -->
+  <div class="main-wrapper">
+
+    <!-- HEADER INCLUDE -->
+    <div class="container include-me" id="header" data-location="./includes/header.html"></div>
+    <!-- START MAIN BODY CONTENT -->
+    <div class="container main-content">
+      <div class="row">
+        <!-- START LEFT CONTENT -->
+        <div class="col-lg-9 col-md-12" id="mainLeftContent">
+          <div class="row">
+            <!-- START DATASET CONTAINER -->
+            <div class="col-lg-12" id="datasetContainer">
+              <h1>Datasets</h1>
+              <!-- START DATASET PANEL -->
+              <section class="dataset main-content-panel">
+                <div class="bg-light-grey border-rounded">
+                  <div class="row">
+                    <!-- START Apicomplexan Protozoa -->
+                    <div class="col-lg-6 col-md-12">
+                      <div class="dataset-panel text-center" id="ApicomplexanProtozoaPanel">
+                        <h3 class="card-title">Apicomplexan Protozoa</h3>
+                        <img src="img/dataset-apicomplexan-protozoa.jpg" class="rounded mx-auto d-block" alt="apicomplexan protozoa">
+                        <div class="input-group">
+                          <select class="custom-select select-link form-control" id="apicomplexanProtozoa">
+                            <option selected value="">Choose...</option>
+                          </select>
+                          <span class="input-group-btn">
+                            <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Apicomplexan Protozoa -->
+                    <!-- START Kinetoplastid Protozoa -->
+                    <div class="col-lg-6 col-md-12">
+                      <div class="dataset-panel text-center" id="kinetoplastidProtozoaPanel">
+                        <h3 class="card-title">Kinetoplastid Protozoa</h3>
+                        <img src="img/dataset-kinetoplastid-protozoa.jpg" class="rounded mx-auto d-block" alt="kinetoplastid protozoa">
+                        <div class="input-group">
+                          <select class="custom-select select-link form-control" id="kinetoplastidProtozoa">
+                            <option selected value="">Choose...</option>
+                          </select>
+                          <span class="input-group-btn">
+                            <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Kinetoplastid Protozoa -->
+                  </div>
+                  <div class="row">
+                    <!-- START Parasitic Helminths -->
+                    <div class="col-lg-6 col-md-12">
+                      <div class="dataset-panel text-center" id="parasiticHelminthsPanel">
+                        <h3 class="card-title">Parasitic Helminths</h3>
+                        <img src="img/dataset-parasitic-helminths.jpg" class="rounded mx-auto d-block" alt="parasitic helminths">
+                        <div class="input-group">
+                          <select class="custom-select select-link form-control" id="parasiticHelminths">
+                            <option selected value="">Choose...</option>
+                          </select>
+                          <span class="input-group-btn">
+                            <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Parasitic Helminths -->
+                    <!-- START Parasitic Vectors -->
+                    <div class="col-lg-6 col-md-12">
+                      <div class="dataset-panel text-center" id="parasiticVectorsPanel">
+                        <h3 class="card-title">Parasitic Vectors</h3>
+                        <img src="img/dataset-parasite-vectors.jpg" class="rounded mx-auto d-block" alt="apicomplexan protozoa">
+                        <div class="input-group">
+                          <select class="custom-select select-link form-control" id="parasiticVectors">
+                            <option selected value="">Choose...</option>
+                            <option value="parasite-vectors">Parasite vectors</option>
+                          </select>
+                          <span class="input-group-btn">
+                            <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Parasitic Vectors -->
+                  </div>
+                </div>
+              </section>
+              <!-- END DATASET PANEL -->
+            </div>
+            <!-- END DATASET CONTAINER -->
+          </div>
+          <div class="row">
+            <!-- START SEQUENCE SEARCHES -->
+            <div class="col-lg-6 col-md-12">
+              <section class="events main-content-panel" id="sequenceSearchesSection">
+                <h1 class="card-title">Sequence searches</h1>
+                <div class="card bg-light-grey border-rounded" id="sequenceSearches">
+                  <div class="card-body">
+                    <p class="card-text">Blast
+                      <span>
+                        <i class="fas fa-angle-double-right card-link-icon"></i>
+                        <a href="#" target="_blank" class="card-link">Single organism</a>
+                      </span>
+                      <span>
+                        <i class="fas fa-angle-double-right card-link-icon"></i>
+                        <a href="#" target="_blank" class="card-link">Multi-organism (proteins)</a>
+                      </span>
+                      <span>
+                        <i class="fas fa-angle-double-right card-link-icon"></i>
+                        <a href="#" target="_blank" class="card-link">Multi-organism (transcripts and contigs/chromosomes)</a>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- END SEQUENCE SEARCHES -->
+            <!-- START GO TO LINKS -->
+            <div class="col-lg-6 col-md-12">
+              <section class="events main-content-panel" id="goToSection">
+                <h1 class="card-title">Go to our…</h1>
+                <div class="card bg-light-grey border-rounded" id="goTo">
+                  <div class="card-body">
+                    <p class="card-text">
+                      <span>
+                        <i class="fas fa-angle-double-right card-link-icon"></i>
+                        <a href="#" target="_blank" class="card-link">Query page</a></span>
+                      <span>
+                        <i class="fas fa-angle-double-right card-link-icon"></i>
+                        <a href="#" target="_blank" class="card-link">Web Artemis</a>
+                      </span>
+                      <span>
+                        <i class="fas fa-angle-double-right card-link-icon"></i>
+                        <a href="#" target="_blank" class="card-link">AmiGO</a>
+                      </span>
+                      <span>
+                        <i class="fas fa-angle-double-right card-link-icon"></i>
+                        <a href="#" target="_blank" class="card-link">JBrowse</a>
+                      </span>
+                      <span>
+                        <i class="fas fa-angle-double-right card-link-icon"></i>
+                        <a href="http://lists.sanger.ac.uk/mailman/listinfo/genedb-info" target="_blank" class="card-link">Mailing list</a>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- END GO TO LINKS-->
+          </div>
+        </div>
+        <!-- END LEFT CONTENT -->
+        <!-- START RIGHT CONTENT -->
+        <div class="col-lg-3 col-md-12">
+          <!-- START EVENTS -->
+          <section class="main-content-panel" id="eventsSection">
+            <h1 class="card-title">Events</h1>
+            <div class="card bg-light-blue border-rounded" id="events">
+              <div class="card-body">
+                <p class="card-text">There are no events planned at this time.</p>
+              </div>
+            </div>
+          </section>
+          <!-- END EVENTS -->
+          <!-- START NEWS -->
+          <section class="main-content-panel" id="newsSection">
+            <h1 class="card-title">News</h1>
+            <div class="card bg-light-grey border-rounded" id="news">
+              <div class="card-body">
+                <p class="card-text">There is no current news at the moment.</p>
+              </div>
+            </div>
+          </section>
+          <!-- END NEWS -->
+          <!-- START WEB SERVICES -->
+          <section class="main-content-panel" id="webServicesSection">
+            <h1 class="card-title">Web services</h1>
+            <div class="card bg-light-blue border-rounded" id="webServices">
+              <div class="card-body">
+                <p class="card-text">Are available for GeneDB:
+                  <span>
+                    <i class="fas fa-angle-double-right card-link-icon"></i>
+                    <a href="http://www.genedb.org/services" target="_blank" class="card-link">Web services</a>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </section>
+          <!-- END WEB SERVICES -->
+          <!-- START INFORMATION -->
+          <section class="main-content-panel-last" id="informationSection">
+            <h1 class="card-title">Information</h1>
+            <div class="card bg-light-blue border-rounded" id="information">
+              <div class="card-body">
+                <p class="card-text">
+                  Data
+                  <span>
+                    <i class="fas fa-angle-double-right card-link-icon"></i>
+                    <a href="data-release.html" target="_blank" class="card-link">Data Release Policy</a>
+                  </span>
+                </p>
+                <p class="card-text">
+                  Sequencing Projects
+                  <span><i class="fas fa-angle-double-right card-link-icon"></i>
+                    <a href="https://www.sanger.ac.uk/resources/downloads/protozoa/" target="_blank" class="card-link">Eukaryotes (Protozoa)</a>
+                  </span>
+                </p>
+                <p class="card-text">
+                  Software
+                  <span>
+                    <i class="fas fa-angle-double-right card-link-icon"></i>
+                    <a href="https://www.sanger.ac.uk/science/tools/artemis-comparison-tool-act" target="_blank" class="card-link">ACT</a>
+                  </span>
+                  <span>
+                    <i class="fas fa-angle-double-right card-link-icon"></i>
+                    <a href="https://www.sanger.ac.uk/science/tools/artemis" target="_blank" class="card-link">Artemis</a>
+                    <span>
+                </p>
+                <p class="card-text">
+                  Contributors
+                  <span>
+                    <i class="fas fa-angle-double-right card-link-icon"></i>
+                    <a href="acknowledgements.html" target="_blank" class="card-link">Acknowledgements</a>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </section>
+          <!-- END INFORMATION -->
+        </div>
+        <!-- END RIGHT CONTENT -->
+      </div>
+    </div>
+    <!-- END MAIN BODY CONTENT -->
+
+    <!-- FOOTER INCLUDE -->
+    <div class="container include-me" id="footer" data-location="./includes/footer.html"></div>
+  </div>
+  <!-- END MAIN WRAPPER -->
+
+  <!-- SCRIPTS -->
+  <!-- jQuery 3.3.1 -->
+  <script src="js/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap 4.0.0 -->
+  <script src="js/bootstrap-4.0.0/bootstrap.min.js"></script>
+  <!-- Custom -->
+  <script src="js/custom.js"></script>
+</body>
+</html>

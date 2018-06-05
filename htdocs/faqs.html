@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FAVICON -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+
+  <!-- PAGE TITLE -->
+  <title>GeneDB - FAQs</title>
+
+  <!-- PLUGIN CSS STYLES -->
+  <!-- BOOTSTRAP-4.0.0 -->
+  <link href="css/bootstrap-4.0.0/bootstrap.min.css" rel="stylesheet">
+  <!-- FONTAWESOME-5.0.13 -->
+  <link href="css/fontawesome-5.0.13/fontawesome-all.css" rel="stylesheet">
+
+  <!-- CUSTOM CSS STYLES -->
+  <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body class="body-wrapper static">
+  <div class="main-wrapper">
+    
+    <!-- HEADER INCLUDE -->
+    <div class="container include-me" id="header" data-location="./includes/header.html"></div>
+
+    <!-- START MAIN BODY CONTENT -->
+    <div class="container main-content">
+      <div class="row">
+        <!-- START LEFT CONTENT -->
+        <div class="col-lg-8 col-md-12">
+          <!-- START FAQS -->
+          <section class="about-genedb main-content-panel" id="faqSection">
+            <h1 class="card-title">Frequently Asked Questions</h1>
+            <!-- START ACCORDIAN -->
+            <div id="accordion" id="faqs">
+              <!-- START collapseOne -->
+              <div class="card">
+                <div class="card-header bg-light-grey" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <p class="faq-header">I've found my favourite protein, how do I download the fasta?</p>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body faq-content">
+                    <ol>
+                      <li>From the gene page of your protein, click <b>ADD TO BASKET</b>.</li>
+                      <li>Choose the <b>History</b> option from the <b>Tools</b> menu.</li>
+                      <li>Click the <b>Download</b> link for your search.</li>
+                      <li>Set <b>Output Format</b> to <b>FASTA Sequences</b>, choose the fields required for the fasta header and select <b>Protein sequence</b> as <b>Sequence type</b>.</li>
+                      <li>Choose <b>Normal Page</b> as output destination and click <b>Submit Query</b>.</li>
+                  </div>
+                </div>
+              </div>
+              <!-- END collapseOne -->
+              <!-- START collapseTwo -->
+              <div class="card">
+                <div class="card-header bg-light-grey" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  <p class="faq-header">Can I download all proteins from my favourite species?</p>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                  <div class="card-body faq-content">
+                    <ol>
+                      <li>From the species front page, select the <b>Gene Type</b> search.</li>
+                      <li>Select <b>protein-coding</b> as <b>Gene Type</b> and click <b>Submit</b>.</li>
+                      <li>Choose the <b>History</b> option from the <b>Tools</b> menu.</li>
+                      <li>Click the <b>Download</b> link for your search.</li>
+                      <li>Set <b>Output Format</b> to <b>FASTA Sequences</b>, choose the fields required for the fasta header and select <b>Protein sequence</b> as <b>Sequence type</b>.</li>
+                      <li>Choose either <b>Normal Page</b> or <b>Email to</b> as output destination and click <b>Submit Query</b>. It is recommended that larger downloads should be emailed rather than output to screen.</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <!-- END collapseTwo -->
+              <!-- START collapseThree -->
+              <div class="card">
+                <div class="card-header bg-light-grey" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <p class="faq-header">I've searched for my favourite protein, and yesterday it was there, but now I can't find it. Where is it?</p>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                  <div class="card-body faq-content">
+                    <p>There are two probable reasons for this:</p>
+                    <ol>
+                      <li>GeneDB is updated every 24 hours and sometimes gene models may be changed by a curator. Two gene models may be merged, a gene model may be split into two 
+                      genes or it may be decided that a gene model is not real.</li>
+                      <li>There is a known bug in GeneDB in which gene models are not indexed for GeneDB's searches.</li>
+                    </ol>
+                    <p>In both cases, we'd recommend first checking the <b>Annotation Statistics</b> link on the organism home page. This lists all annotation changes in the last 120 days. If this fails, we'd recommend searching for gene models with similar IDs or looking at the contig the gene model was previously found to be on, using the gene page maps, to check whether the gene is genuinely absent. If not, check again in 24 hours and then please email the GeneDB helpdesk so the status of the gene can be investigated further.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- END collapseThree -->
+              <!-- START collapseFour -->
+              <div class="card">
+                <div class="card-header bg-light-grey" id="headingFour" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  <p class="faq-header">Can I download the whole genome?</p>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                  <div class="card-body faq-content">
+                    <p>Whole genome download is not available directly from GeneDB. However, the front page for most organisms contains an FTP link from which the full genome can usually be downloaded.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- END collapseFour -->
+              <!-- START collapseFive -->
+              <div class="card">
+                <div class="card-header bg-light-grey" id="headingFive" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  <p class="faq-header">How can I see/access RNAseq evidence for my favourite gene?</p>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                  <div class="card-body faq-content">
+                    <p>GeneDB currently only has RNA-Seq data available for <em>Schistosoma mansoni</em>. However, all RNA-Seq data sequenced at the Wellcome Sanger Institute should 
+                    be available via the <a href="http://www.ebi.ac.uk/ena/" target="_blank">European Nucelotide Archive</a>. Please contact the 
+                    <a href="mailto:genedb-help@sanger.ac.uk">GeneDB helpdesk</a> for further details.</p>
+                    <p>Where RNA-Seq evidence is present for an organism, to access it from the gene page, click the link to view your region of interest in a separate Web 
+                    Artemis window. From the View pulldown menu, the BAM option should list all available BAM files of RNA-Seq data.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- END collapseFive -->
+              <!-- START collapseSix -->
+              <div class="card">
+                <div class="card-header bg-light-grey" id="headingSix" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                  <p class="faq-header">What happened to the previous version of the GeneDB website?</p>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                  <div class="card-body faq-content">
+                    <p>The old GeneDB website was switched off on May 14th 2013. Content from the fission yeast <em>Schizosaccharomyces pombe</em> can now be found in 
+                    <a href="http://www.pombase.org/" target="_blank">Pombase</a>. Content from the pathogenic fungus <em>Candida dubliniensis</em> can now be found in 
+                    the <a href="http://www.candidagenome.org/" target="_blank">Candida Genome Database</a>. All other content is now found on this site.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- END collapseSix -->
+              <!-- START collapseSeven -->
+              <div class="card">
+                <div class="card-header bg-light-grey" id="headingSix" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                  <p class="faq-header">How do I cite GeneDB?</p>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                  <div class="card-body faq-content">
+                    <p>Please cite the current <a href="http://nar.oxfordjournals.org/content/40/D1/D98" target="_blank">GeneDB publication</a>.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- END collapseSeven -->
+            </div>
+            <!-- END ACCORDIAN -->
+          </section>
+          <!-- END FAQS -->
+        </div>
+        <!-- END LEFT CONTENT -->
+        <!-- START RIGHT CONTENT -->
+        <div class="col-lg-4 col-md-12">
+          <!-- About GeneDB INCLUDE -->
+          <div class="container include-me" id="footer" data-location="./includes/about-genedb.html"></div>
+        </div>
+        <!-- END RIGHT CONTENT -->
+      </div>
+    </div>
+    <!-- END MAIN BODY CONTENT -->
+
+    <!-- FOOTER INCLUDE -->
+    <div class="container include-me" id="footer" data-location="./includes/footer.html"></div>
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <!-- jQuery 3.3.1 -->
+  <script src="js/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap 4.0.0 -->
+  <script src="js/bootstrap-4.0.0/bootstrap.min.js"></script>
+  <!-- Custom -->
+  <script src="js/custom.js"></script>
+
+</body>
+
+</html>
