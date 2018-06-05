@@ -2,7 +2,6 @@
 
 body {
   font-family: Tahoma, Verdana, sans-serif !important;
-  /*background: url(../img/body-bg.gif) repeat-y top center #999999*/
 }
 
 h1 {
@@ -21,10 +20,6 @@ a {
 
 .container-fluid {
   padding: 0;
-}
-
-.container {
-  /*width: 916px;*/
 }
 
 .bg-light-grey {
@@ -55,7 +50,6 @@ a {
 /*=== NAVBAR ===*/
 
 .navbar {
-  /*background: linear-gradient(#4e95c2, #396f90);*/
   background: linear-gradient(#4e95c2, #396f90);
   border-radius: .5rem !important;
 }
@@ -67,11 +61,8 @@ a {
 }
 
 .navbar-header .navbar-brand > img {
-  /*padding: 0 80px;
-  width:90%;*/
-
   padding: 18px 0;
-  width: 290px;
+  width: 280px;
 }
 
 .navbar-nav {
@@ -80,7 +71,7 @@ a {
 
 @media screen and (max-width: 289px) {
   .navbar-header .navbar-brand > img {
-    width: 100%;
+    width: 95%;
   }
 }
 
