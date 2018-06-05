@@ -39,7 +39,7 @@ jQuery(document).ready(function(){
     var dataset = select.parent();
     var link = $('a', dataset);
     if( select.attr('id') == 'parasiteVectors') {
-      link.attr('href', '/parasite-vectors.html');
+      link.attr('href', '/GeneDB/parasite-vectors.html');
     } else {
       link.attr('href', 'https://genedb-apollo.dev.sanger.ac.uk/'+select.val()+'/jbrowse/index.html');
     }
