@@ -5,6 +5,7 @@ jQuery(document).ready(function(){
     $(this).load($(this).data('location'));
   });
 
+  // Read JSON file to load main content select options
   $.get("/GeneDB/data/datasets.json", function( data ){ 
     $.each(JSON.parse(data), function(name, values) {
 
@@ -30,14 +31,15 @@ jQuery(document).ready(function(){
     });
   });
 
+  // Forward main content selected option to apollo
   $('.select-link').on('change', function(){
     var select = $(this);
     $('.select-link').not(select).val('');
     $('.custom-button').addClass('disabled').attr('href', '#');
     var dataset = select.parent();
     var link = $('a', dataset);
-    if( select.attr('id') == 'parasiticVectors') {
-      link.attr('href', '/parasitic-vectors.html');
+    if( select.attr('id') == 'parasiteVectors') {
+      link.attr('href', '/parasite-vectors.html');
     } else {
       link.attr('href', 'https://genedb-apollo.dev.sanger.ac.uk/'+select.val()+'/jbrowse/index.html');
     }
@@ -46,7 +48,4 @@ jQuery(document).ready(function(){
     }
 
   });
-
-  
-
 });

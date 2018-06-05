@@ -137,11 +137,16 @@ a {
 .dataset-panel select {
   border: 1px solid #111;
 }
+
 .dataset-panel a.btn {
   border: 1px solid #111;
   margin-left: -1px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.default-content {
+  margin-top: 20px;
 }
 
 /*=== FAQS ===*/
