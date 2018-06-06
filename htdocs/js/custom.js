@@ -6,7 +6,7 @@ jQuery(document).ready(function(){
   });
 
   // Read JSON file to load main content select options
-  $.get("/data/datasets.json", function( data ){ 
+  $.get("data/datasets.json", function( data ){ 
     $.each(JSON.parse(data), function(name, values) {
 
       var output = new Array();
@@ -39,7 +39,7 @@ jQuery(document).ready(function(){
     var dataset = select.parent();
     var link = $('a', dataset);
     if( select.attr('id') == 'parasiteVectors') {
-      link.attr('href', '/parasite-vectors.html');
+      link.attr('href', 'parasite-vectors.html');
     } else {
       link.attr('href', 'https://genedb-apollo.dev.sanger.ac.uk/'+select.val()+'/jbrowse/index.html');
     }
