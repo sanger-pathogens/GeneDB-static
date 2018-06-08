@@ -7,7 +7,7 @@ jQuery(document).ready(function(){
 
   // Read JSON file to load main content select options
   $.get("data/datasets.json", function( data ){ 
-    $.each(JSON.parse(data), function(name, values) {
+    $.each(data, function(name, values) {
 
       var output = new Array();
 
