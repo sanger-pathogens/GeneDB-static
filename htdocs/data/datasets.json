@@ -1,328 +1,362 @@
 {
-  "apicomplexanProtozoa": [
+  "kinetoplastids": [
     {
-      "organism_id":144,
-      "abbreviation":"Ncaninum",
-      "genus":"Neospora",
-      "species":"caninum",
-      "common_name":"Ncaninum",
-      "comment":""
+      "abbreviation": "Lbraziliensis",
+      "common_name": "Lbraziliensis",
+      "genus": "Leishmania",
+      "species": "braziliensis MHOM/BR/75/M2904",
+      "strain": "MHOM/BR/75/M2904",
+      "version": null
     },
     {
-      "organism_id":230,
-      "abbreviation":"Eacervulina",
-      "genus":"Eimeria",
-      "species":"acervulina",
-      "common_name":"Eacervulina",
-      "comment":""
+      "abbreviation": "Lmajor",
+      "common_name": "Lmajor",
+      "genus": "Leishmania",
+      "species": "major Friedlin",
+      "strain": "Friedlin",
+      "version": null
     },
     {
-      "organism_id":231,
-      "abbreviation":"Ebrunetti",
-      "genus":"Eimeria",
-      "species":"brunetti",
-      "common_name":"Ebrunetti",
-      "comment":""
+      "abbreviation": "Linfantum",
+      "common_name": "Linfantum",
+      "genus": "Leishmania",
+      "species": "infantum JPCM5 ",
+      "strain": "JPCM5",
+      "version": null
     },
     {
-      "organism_id":232,
-      "abbreviation":"Emaxima",
-      "genus":"Eimeria",
-      "species":"maxima",
-      "common_name":"Emaxima",
-      "comment":""
+      "abbreviation": "Tcongolense",
+      "common_name": "Tcongolense",
+      "genus": "Trypanosoma",
+      "species": "congolense",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":233,
-      "abbreviation":"Emitis",
-      "genus":"Eimeria",
-      "species":"mitis",
-      "common_name":"Emitis",
-      "comment":""
+      "abbreviation": "TbruceiLister427",
+      "common_name": "TbruceiLister427",
+      "genus": "Trypanosoma",
+      "species": "brucei Lister 427",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":234,
-      "abbreviation":"Enecatrix",
-      "genus":"Eimeria",
-      "species":"necatrix",
-      "common_name":"Enecatrix",
-      "comment":""
+      "abbreviation": "Tbruceibrucei927",
+      "common_name": "Tbruceibrucei927",
+      "genus": "Trypanosoma",
+      "species": "brucei TREU927",
+      "strain": "TREU927",
+      "version": null
     },
     {
-      "organism_id":235,
-      "abbreviation":"Epraecox",
-      "genus":"Eimeria",
-      "species":"praecox",
-      "common_name":"Epraecox",
-      "comment":""
+      "abbreviation": "Tbruceigambiense",
+      "common_name": "Tbruceigambiense",
+      "genus": "Trypanosoma",
+      "species": "brucei gambiense",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":25,
-      "abbreviation":"Etenella",
-      "genus":"Eimeria",
-      "species":"tenella",
-      "common_name":"Etenella",
-      "comment":""
+      "abbreviation": "Tvivax",
+      "common_name": "Tvivax",
+      "genus": "Trypanosoma",
+      "species": "vivax",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":26,
-      "abbreviation":"Tannulata",
-      "genus":"Theileria",
-      "species":"annulata",
-      "common_name":"Tannulata",
-      "comment":""
+      "abbreviation": "Tcruzi",
+      "common_name": "Tcruzi",
+      "genus": "Trypanosoma",
+      "species": "cruzi",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":240,
-      "abbreviation":"Povale",
-      "genus":"Plasmodium",
-      "species":"ovale curtisi",
-      "common_name":"Povale",
-      "comment":""
+      "abbreviation": "Lmexicana",
+      "common_name": "Lmexicana",
+      "genus": "Leishmania",
+      "species": "mexicana",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":239,
-      "abbreviation":"PvivaxP01",
-      "genus":"Plasmodium",
-      "species":"vivax P01",
-      "common_name":"PvivaxP01",
-      "comment":""
-    },
-    {
-      "organism_id":241,
-      "abbreviation":"Pmalariae",
-      "genus":"Plasmodium",
-      "species":"malariae",
-      "common_name":"Pmalariae",
-      "comment":""
-    },
-    {
-      "organism_id":75,
-      "abbreviation":"Pchabaudi",
-      "genus":"Plasmodium",
-      "species":"chabaudi",
-      "common_name":"Pchabaudi",
-      "comment":""
-    },
-    {
-      "organism_id":27,
-      "abbreviation":"Pfalciparum",
-      "genus":"Plasmodium",
-      "species":"falciparum 3D7",
-      "common_name":"Pfalciparum",
-      "comment":""
-    },
-    {
-      "organism_id":238,
-      "abbreviation":"Prelictum",
-      "genus":"Plasmodium",
-      "species":"relictum",
-      "common_name":"Prelictum",
-      "comment":""
-    },
-    {
-      "organism_id":29,
-      "abbreviation":"Pberghei",
-      "genus":"Plasmodium",
-      "species":"berghei",
-      "common_name":"Pberghei",
-      "comment":""
-    },
-    {
-      "organism_id":28,
-      "abbreviation":"Pknowlesi",
-      "genus":"Plasmodium",
-      "species":"knowlesi",
-      "common_name":"Pknowlesi",
-      "comment":""
-    },
-    {
-      "organism_id":31,
-      "abbreviation":"Pyoelii",
-      "genus":"Plasmodium",
-      "species":"yoelii 17X",
-      "common_name":"Pyoelii",
-      "comment":""
-    },
-    {
-      "organism_id":237,
-      "abbreviation":"Pgallinaceum",
-      "genus":"Plasmodium",
-      "species":"gallinaceum",
-      "common_name":"Pgallinaceum",
-      "comment":""
-    },
-    {
-      "organism_id":211,
-      "abbreviation":"Preichenowi",
-      "genus":"Plasmodium",
-      "species":"reichenowi",
-      "common_name":"Preichenowi",
-      "comment":""
+      "abbreviation": "Ldonovani_BPK282A1",
+      "common_name": "Ldonovani_BPK282A1",
+      "genus": "Leishmania",
+      "species": "donovani",
+      "strain": "BPK282A1",
+      "version": null
     }
   ],
-  "kinetoplastidProtozoa": [
+  "apicomplexa": [
     {
-      "organism_id":210,
-      "abbreviation":"Bsaltans",
-      "genus":"Bodo",
-      "species":"saltans",
-      "common_name":"Bsaltans",
-      "comment":""
+      "abbreviation": "Pfalciparum",
+      "common_name": "Pfalciparum",
+      "genus": "Plasmodium",
+      "species": "falciparum 3D7",
+      "strain": "3D7",
+      "version": 3
     },
     {
-      "organism_id":14,
-      "abbreviation":"Lbraziliensis",
-      "genus":"Leishmania",
-      "species":"braziliensis MHOM/BR/75/M2904",
-      "common_name":"Lbraziliensis",
-      "comment":""
+      "abbreviation": "Pknowlesi",
+      "common_name": "Pknowlesi",
+      "genus": "Plasmodium",
+      "species": "knowlesi",
+      "strain": null,
+      "version": 2
     },
     {
-      "organism_id":214,
-      "abbreviation":"Ldonovani_BPK282A1",
-      "genus":"Leishmania",
-      "species":"donovani",
-      "common_name":"Ldonovani_BPK282A1",
-      "comment":"formapseq"
+      "abbreviation": "Pberghei",
+      "common_name": "Pberghei",
+      "genus": "Plasmodium",
+      "species": "berghei",
+      "strain": null,
+      "version": 3
     },
     {
-      "organism_id":16,
-      "abbreviation":"Linfantum",
-      "genus":"Leishmania",
-      "species":"infantum JPCM5",
-      "common_name":"Linfantum",
-      "comment":""
+      "abbreviation": "Pyoelii",
+      "common_name": "Pyoelii",
+      "genus": "Plasmodium",
+      "species": "yoelii 17X",
+      "strain": "17X",
+      "version": 3
     },
     {
-      "organism_id":15,
-      "abbreviation":"Lmajor",
-      "genus":"Leishmania",
-      "species":"major Friedlin",
-      "common_name":"Lmajor",
-      "comment":""
+      "abbreviation": "Pchabaudi",
+      "common_name": "Pchabaudi",
+      "genus": "Plasmodium",
+      "species": "chabaudi",
+      "strain": null,
+      "version": 3
     },
     {
-      "organism_id":135,
-      "abbreviation":"Lmexicana",
-      "genus":"Leishmania",
-      "species":"mexicana",
-      "common_name":"Lmexicana",
-      "comment":""
+      "abbreviation": "Preichenowi",
+      "common_name": "Preichenowi",
+      "genus": "Plasmodium",
+      "species": "reichenowi",
+      "strain": null,
+      "version": 3
     },
     {
-      "organism_id":18,
-      "abbreviation":"TbruceiLister427",
-      "genus":"Trypanosoma",
-      "species":"brucei Lister 427",
-      "common_name":"TbruceiLister427",
-      "comment":""
+      "abbreviation": "Pgallinaceum",
+      "common_name": "Pgallinaceum",
+      "genus": "Plasmodium",
+      "species": "gallinaceum",
+      "strain": null,
+      "version": 1
     },
     {
-      "organism_id":19,
-      "abbreviation":"Tbruceibrucei927",
-      "genus":"Trypanosoma",
-      "species":"brucei TREU927",
-      "common_name":"Tbruceibrucei927",
-      "comment":""
+      "abbreviation": "Prelictum",
+      "common_name": "Prelictum",
+      "genus": "Plasmodium",
+      "species": "relictum",
+      "strain": null,
+      "version": 1
     },
     {
-      "organism_id":20,
-      "abbreviation":"Tbruceigambiense",
-      "genus":"Trypanosoma",
-      "species":"brucei gambiense",
-      "common_name":"Tbruceigambiense",
-      "comment":""
+      "abbreviation": "PvivaxP01",
+      "common_name": "PvivaxP01",
+      "genus": "Plasmodium",
+      "species": "vivax P01",
+      "strain": "P01",
+      "version": 1
     },
     {
-      "organism_id":17,
-      "abbreviation":"Tcongolense",
-      "genus":"Trypanosoma",
-      "species":"congolense",
-      "common_name":"Tcongolense",
-      "comment":""
+      "abbreviation": "Povale",
+      "common_name": "Povale",
+      "genus": "Plasmodium",
+      "species": "ovale curtisi",
+      "strain": null,
+      "version": 1
     },
     {
-      "organism_id":22,
-      "abbreviation":"Tcruzi",
-      "genus":"Trypanosoma",
-      "species":"cruzi",
-      "common_name":"Tcruzi",
-      "comment":""
-    },
-    {
-      "organism_id":21,
-      "abbreviation":"Tvivax",
-      "genus":"Trypanosoma",
-      "species":"vivax",
-      "common_name":"Tvivax",
-      "comment":""
+      "abbreviation": "Pmalariae",
+      "common_name": "Pmalariae",
+      "genus": "Plasmodium",
+      "species": "malariae",
+      "strain": null,
+      "version": 1
     }
   ],
-  "parasiticHelminths": [
+  "helminths": [
     {
-      "organism_id":217,
-      "abbreviation":"Bxylophilus",
-      "genus":"Bursaphelenchus",
-      "species":"xylophilus",
-      "common_name":"Bxylophilus",
-      "comment":""
+      "abbreviation": "Smansoni",
+      "common_name": "Smansoni",
+      "genus": "Schistosoma",
+      "species": "mansoni",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":223,
-      "abbreviation":"Egranulosus",
-      "genus":"Echinococcus",
-      "species":"granulosus",
-      "common_name":"Egranulosus",
-      "comment":""
+      "abbreviation": "Emultilocularis",
+      "common_name": "Emultilocularis",
+      "genus": "Echinococcus",
+      "species": "multilocularis",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":212,
-      "abbreviation":"Emultilocularis",
-      "genus":"Echinococcus",
-      "species":"multilocularis",
-      "common_name":"Emultilocularis",
-      "comment":""
+      "abbreviation": "Hmicrostoma",
+      "common_name": "Hmicrostoma",
+      "genus": "Hymenolepis",
+      "species": "microstoma",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":218,
-      "abbreviation":"Gpallida",
-      "genus":"Globodera",
-      "species":"pallida",
-      "common_name":"Gpallida",
-      "comment":""
+      "abbreviation": "Tsolium",
+      "common_name": "Tsolium",
+      "genus": "Taenia",
+      "species": "solium",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":219,
-      "abbreviation":"Hmicrostoma",
-      "genus":"Hymenolepis",
-      "species":"microstoma",
-      "common_name":"Hmicrostoma",
-      "comment":""
+      "abbreviation": "Egranulosus",
+      "common_name": "Egranulosus",
+      "genus": "Echinococcus",
+      "species": "granulosus",
+      "strain": null,
+      "version": null
+    }
+  ],
+  "fungi": [
+    {
+      "abbreviation": "CneoformansneoformansJEC21",
+      "common_name": "CneoformansneoformansJEC21",
+      "genus": "Cryptococcus",
+      "species": "neoformans var. neoformans JEC21",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":77,
-      "abbreviation":"Sjaponicum",
-      "genus":"Schistosoma",
-      "species":"japonicum",
-      "common_name":"Sjaponicum",
-      "comment":""
+      "abbreviation": "AfumigatusAf293",
+      "common_name": "AfumigatusAf293",
+      "genus": "Aspergillus",
+      "species": "fumigatus Af293",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":13,
-      "abbreviation":"Smansoni",
-      "genus":"Schistosoma",
-      "species":"mansoni",
-      "common_name":"Smansoni",
-      "comment":""
+      "abbreviation": "AnidulansFGSCA4",
+      "common_name": "AnidulansFGSCA4",
+      "genus": "Aspergillus",
+      "species": "nidulans FGSC A4",
+      "strain": null,
+      "version": null
     },
     {
-      "organism_id":222,
-      "abbreviation":"Tsolium",
-      "genus":"Taenia",
-      "species":"solium",
-      "common_name":"Tsolium",
-      "comment":""
+      "abbreviation": "AnigerCBS51388",
+      "common_name": "AnigerCBS51388",
+      "genus": "Aspergillus",
+      "species": "niger CBS 513.88",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "AoryzaeRIB40",
+      "common_name": "AoryzaeRIB40",
+      "genus": "Aspergillus",
+      "species": "oryzae RIB40",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "BcinereaB0510",
+      "common_name": "BcinereaB0510",
+      "genus": "Botrytis",
+      "species": "cinerea B05.10",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "CimmitisRS",
+      "common_name": "CimmitisRS",
+      "genus": "Coccidioides",
+      "species": "immitis RS",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "CposadasiiSilveira",
+      "common_name": "CposadasiiSilveira",
+      "genus": "Coccidioides",
+      "species": "posadasii str. Silveira",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "FgraminearumPH1",
+      "common_name": "FgraminearumPH1",
+      "genus": "Fusarium",
+      "species": "graminearum PH-1",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "HcapsulatumNAm1",
+      "common_name": "HcapsulatumNAm1",
+      "genus": "Histoplasma",
+      "species": "capsulatum NAm1",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "Moryzae7015",
+      "common_name": "Moryzae7015",
+      "genus": "Magnaporthe",
+      "species": "oryzae 70-15",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "MglobosaCBS7966",
+      "common_name": "MglobosaCBS7966",
+      "genus": "Malassezia",
+      "species": "globosa CBS 7966",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "NcrassaOR74A",
+      "common_name": "NcrassaOR74A",
+      "genus": "Neurospora",
+      "species": "crassa OR74A",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "PjiroveciiSE8",
+      "common_name": "PjiroveciiSE8",
+      "genus": "Pneumocystis",
+      "species": "jirovecii SE8",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "TreeseiQM6a",
+      "common_name": "TreeseiQM6a",
+      "genus": "Trichoderma",
+      "species": "reesei QM6a",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "Umaydis521",
+      "common_name": "Umaydis521",
+      "genus": "Ustilago",
+      "species": "maydis 521",
+      "strain": null,
+      "version": null
+    },
+    {
+      "abbreviation": "CneoformansH99",
+      "common_name": "CneoformansH99",
+      "genus": "Cryptococcus",
+      "species": "neoformans var. grubii H99",
+      "strain": null,
+      "version": null
     }
   ]
 }
