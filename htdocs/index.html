@@ -47,7 +47,7 @@
                           <h3 class="card-title">Apicomplexan Protozoa</h3>
                           <img src="img/dataset-apicomplexan-protozoa.jpg" class="rounded mx-auto d-block" alt="apicomplexan protozoa">
                           <div class="input-group">
-                            <select class="custom-select select-link form-control" id="apicomplexanProtozoa">
+                            <select class="custom-select select-link form-control" id="apicomplexa">
                               <option selected value="">Choose...</option>
                             </select>
                             <span class="input-group-btn">
@@ -63,7 +63,7 @@
                           <h3 class="card-title">Kinetoplastid Protozoa</h3>
                           <img src="img/dataset-kinetoplastid-protozoa.jpg" class="rounded mx-auto d-block" alt="kinetoplastid protozoa">
                           <div class="input-group">
-                            <select class="custom-select select-link form-control" id="kinetoplastidProtozoa">
+                            <select class="custom-select select-link form-control" id="kinetoplastids">
                               <option selected value="">Choose...</option>
                             </select>
                             <span class="input-group-btn">
@@ -81,7 +81,7 @@
                           <h3 class="card-title">Parasitic Helminths</h3>
                           <img src="img/dataset-parasitic-helminths.jpg" class="rounded mx-auto d-block" alt="parasitic helminths">
                           <div class="input-group">
-                            <select class="custom-select select-link form-control" id="parasiticHelminths">
+                            <select class="custom-select select-link form-control" id="helminths">
                               <option selected value="">Choose...</option>
                             </select>
                             <span class="input-group-btn">
@@ -91,15 +91,15 @@
                         </div>
                       </div>
                       <!-- END Parasitic Helminths -->
-                      <!-- START Parasitic Vectors -->
+                      <!-- START Fungi -->
                       <div class="col-lg-6 col-md-12">
-                        <div class="dataset-panel text-center" id="parasiticVectorsPanel">
-                          <h3 class="card-title">Parasite Vectors</h3>
-                          <img src="img/dataset-parasite-vectors.jpg" class="rounded mx-auto d-block" alt="apicomplexan protozoa">
+                        <div class="dataset-panel text-center" id="fungiPanel">
+                          <h3 class="card-title">Fungi</h3>
+                          <img src="img/dataset-fungi.jpg" class="rounded mx-auto d-block" alt="fungi">
                           <div class="input-group">
-                            <select class="custom-select select-link form-control" id="parasiteVectors">
+                            <select class="custom-select select-link form-control" id="fungi">
                               <option selected value="">Choose...</option>
-                              <option value="parasite-vectors">Parasite vectors</option>
+                              <option value="fungi">Fungi</option>
                             </select>
                             <span class="input-group-btn">
                               <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
@@ -107,40 +107,13 @@
                           </div>
                         </div>
                       </div>
-                      <!-- END Parasitic Vectors -->
+                      <!-- END Fungi -->
                     </div>
                   </div>
                 </section>
                 <!-- END DATASET PANEL -->
               </div>
               <!-- END DATASET CONTAINER -->
-            </div>
-            <div class="row">
-              <!-- START SEQUENCE SEARCHES -->
-              <div class="col-lg-12">
-                <section class="events main-content-panel" id="sequenceSearchesSection">
-                  <h1 class="card-title">BLAST sequence searches</h1>
-                  <div class="card bg-light-grey border-rounded" id="sequenceSearches">
-                    <div class="card-body">
-                      <p class="card-text">
-                        <span>
-                          <i class="fas fa-angle-double-right card-link-icon"></i>
-                          <a href="#" target="_blank" class="card-link">Single organism</a>
-                        </span>
-                        <span>
-                          <i class="fas fa-angle-double-right card-link-icon"></i>
-                          <a href="#" target="_blank" class="card-link">Multi-organism (proteins)</a>
-                        </span>
-                        <span>
-                          <i class="fas fa-angle-double-right card-link-icon"></i>
-                          <a href="#" target="_blank" class="card-link">Multi-organism (transcripts and contigs/chromosomes)</a>
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              </div>
-              <!-- END SEQUENCE SEARCHES -->
             </div>
           </div>
           <!-- END LEFT CONTENT -->
@@ -166,21 +139,6 @@
               </div>
             </section>
             <!-- END NEWS -->
-            <!-- START WEB SERVICES -->
-            <section class="main-content-panel" id="webServicesSection">
-              <h1 class="card-title">Web services</h1>
-              <div class="card bg-light-blue border-rounded" id="webServices">
-                <div class="card-body">
-                  <p class="card-text">Are available for GeneDB:
-                    <span>
-                      <i class="fas fa-angle-double-right card-link-icon"></i>
-                      <a href="http://www.genedb.org/services" target="_blank" class="card-link">Web services</a>
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </section>
-            <!-- END WEB SERVICES -->
             <!-- START INFORMATION -->
             <section class="main-content-panel-last" id="informationSection">
               <h1 class="card-title">Information</h1>
@@ -194,12 +152,6 @@
                     </span>
                   </p>
                   <p class="card-text">
-                    Sequencing Projects
-                    <span><i class="fas fa-angle-double-right card-link-icon"></i>
-                      <a href="https://www.sanger.ac.uk/resources/downloads/protozoa/" target="_blank" class="card-link">Eukaryotes (Protozoa)</a>
-                    </span>
-                  </p>
-                  <p class="card-text">
                     Software
                     <span>
                       <i class="fas fa-angle-double-right card-link-icon"></i>
@@ -208,14 +160,7 @@
                     <span>
                       <i class="fas fa-angle-double-right card-link-icon"></i>
                       <a href="https://www.sanger.ac.uk/science/tools/artemis" target="_blank" class="card-link">Artemis</a>
-                      <span>
-                  </p>
-                  <p class="card-text">
-                    Contributors
                     <span>
-                      <i class="fas fa-angle-double-right card-link-icon"></i>
-                      <a href="acknowledgements.html" target="_blank" class="card-link">Acknowledgements</a>
-                    </span>
                   </p>
                   <p class="card-text">
                     Mailing list
