@@ -46,7 +46,13 @@
                   </div>
                   <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body faq-content">
-                      <p>The old GeneDB website was replaced on 11th of Jan 2019 in order to facilitate integration with the Apollo annotation tool.</p>
+                      <p>The old GeneDB website was replaced in January 2019 to facilitate integration with the <a href='https://apollo.genedb.org/jbrowse/' target='_blank'>Apollo</a> annotation tool. 
+			You can now view gene structures and functional annotations in <a href='https://apollo.genedb.org/jbrowse/' target='_blank'>Apollo</a> which is based on <a href='https://jbrowse.org/' target='_blank'>JBrowse</a>. 
+			This site will be updated on a weekly basis. 
+                      </p>
+                      <p>In addition to that, we are providing a Wikidata/GeneDB website. This has been rolled out for <em>Plasmodium</em> species. You can find more information 
+			<a href='https://tools.wmflabs.org/genedb' target='_blank'>here</a> and an example gene record page <a href='https://tools.wmflabs.org/genedb/#/gene/PF3D7_0810800' target='_blank'>here</a>.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -63,6 +69,48 @@
                   </div>
                 </div>
                 <!-- END collapseTwo -->
+                <!-- START collapseThree -->
+                <div class="card">
+                  <div class="card-header bg-light-grey" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <p class="faq-header">How can I search Apollo and access the functional annotations for my gene of interest?</p>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body faq-content">
+                      <p>You can either choose a whole chromosome in Apollo and scroll along the chromosome, or you can enter a Gene ID in the search box. Please note, searching for gene names like MDR1 is <strong>not</strong> possible.</p>
+                      <img src="img/faq-search-gene-id.png" class="img-fluid mx-auto" alt="search gene id">
+                      <p>When you right click on a gene a small menu comes up. Click on View details to see the functional annotation.</p>
+                      <img src="img/faq-view-functional-annotation.png" class="img-fluid mx-auto" alt="view functional annotation">
+                    </div>
+                  </div>
+                </div>
+                <!-- END collapseThree -->
+                <!-- START collapseFour -->
+                <div class="card">
+                  <div class="card-header bg-light-grey" id="headingFour" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <p class="faq-header">I've found my favourite protein, how do I now download the sequence?</p>
+                  </div>
+                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-body faq-content">
+                      <p>Go to your gene of interest, right click on the gene and view details. From here you can download a FASTA file. </p>
+                      <img src="img/faq-download-fasta.png" class="img-fluid mx-auto" alt="download fasta">
+                    </div>
+                  </div>
+                </div>
+                <!-- END collapseFour -->
+                <!-- START collapseFive -->
+                <div class="card">
+                  <div class="card-header bg-light-grey" id="headingFive" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    <p class="faq-header">Where can I view annotation statistics?</p>
+                  </div>
+                  <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                    <div class="card-body faq-content">
+                      <p>You can now view the annotation statistics <a href="ftp://ftp.sanger.ac.uk/pub/genedb/annotation_updates" target="_blank">here</a>. 
+			We also provide genome GFF files for all of the curated species <a href="ftp://ftp.sanger.ac.uk/pub/genedb/apollo_releases" target="_blank">here</a> which are updated on a weekly basis.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- END collapseFive -->
               </div>
               <!-- END ACCORDIAN -->
             </section>
