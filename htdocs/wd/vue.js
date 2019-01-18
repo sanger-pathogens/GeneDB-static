@@ -6,6 +6,7 @@ let wd = new WikiData() ;
 
 
 $(document).ready ( function () {
+	vue_components.toolname = 'genedb' ;
 	Promise.all ( [
 		vue_components.loadComponents ( ['wd-link','wd-date','tool-translate','tool-navbar','publication','commons-thumbnail',
 			'chromosome_plot.html',

@@ -32,8 +32,10 @@
 						<wd-link :item='gene.q_chromosome' as_text='1'></wd-link>
 					</router-link>
 				</td>
-				<td v-if='show_species'>
-					<wd-link v-if='typeof gene.species!="undefined"' :item='gene.species'></wd-link>
+				<td v-if='show_species && typeof gene.species!="undefined"'>
+					<router-link :to='"/species/"+gene.species'>
+						<wd-link :item='gene.species' as_text='1'></wd-link>
+					</router-link>
 				</td>
 			</tr>
 		</tbody>
