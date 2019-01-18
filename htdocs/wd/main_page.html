@@ -1,0 +1,83 @@
+<template id='main-page-template'>
+<div class='container'>
+	<genedb-header></genedb-header>
+	<div class='row'>
+		<div class='lead col-12'>
+			A version of GeneDB, based on Wikidata.
+		</div>
+	</div>
+	<div style='float:right' v-if='by_species.length>0'>
+		<h3>Genes by species</h3>
+		<div>
+			<table class='table table-striped' style='width:auto'>
+				<thead>
+					<tr>
+						<th>Species</th>
+						<th>Number of genes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for='species in by_species'>
+						<td>
+							<router-link :to='"/species/"+species.q'>
+								<wd-link :item='species.q' as_text='1'></wd-link>
+							</router-link>
+						</td>
+						<td style='text-align:right;'>{{species.num}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-12'><h3>Examples</h3></div>
+	</div>
+	<div class='row'>
+		<div class='col-12'>
+			<ul>
+				<li><router-link to='/gene/PF3D7_0810800'>Gene <i>DHPS</i></router-link></li>
+				<li><router-link to='/go/GO:0042493'>Genes with GO term GO:0042493</router-link></li>
+				<li><router-link to='/chromosome/Q18967851'>All genes on chromosome Pf3D7_08_v3</router-link></li>
+			</ul>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-12'><h3>Search</h3></div>
+	</div>
+	<div class='row'>
+		<div class='col-12'>
+			<gene-search-box></gene-search-box>
+		</div>
+	</div>
+	<genedb-footer></genedb-footer>
+</div>
+</template>
+
+<script>
+'use strict';
+
+let MainPage = Vue.extend ( {
+	data : function () { return { by_species:[] } } ,
+	created : function () {
+		let me = this ;
+		let sparql = 'SELECT ?species ?speciesLabel ?genes {{SELECT ?species (count(?q) AS ?genes) {?q wdt:P31 wd:Q7187;wdt:P3382 [];wdt:P703 ?species} GROUP BY ?species} SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en"}} ORDER BY ?speciesLabel' ;
+		wd.loadSPARQL ( sparql , function ( d ) {
+			let sd = [] ; // Species data
+			$.each ( d.results.bindings , function ( dummy , b ) {
+				let q = wd.itemFromBinding ( b.species ) ;
+				let label = b.speciesLabel.value ;
+				let num = b.genes.value ;
+				sd.push ( { q , label , num } ) ;
+			} ) ;
+			me.by_species = sd ;
+		} ) ;
+	} ,
+	mounted : function () {
+		$('.hide_on_main_page').remove() ;
+	} ,
+	methods : {
+	} ,
+	template : '#main-page-template'
+} ) ;
+
+</script>
