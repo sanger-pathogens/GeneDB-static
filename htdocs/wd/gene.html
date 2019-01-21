@@ -36,7 +36,9 @@
 							</td>
 							<td>
 								<div v-for='taxon_q in i.getClaimItemsForProperty("P703",true)'>
-									<wd-link :item='taxon_q' as_text='1'></wd-link>
+									<router-link :to='"/species/"+taxon_q'>
+										<wd-link :item='taxon_q' as_text='1'></wd-link>
+									</router-link>
 								</div>
 							</td>
 						</tr>
