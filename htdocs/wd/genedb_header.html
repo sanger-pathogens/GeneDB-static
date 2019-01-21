@@ -34,7 +34,7 @@ Vue.component ( 'genedb-header' , {
       if ( this.is_loaded && $("#search-form").length > 0 ) {
         $("#search-form").submit(function() {
             var query = $('input[name="find"]').val();
-            window.location.href = '/wd/#/search/'+query;
+            window.location.href = '/#/search/'+query;
             return false;
         });
         this.search_added = true ;

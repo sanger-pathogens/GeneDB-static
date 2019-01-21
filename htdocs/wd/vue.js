@@ -6,27 +6,30 @@ let wd = new WikiData() ;
 
 
 $(document).ready ( function () {
+	if ( window.location.hash=='' || window.location.hash=='#' ) return ;
+	$('#app').show() ;
+	$('#main_body').hide() ;
 	vue_components.toolname = 'genedb' ;
 	Promise.all ( [
 		vue_components.loadComponents ( ['wd-link','wd-date','tool-translate','tool-navbar','publication','commons-thumbnail',
-			'chromosome_plot.html',
-			'gene_search_box.html',
-			'genedb_header.html',
-			'genedb_footer.html',
-			'main_page.html',
-			'search_page.html',
-			'gene_list.html',
-			'gene.html',
-			'species.html',
-			'go_term.html',
-			'chromosome.html',
-			'protein_box.html'
+			'/wd/chromosome_plot.html',
+			'/wd/gene_search_box.html',
+			'/wd/genedb_header.html',
+			'/wd/genedb_footer.html',
+			'/wd/main_page.html',
+			'/wd/search_page.html',
+			'/wd/gene_list.html',
+			'/wd/gene.html',
+			'/wd/species.html',
+			'/wd/go_term.html',
+			'/wd/chromosome.html',
+			'/wd/protein_box.html'
 		] ) ,
 //		new Promise(function(resolve, reject) { resolve() } )
 	] )	.then ( () => {
 			wd_link_wd = wd ;
 			const routes = [
-			  { path: '/', component: MainPage , props:true },
+			  { path: '/wd', component: MainPage , props:true },
 			  { path: '/gene/:genedb_id', component: Gene , props:true },
 			  { path: '/go/:go_term', component: GoTerm , props:true },
 			  { path: '/search', component: SearchPage , props:true },
