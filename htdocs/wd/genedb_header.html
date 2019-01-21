@@ -1,67 +1,47 @@
 <template id='genedb-header-template'>
-<!-- START HEADER -->
-<header id="header" class="header-wrapper">
-
-    <!-- START LOGO -->
-    <div class="navbar-header">
-      <router-link id="genedb-logo" class="navbar-brand" to="/">
-        <img src="/img/GeneDB-logo.png" alt="GeneDB">
-      </router-link>
-    </div>
-    <!-- END LOGO -->
-
-  <!-- START NAVIGATION -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-
-      <!-- START NAVBAR -->
-      <div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://apollo.genedb.org/jbrowse/">Apollo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.genedb.org/action/BLAST">BLAST</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="acknowledgements.html">Acknowledgements</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="faqs.html">Frequently asked questions</a>
-            </li>
-            <li class='hide_on_main_page hide_on_search_page nav-item' style='margin-top:0.5rem'>
-              <span tt='search'></span>
-              <gene-search-box open_search_page='1' style='display:inline-block'></gene-search-box>
-            </li>
-          </ul>
-      </div>
-      <!-- END NAVBAR -->
-    </nav>
-  <!-- END NAVIGATION -->
-</header>
-<!-- END HEADER -->
-
+<div v-if='is_loaded' v-html='header'>
+</div>
 </template>
-
 
 <script>
 'use strict';
 
+let cached_header ;
+
 Vue.component ( 'genedb-header' , {
 	template : '#genedb-header-template' ,
-	data : function () { return {} } ,
-	mounted : function () {} ,
+	data : function () { return { is_loaded:false , search_added:false , header:'' } } ,
+  created : function () {
+    let me = this ;
+    if ( typeof cached_header != 'undefined' ) {
+      me.header = cached_header ;
+      me.is_loaded = true ;
+    } else {
+      $.get ( '/includes/header.html' , function ( d ) {
+        cached_header = d ;
+        me.header = cached_header ;
+        me.is_loaded = true ;
+      } ) ;
+    }
+  } ,
+  mounted : function () {
+    tt.updateInterface(this.$el) ;
+    this.addSearch() ;
+  } ,
 	methods : {
+    addSearch : function () {
+      if ( this.search_added ) return ;
+      if ( this.is_loaded && $("#search-form").length > 0 ) {
+        $("#search-form").submit(function() {
+            var query = $('input[name="find"]').val();
+            window.location.href = '/wd/#/search/'+query;
+            return false;
+        });
+        this.search_added = true ;
+        return ;
+      }
+      setTimeout ( this.addSearch , 100 ) ;
+    }
 	}
 } ) ;
 

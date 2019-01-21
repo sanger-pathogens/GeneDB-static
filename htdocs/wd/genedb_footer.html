@@ -18,7 +18,6 @@ Vue.component ( 'genedb-footer' , {
       me.footer = cached_footer ;
       me.is_loaded = true ;
     } else {
-      console.log("Loaging footer...")
       $.get ( '/includes/footer.html' , function ( d ) {
         cached_footer = d ;
         me.footer = cached_footer ;
