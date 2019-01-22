@@ -3,9 +3,11 @@
 
     <!-- START LOGO -->
     <div class="navbar-header" style='display:flex'>
-      <a id="genedb-logo" class="navbar-brand" href="/" style='display:inline'>
-        <img src="/img/GeneDB-logo.png" alt="GeneDB">
-      </a>
+      <div class='col-lg-9 col-md-12'>
+        <a id="genedb-logo" class="navbar-brand" href="/" style='display:inline'>
+          <img src="/img/GeneDB-logo.png" alt="GeneDB">
+        </a>
+      </div>
       <div class='col-lg-3 col-md-12 hide_on_main_page hide_on_search_page nav-item' style='display:inline;margin-top:2rem'>
         <form method='get' id='search-form' style='white-space:nowrap' class='input-group' @submit='doSearch'>
           <input id='search-form-find' name='find' type='text' placeholder="Gene ID, name, alias" accesskey='f' class='form-control' />
