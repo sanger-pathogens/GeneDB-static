@@ -8,7 +8,6 @@
 	<div v-else-if='query==""'></div>
 	<div v-else-if='results.length==0'><i>No results found</i></div>
 	<div v-else>
-		<hr/>
 		<gene-list :genes='genes' show_chromosome='1' show_species='1'></gene-list>
 		<div v-if='results.length==50' style='display:block'><i>Potentially more results</i></div>
 	</div>
