@@ -29,7 +29,7 @@ Vue.component ( 'gene-search-box' , {
 			$('#gene_search_box').focus() ;
 			if ( typeof me.initial_query == 'undefined' || me.initial_query == '' ) return ;
 			me.query = me.initial_query ;
-			me.onQueryChange() ;
+			me.doSearch();
 		} , 100 ) ;
 	} ,
 	methods : {
@@ -66,12 +66,33 @@ Vue.component ( 'gene-search-box' , {
 				return ;
 			}
 			me.results = [] ;
-			let sparql = 'SELECT DISTINCT ?q { ?q wdt:P3382 [] ; wdt:P31 wd:Q7187 { { ?q skos:altLabel ?name FILTER ( STRSTARTS(ucase(?name),"'+the_query+'") ) } UNION { ?q rdfs:label ?name FILTER ( STRSTARTS(ucase(?name),"'+the_query+'") ) } UNION { ?q wdt:P3382 ?name FILTER ( STRSTARTS(ucase(?name),"'+the_query+'") ) } } } LIMIT 50' ;
-			// XP_001349418
-			wd.loadSPARQLitems ( sparql , function ( d ) {
-				wd.getItemBatch ( d , function () {
-					me.query_cache[the_query] = d ;
-					me.results = d ;
+			me.doSearchAPI ( the_query ) ;
+		} ,
+		doSearchAPI : function ( the_query ) {
+			let me = this ;
+			$.getJSON ( 'https://www.wikidata.org/w/api.php?callback=?' , {
+				action:'query',
+				list:'search',
+				srnamespace:0,
+				srlimit:500,
+				srsearch:the_query+' haswbstatement:P3382',
+				format:'json'
+			} , function ( d ) {
+				let to_load = [] ;
+				$.each ( d.query.search , function ( k , v ) {
+					to_load.push ( v.title ) ;
+				} ) ;
+				wd.getItemBatch ( to_load , function () {
+					// Filter genes
+					let gene_items = [] ;
+					$.each ( to_load , function ( k , q ) {
+						let i = wd.getItem ( q ) ;
+						if ( typeof i == 'undefined' ) return ;
+						if ( !i.hasClaimItemLink('P31','Q7187') ) return ; // Not a gene
+						gene_items.push ( q ) ;
+					} ) ;
+					me.query_cache[the_query] = gene_items ;
+					me.results = gene_items ;
 					me.setGenesFromResults() ;
 					me.last_query = the_query ;
 					me.searching = false ;
