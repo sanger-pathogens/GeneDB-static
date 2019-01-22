@@ -32,6 +32,7 @@ Vue.component ( 'genedb-header' , {
     addSearch : function () {
       if ( this.search_added ) return ;
       if ( this.is_loaded && $("#search-form").length > 0 ) {
+        $("#search-form-find").keydown ( function () { $("#search-form-button").removeClass('disabled') });
         $("#search-form").submit(function() {
             var query = $('input[name="find"]').val();
             window.location.href = '/#/search/'+query;
