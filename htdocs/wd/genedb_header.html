@@ -1,0 +1,49 @@
+<template id='genedb-header-template'>
+<div v-if='is_loaded' v-html='header'>
+</div>
+</template>
+
+<script>
+'use strict';
+
+let cached_header ;
+
+Vue.component ( 'genedb-header' , {
+	template : '#genedb-header-template' ,
+	data : function () { return { is_loaded:false , search_added:false , header:'' } } ,
+  created : function () {
+    let me = this ;
+    if ( typeof cached_header != 'undefined' ) {
+      me.header = cached_header ;
+      me.is_loaded = true ;
+    } else {
+      $.get ( '/includes/header.html' , function ( d ) {
+        cached_header = d ;
+        me.header = cached_header ;
+        me.is_loaded = true ;
+      } ) ;
+    }
+  } ,
+  mounted : function () {
+    tt.updateInterface(this.$el) ;
+    this.addSearch() ;
+  } ,
+	methods : {
+    addSearch : function () {
+      if ( this.search_added ) return ;
+      if ( this.is_loaded && $("#search-form").length > 0 ) {
+        $("#search-form-find").keydown ( function () { $("#search-form-button").removeClass('disabled') });
+        $("#search-form").submit(function() {
+            var query = $('input[name="find"]').val();
+            window.location.href = '/#/search/'+query;
+            return false;
+        });
+        this.search_added = true ;
+        return ;
+      }
+      setTimeout ( this.addSearch , 100 ) ;
+    }
+	}
+} ) ;
+
+</script>

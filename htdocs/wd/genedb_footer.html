@@ -1,0 +1,32 @@
+<template id='genedb-footer-template'>
+<div v-if='is_loaded' v-html='footer'>
+</div>
+</template>
+
+
+<script>
+'use strict';
+
+let cached_footer ;
+
+Vue.component ( 'genedb-footer' , {
+	template : '#genedb-footer-template' ,
+	data : function () { return { is_loaded:false , footer:'' } } ,
+  created : function () {
+    let me = this ;
+    if ( typeof cached_footer != 'undefined' ) {
+      me.footer = cached_footer ;
+      me.is_loaded = true ;
+    } else {
+      $.get ( '/includes/footer.html' , function ( d ) {
+        cached_footer = d ;
+        me.footer = cached_footer ;
+        me.is_loaded = true ;
+      } ) ;
+    }
+  } ,
+	methods : {
+	}
+} ) ;
+
+</script>

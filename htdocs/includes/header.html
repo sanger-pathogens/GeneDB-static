@@ -2,10 +2,18 @@
 <header id="header" class="header-wrapper">
 
     <!-- START LOGO -->
-    <div class="navbar-header">
-      <a id="genedb-logo" class="navbar-brand" href="http://localhost/GeneDB/index.html">
-        <img src="img/GeneDB-logo.png" alt="GeneDB">
-      </a>
+    <div class="navbar-header" style='display:flex'>
+      <div class='col-lg-9 col-md-12'>
+        <a id="genedb-logo" class="navbar-brand" href="/" style='display:inline'>
+          <img src="/img/GeneDB-logo.png" alt="GeneDB">
+        </a>
+      </div>
+      <div class='col-lg-3 col-md-12 hide_on_main_page hide_on_search_page nav-item' style='display:inline;margin-top:2rem'>
+        <form method='get' id='search-form' style='white-space:nowrap' class='input-group' @submit='doSearch'>
+          <input id='search-form-find' name='find' type='text' placeholder="Gene ID, name, alias" accesskey='f' class='form-control' />
+          <input id='search-form-button' type='submit' value='Search' class='input-group-append btn btn-dark custom-button disabled' />
+        </form>
+      </div>
     </div>
     <!-- END LOGO -->
 
@@ -21,10 +29,10 @@
       <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About us</a>
+              <a class="nav-link" href="/about.html">About us</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://apollo.genedb.org/jbrowse/">Apollo</a>
@@ -33,10 +41,10 @@
               <a class="nav-link" href="https://www.genedb.org/action/BLAST">BLAST</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="acknowledgements.html">Acknowledgements</a>
+              <a class="nav-link" href="/acknowledgements.html">Acknowledgements</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="faqs.html">Frequently asked questions</a>
+              <a class="nav-link" href="/faqs.html">Frequently asked questions</a>
             </li>
           </ul>
       </div>
@@ -45,3 +53,13 @@
   <!-- END NAVIGATION -->
 </header>
 <!-- END HEADER -->
+
+<script>
+$("#search-form-find").keydown ( function () { $("#search-form-button").removeClass('disabled') });
+$("#search-form").submit(function() {
+    var query = $('input[name="find"]').val();
+    window.location.href = '/#/search/'+query;
+    location.reload();
+    return false;
+}); 
+</script>
