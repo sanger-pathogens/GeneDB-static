@@ -81,6 +81,14 @@
 							<td tt='plasmodb'></td>
 							<td><a target='_blank' class='external' :href='"http://plasmodb.org/gene/"+genedb_id'>{{genedb_id}}</a></td>
 						</tr>
+						<tr v-if='i.hasClaims("P591")'>
+							<td>EC enzyme</td>
+							<td>
+								<div v-for='ec in i.getStringsForProperty("P591")'>
+									<a target='_blank' class='external' :href='"http://enzyme.expasy.org/EC/"+encodeURIComponent(ec)'>{{ec}}</a>
+								</div>
+							</td>
+						</tr>
 						<tr v-if='apollo_url!=""'>
 							<td tt='apollo'></td>
 							<td><a target='_blank' class='external' :href='apollo_url' tt='apollo'></a></td>
