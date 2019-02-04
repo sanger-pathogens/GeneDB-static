@@ -81,6 +81,20 @@
 							<td tt='plasmodb'></td>
 							<td><a target='_blank' class='external' :href='"http://plasmodb.org/gene/"+genedb_id'>{{genedb_id}}</a></td>
 						</tr>
+						<tr>
+							<td>MPMP</td>
+							<td>
+								<a target='_blank' class='external' :href='"http://mpmp.huji.ac.il/pfid?pfid="+encodeURIComponent(genedb_id)'>{{genedb_id}}</a>
+								<small>[Malaria Parasite Metabolic Pathways]</small>
+							</td>
+						</tr>
+						<tr>
+							<td>RMGM</td>
+							<td>
+								<a target='_blank' class='external' :href='"https://www.pberghei.eu/index.php?cat=geneid&q="+encodeURIComponent(genedb_id)'>{{genedb_id}}</a>
+								<small>[Rodent Malaria genetically modified Parasites]</small>
+							</td>
+						</tr>
 						<tr v-if='i.hasClaims("P591")'>
 							<td>EC Number</td>
 							<td>
