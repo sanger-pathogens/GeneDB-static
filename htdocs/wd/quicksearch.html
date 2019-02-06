@@ -1,0 +1,32 @@
+<template id='quicksearch-template'>
+<div class='container'>
+	<genedb-header></genedb-header>
+	Redirecting...
+	<genedb-footer></genedb-footer>
+</div>
+</template>
+
+<script>
+'use strict';
+
+// This takes old-style searches and redirects them accordingly
+
+let QuickSearch = Vue.extend ( {
+	props : [ 'genedb_id' ] ,
+	data : function () { return {} } ,
+	created : function () {
+		let me = this ;
+		let searchText = me.$route.query.searchText ;
+		if ( /^\S+$/.test(searchText) ) { // Assuming it's a gene ID
+			me.$router.replace ( '/gene/'+searchText );
+		} else { // Fallback to search
+			me.$router.replace ( '/search/'+searchText );
+		}
+	} ,
+	updated : function () { tt.updateInterface(this.$el) ; } ,
+	mounted : function () { tt.updateInterface(this.$el) ; } ,
+	methods : {
+	} ,
+	template:'#quicksearch-template'
+} )
+</script>

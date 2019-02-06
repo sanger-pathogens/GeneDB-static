@@ -20,6 +20,7 @@ $(document).ready ( function () {
 			'/wd/search_page.html',
 			'/wd/gene_list.html',
 			'/wd/gene.html',
+			'/wd/quicksearch.html',
 			'/wd/species.html',
 			'/wd/go_term.html',
 			'/wd/chromosome.html',
@@ -34,6 +35,7 @@ $(document).ready ( function () {
 			  { path: '/go/:go_term', component: GoTerm , props:true },
 			  { path: '/search', component: SearchPage , props:true },
 			  { path: '/search/:query', component: SearchPage , props:true },
+			  { path: '/quicksearch/', component: QuickSearch , props:true },
 			  { path: '/species/:species_id', component: SpeciesPage , props:true },
 			  { path: '/chromosome/:q_chromosome', component: Chromosome , props:true },
 			] ;
