@@ -36,7 +36,14 @@
 							<div style='width:70%;display:flex;flex-direction:column'>
 								<div v-for='si in (ref.snaks.P248||[])'>
 									<publication :item='si.datavalue.value.id'></publication>
-									<!--<wd-link :item='si.datavalue.value.id'></wd-link>-->
+								</div>
+								<div v-for='ref_url in (ref.snaks.P854||[])'>
+									<div v-if='go_ref_pattern.test(ref_url.datavalue.value)'>
+										GOREF :
+										<a target='_blank' class='external' :href='ref_url.datavalue.value'>
+											{{go_ref_pattern.exec(ref_url.datavalue.value)[1]}}
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -168,7 +175,7 @@ SELECT * { ?q wdt:P3382 ?genedb ; wdt:P1057 wd:Q18967858 ; wdt:P644 ?start ; wdt
 Vue.component ( 'go-list' , {
 	template : '#go-list-template' ,
 	props : [ 'go_prop' , 'claims' ] ,
-	data : function () { return { loaded:false } } ,
+	data : function () { return { loaded:false , go_ref_pattern:new RegExp('//github\\.com/geneontology/go-site/blob/master/metadata/gorefs/goref-(\\d+).md$') } } ,
 	created : function () {
 		let me = this ;
 		let to_load = [] ;
