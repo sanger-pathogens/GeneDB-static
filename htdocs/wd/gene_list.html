@@ -55,7 +55,8 @@ Vue.component ( 'gene-list' , {
 	methods : {
 		formatPosition : function ( p ) {
 			if ( typeof p == 'undefined' || p == '' ) return '' ;
-			return (''+p).replace(/[0-9](?=(?:[0-9]{3})+(?![0-9]))/,'$&,') ;
+			return (p*1).toLocaleString() ;
+//			return (''+p).replace(/[0-9](?=(?:[0-9]{3})+(?![0-9]))/,'$&,') ;
 		}
 	}
 } ) ;
