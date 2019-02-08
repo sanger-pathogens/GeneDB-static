@@ -120,7 +120,11 @@
 			<div class="card-header" tt='orthologs'></div>
 			<div class="card-body">
 				<div v-for='(orth_genes,taxon_q) in orthologs' style='width:100%'>
-					<wd-link :item='taxon_q'></wd-link>
+					<div>
+						<router-link :to='"/species/"+taxon_q'>
+							<wd-link :item='taxon_q' as_text='1'></wd-link>
+						</router-link>
+					</div>
 					<gene-list :genes='orth_genes'></gene-list>
 				</div>
 			</div>
