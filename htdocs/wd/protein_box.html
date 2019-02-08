@@ -18,8 +18,13 @@
 					<div style='width:80%;display:flex;flex-direction:column;'>
 						<div v-for='(qualifiers,qprop) in (claim.qualifiers||{})' style='display:flex;flex-direction:row;width:100%'>
 							<div v-if='qprop=="P459"' v-for='qual in qualifiers'>
-								<wd-link item='P459' as_text='1'></wd-link>: 
+								<wd-link :item='qprop' as_text='1'></wd-link>: 
 								<wd-link :item='qual.datavalue.value.id'></wd-link>
+							</div>
+							<div v-if='qprop=="P3519"' v-for='qual in qualifiers'>
+								With/from
+								<wd-link :item='qprop' as_text='1'></wd-link>:
+								<a class='external' target='_blank' :href='"http://pfam.xfam.org/family?acc="+qual.datavalue.value'>{{qual.datavalue.value}}</a>
 							</div>
 						</div>
 						<div v-for='ref in (claim.references||[])' style='width:100%'>
