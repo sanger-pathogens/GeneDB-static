@@ -70,11 +70,11 @@
 					</small>
 				</h5>
 
-				<table class="table table-sm table-borderless">
+				<table class="table table-sm table-borderless" style='width:auto'>
 					<tbody>
 						<tr>
 							<td nowrap>GeneDB ID</td>
-							<td>{{genedb_id}}</td>
+							<td style='width:100%'>{{genedb_id}}</td>
 						</tr>
 						<tr v-if='data.aliases.length>0'>
 							<td nowrap>Alternative names</td>
@@ -83,15 +83,15 @@
 							</td>
 						</tr>
 						<tr>
-							<td tt='protein_name'></td>
+							<td tt='protein_name' nowrap></td>
 							<td><b>{{i.getLabel("en")}}</b></td>
 						</tr>
 						<tr v-if='i.getDesc("en")!=""'>
-							<td tt='description'></td>
+							<td tt='description' nowrap></td>
 							<td>{{i.getDesc()}}</td>
 						</tr>
 						<tr v-if='full_info && i.hasClaims("P703")'>
-							<td>
+							<td nowrap>
 								<wd-link item="P703" as_text="1"></wd-link>
 							</td>
 							<td>
@@ -101,7 +101,7 @@
 							</td>
 						</tr>
 						<tr v-if='i.hasClaims("P279")'>
-							<td tt='protein_type'></td>
+							<td tt='protein_type' nowrap></td>
 							<td>
 								<div v-for='type_q in i.getClaimItemsForProperty("P279",true)'>
 									<wd-link :item='type_q' as_text='1'></wd-link>
@@ -109,28 +109,28 @@
 							</td>
 						</tr>
 						<tr v-if='full_info && gene_genedb_id!=""'>
-							<td tt='encoded_by'></td>
+							<td tt='encoded_by' nowrap></td>
 							<td>
 								<router-link :to='"/gene/"+gene_genedb_id'>{{gene_genedb_id}}</router-link>
 							</td>
 						</tr>
 						<tr v-for='pid in external_ids' v-if='i.hasClaims(pid)'>
-							<td>{{wd.getItem(pid).getLabel()}}</td>
+							<td nowrap>{{wd.getItem(pid).getLabel()}}</td>
 							<td><a :href="wd.getItem(pid).getFirstStringForProperty('P1630').replace('$1',i.getFirstStringForProperty(pid))" class='external' target='_blank'>{{i.getFirstStringForProperty(pid)}}</a></td>
 						</tr>
 						<tr v-if='i.hasClaims("P352")'><!-- UniProt <=> InterPro -->
-							<td>InterPro</td>
+							<td nowrap>InterPro</td>
 							<td>
 								<a :href='"http://www.ebi.ac.uk/interpro/protein/"+i.getFirstStringForProperty("P352")' class='external' target='_blank'>
 									{{i.getFirstStringForProperty("P352")}}
 								</a>
 						</tr>
 						<tr>
-							<td tt='wikidata'></td>
+							<td tt='wikidata' nowrap></td>
 							<td><wd-link :item='q' :label='q'></wd-link></td>
 						</tr>
 						<tr v-if='i.hasClaims("P361")'>
-							<td>Part of</td>
+							<td nowrap>Part of</td>
 							<td>
 								<div v-for='qq in i.getClaimItemsForProperty("P361",true)'>
 									<router-link :to='"/part/"+qq'><wd-link :item='qq' as_text='1'></wd-link></router-link>
@@ -141,7 +141,7 @@
 							</td>
 						</tr>
 						<tr v-if='i.hasClaims("P527")'>
-							<td>Has part</td>
+							<td nowrap>Has part</td>
 							<td>
 								<div v-for='qq in i.getClaimItemsForProperty("P527",true)'>
 									<router-link :to='"/part/"+qq'><wd-link :item='qq' as_text='1'></wd-link></router-link>
@@ -265,7 +265,6 @@ Vue.component ( 'protein-box' , {
 					$.each ( me.go_props , function ( k , go_prop ) {
 						if ( me.i.hasClaims(go_prop) ) me.show_curation_box = true ;
 					} ) ;
-		console.log(me.show_curation_box);
 
 					me.loadRelatedItems ( resolve , reject ) ;
 				}
