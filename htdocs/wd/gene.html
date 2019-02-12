@@ -16,10 +16,15 @@
 				<table class="table table-sm table-borderless">
 					<tbody>
 						<tr>
-							<td tt='systematic_name' nowrap></td>
+							<td nowrap>GeneDB ID</td>
 							<td style='width:100%'>
-								<i>{{genedb_id}}</i>
-								<br/><span v-if='data.aliases.length>0' tt='previously_known_as' :tt1='data.aliases.join(", ")'></span>
+								{{genedb_id}}
+							</td>
+						</tr>
+						<tr  v-if='data.aliases.length>0'>
+							<td nowrap>Alternative names</td>
+							<td style='width:100%'>
+								{{data.aliases.join(", ")}}
 							</td>
 						</tr>
 						<tr>
@@ -266,7 +271,9 @@ let Gene = Vue.extend ( {
 							reject() ;
 						} else {
 							me.loadOrthologs () ;
-							me.data.aliases = Object.values ( me.i.getAliasesForLanguage("en") ) ;
+							me.data.aliases = Object.values ( me.i.getAliasesForLanguage("en") )
+								.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
+							me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
 							me.loaded = true ;
 							resolve() ;
 						}
