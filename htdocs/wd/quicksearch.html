@@ -17,6 +17,9 @@ let QuickSearch = Vue.extend ( {
 	created : function () {
 		let me = this ;
 		let searchText = me.$route.query.searchText ;
+		if ( typeof searchText == 'undefined' || searchText == '' ) {
+			searchText = me.$route.query.name ;
+		}
 		if ( /^\S+$/.test(searchText) ) { // Assuming it's a gene ID
 			me.$router.replace ( '/gene/'+searchText );
 		} else { // Fallback to search

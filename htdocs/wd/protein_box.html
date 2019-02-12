@@ -61,7 +61,7 @@
 	<div v-if='loading' class='row'><i>Loading...</i></div>
 	<div v-else-if='loaded' class='row'>
 		<div class="card mb-2 mt-2" style="width:100%">
-			<div class="card-header" tt='general_information'></div>
+			<div class="card-header">Protein <i>{{genedb_id}}</i></div>
 			<div class="card-body">
 				<h5 v-if='full_info' class="card-title" style='text-align:right'>
 					<small>
@@ -73,10 +73,13 @@
 				<table class="table table-sm table-borderless">
 					<tbody>
 						<tr>
-							<td tt='systematic_name' nowrap></td>
+							<td nowrap>GeneDB ID</td>
+							<td>{{genedb_id}}</td>
+						</tr>
+						<tr v-if='data.aliases.length>0'>
+							<td nowrap>Alternative names</td>
 							<td>
-								<i>{{genedb_id}}</i>
-								<br/><span v-if='data.aliases.length>0' tt='previously_known_as' :tt1='data.aliases.join(", ")'></span>
+								{{data.aliases.join(", ")}}
 							</td>
 						</tr>
 						<tr>
@@ -243,7 +246,9 @@ Vue.component ( 'protein-box' , {
 					me.error_message = "Failed to load '" + me.q + "' from Wikidata API" ;
 					reject() ;
 				} else {
-					me.data.aliases = Object.values ( me.i.getAliasesForLanguage("en") ) ;
+					me.data.aliases = Object.values ( me.i.getAliasesForLanguage("en") )
+						.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
+					me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
 					me.genedb_id = me.i.getFirstStringForProperty('P3382') ;
 					me.loaded = true ;
 					resolve() ;

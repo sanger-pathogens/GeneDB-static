@@ -129,12 +129,9 @@
 			</div>
 		</div>
 
-		<div v-if='i.hasClaims("P688")' class="card mb-2 mt-2" style="width:100%">
-			<div class="card-header" tt='protein'></div>
-			<div class="card-body">
-				<div v-for='protein_q in i.getClaimItemsForProperty("P688",true)' style='width:100%'>
-					<protein-box :q='protein_q'></protein-box>
-				</div>
+		<div v-if='i.hasClaims("P688")' class="row">
+			<div v-for='protein_q in i.getClaimItemsForProperty("P688",true)' style='width:100%'>
+				<protein-box :q='protein_q'></protein-box>
 			</div>
 		</div>
 
@@ -190,6 +187,12 @@ let Gene = Vue.extend ( {
 	} } ,
 	created : function () {
 		let me = this ;
+		if ( /:pep$/.test ( me.genedb_id ) ) {
+			let new_id = me.genedb_id.replace ( /:pep$/ , '' ) ; // Peptide ID from UniProt
+			new_id = new_id.replace ( /\.1$/ , '' ) ; // Protein => Gene ID
+			me.$router.replace ( '/gene/'+new_id );
+			return ;
+		}
 		me.main_subject = [] ;
 		me.apollo_url = '' ;
 		Promise.all ( [
