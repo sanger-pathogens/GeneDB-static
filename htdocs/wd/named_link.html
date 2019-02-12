@@ -5,7 +5,7 @@
 		<i>{{error_message}}</i>
 	</span>
 	<span v-else>
-		<router-link :to='"/"+base+"/"+label'>
+		<router-link :to='"/"+base+"/"+label.replace(/ /g,"_")'>
 			{{label}}
 		</router-link>
 	</span>
