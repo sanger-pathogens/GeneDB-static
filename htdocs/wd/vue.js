@@ -22,6 +22,7 @@ $(document).ready ( function () {
 			'/wd/gene.html',
 			'/wd/quicksearch.html',
 			'/wd/species.html',
+			'/wd/species_link.html',
 			'/wd/go_term.html',
 			'/wd/chromosome.html',
 			'/wd/protein_box.html'

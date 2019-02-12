@@ -41,9 +41,7 @@
 							</td>
 							<td>
 								<div v-for='taxon_q in i.getClaimItemsForProperty("P703",true)'>
-									<router-link :to='"/species/"+taxon_q'>
-										<wd-link :item='taxon_q' as_text='1'></wd-link>
-									</router-link>
+									<species-link :q='taxon_q'></species-link>
 								</div>
 							</td>
 						</tr>
@@ -126,9 +124,7 @@
 			<div class="card-body">
 				<div v-for='(orth_genes,taxon_q) in orthologs' style='width:100%'>
 					<div>
-						<router-link :to='"/species/"+taxon_q'>
-							<wd-link :item='taxon_q' as_text='1'></wd-link>
-						</router-link>
+						<species-link :q='taxon_q'></species-link>
 					</div>
 					<gene-list :genes='orth_genes'></gene-list>
 				</div>

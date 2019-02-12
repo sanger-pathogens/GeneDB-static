@@ -33,9 +33,7 @@
 					</router-link>
 				</td>
 				<td v-if='show_species && typeof gene.species!="undefined"' nowrap>
-					<router-link :to='"/species/"+gene.species'>
-						<wd-link :item='gene.species' as_text='1'></wd-link>
-					</router-link>
+					<species-link :q='gene.species'></species-link>
 				</td>
 			</tr>
 		</tbody>

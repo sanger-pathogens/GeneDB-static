@@ -14,9 +14,7 @@
 				<tbody>
 					<tr v-for='species in by_species'>
 						<td>
-							<router-link :to='"/species/"+species.q'>
-								<wd-link :item='species.q' as_text='1'></wd-link>
-							</router-link>
+							<species-link :q='species.q'></species-link>
 						</td>
 						<td style='text-align:right;'>{{species.num}}</td>
 					</tr>
