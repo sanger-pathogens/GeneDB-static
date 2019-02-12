@@ -133,7 +133,7 @@
 							<td>Part of</td>
 							<td>
 								<div v-for='qq in i.getClaimItemsForProperty("P361",true)'>
-									<wd-link :item='qq'></wd-link>
+									<router-link :to='"/part/"+qq'><wd-link :item='qq' as_text='1'></wd-link></router-link>
 									<span v-if='getInterproURL(qq)!=""'>
 										[<a target='_blank' class='external' :href='getInterproURL(qq)'>InterPro</a>]
 									</span>
@@ -144,7 +144,7 @@
 							<td>Has part</td>
 							<td>
 								<div v-for='qq in i.getClaimItemsForProperty("P527",true)'>
-									<wd-link :item='qq'></wd-link>
+									<router-link :to='"/part/"+qq'><wd-link :item='qq' as_text='1'></wd-link></router-link>
 									<span v-if='getInterproURL(qq)!=""'>
 										[<a target='_blank' class='external' :href='getInterproURL(qq)'>InterPro</a>]
 									</span>
