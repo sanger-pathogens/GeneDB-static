@@ -61,7 +61,7 @@
 	<div v-if='loading' class='row'><i>Loading...</i></div>
 	<div v-else-if='loaded' class='row'>
 		<div class="card mb-2 mt-2" style="width:100%">
-			<div class="card-header" tt='general_information'></div>
+			<div class="card-header">Protein <i>{{genedb_id}}</i></div>
 			<div class="card-body">
 				<h5 v-if='full_info' class="card-title" style='text-align:right'>
 					<small>
