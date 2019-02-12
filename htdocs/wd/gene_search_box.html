@@ -1,7 +1,7 @@
 <template id='gene-search-box-template'>
 <div>
 	<div>
-		<input type='text' v-model='query' @keyup='onQueryChange' id='gene_search_box' tt_placeholder='ph_gene_search' style='width:300px;' @keyup.enter='onEnter' autofocus accesskey='f' />
+		<input type='text' v-model='query' @keyup='onQueryChange' id='gene_search_box' placeholder='Gene ID, name, etc.' style='width:300px;' @keyup.enter='onEnter' autofocus accesskey='f' />
 	</div>
 	<div v-if='open_search_page'></div>
 	<div v-else-if='searching'>...</div>

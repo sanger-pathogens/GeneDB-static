@@ -16,17 +16,22 @@
 				<table class="table table-sm table-borderless">
 					<tbody>
 						<tr>
-							<td tt='systematic_name' nowrap></td>
+							<td nowrap>GeneDB ID</td>
 							<td style='width:100%'>
-								<i>{{genedb_id}}</i>
-								<br/><span v-if='data.aliases.length>0' tt='previously_known_as' :tt1='data.aliases.join(", ")'></span>
+								{{genedb_id}}
+							</td>
+						</tr>
+						<tr  v-if='data.aliases.length>0'>
+							<td nowrap>Alternative names</td>
+							<td style='width:100%'>
+								{{data.aliases.join(", ")}}
 							</td>
 						</tr>
 						<tr>
 							<td tt='gene_name'></td>
 							<td><b>{{i.getLabel("en")}}</b></td>
 						</tr>
-						<tr v-if='i.getDesc()!=""'>
+						<tr v-if='i.getDesc("en")!=""'>
 							<td tt='description'></td>
 							<td>{{i.getDesc()}}</td>
 						</tr>
@@ -36,9 +41,7 @@
 							</td>
 							<td>
 								<div v-for='taxon_q in i.getClaimItemsForProperty("P703",true)'>
-									<router-link :to='"/species/"+taxon_q'>
-										<wd-link :item='taxon_q' as_text='1'></wd-link>
-									</router-link>
+									<named-link :q='taxon_q' base='species'></named-link>
 								</div>
 							</td>
 						</tr>
@@ -53,9 +56,7 @@
 						<tr>
 							<td tt='location'></td>
 							<td>
-								<router-link :to='"/chromosome/"+(i.getClaimItemsForProperty("1057",true))[0]'>
-									<wd-link :item='(i.getClaimItemsForProperty("1057",true))[0]' as_text='1'></wd-link>
-								</router-link>
+								<named-link :q='(i.getClaimItemsForProperty("1057",true))[0]' base='chromosome'></named-link>
 								:
 								{{i.getFirstStringForProperty("P644")}}
 								&ndash;
@@ -81,6 +82,28 @@
 							<td tt='plasmodb'></td>
 							<td><a target='_blank' class='external' :href='"http://plasmodb.org/gene/"+genedb_id'>{{genedb_id}}</a></td>
 						</tr>
+						<tr>
+							<td>MPMP</td>
+							<td>
+								<a target='_blank' class='external' :href='"http://mpmp.huji.ac.il/pfid?pfid="+encodeURIComponent(genedb_id)'>{{genedb_id}}</a>
+								<small>[Malaria Parasite Metabolic Pathways]</small>
+							</td>
+						</tr>
+						<tr>
+							<td>RMGM</td>
+							<td>
+								<a target='_blank' class='external' :href='"https://www.pberghei.eu/index.php?cat=geneid&q="+encodeURIComponent(genedb_id)'>{{genedb_id}}</a>
+								<small>[Rodent Malaria genetically modified Parasites]</small>
+							</td>
+						</tr>
+						<tr v-if='i.hasClaims("P591")'>
+							<td>EC Number</td>
+							<td>
+								<div v-for='ec in i.getStringsForProperty("P591")'>
+									<a target='_blank' class='external' :href='"http://enzyme.expasy.org/EC/"+encodeURIComponent(ec)'>{{ec}}</a>
+								</div>
+							</td>
+						</tr>
 						<tr v-if='apollo_url!=""'>
 							<td tt='apollo'></td>
 							<td><a target='_blank' class='external' :href='apollo_url' tt='apollo'></a></td>
@@ -98,7 +121,9 @@
 			<div class="card-header" tt='orthologs'></div>
 			<div class="card-body">
 				<div v-for='(orth_genes,taxon_q) in orthologs' style='width:100%'>
-					<wd-link :item='taxon_q'></wd-link>
+					<div>
+						<names-link :q='taxon_q' base='species'></named-link>
+					</div>
 					<gene-list :genes='orth_genes'></gene-list>
 				</div>
 			</div>
@@ -240,7 +265,9 @@ let Gene = Vue.extend ( {
 							reject() ;
 						} else {
 							me.loadOrthologs () ;
-							me.data.aliases = Object.values ( me.i.getAliasesForLanguage("en") ) ;
+							me.data.aliases = Object.values ( me.i.getAliasesForLanguage("en") )
+								.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
+							me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
 							me.loaded = true ;
 							resolve() ;
 						}

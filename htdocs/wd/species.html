@@ -1,7 +1,8 @@
 <template id='species-template'>
 <div class='container'>
 	<genedb-header></genedb-header>
-	<div v-if='loading' class='row'><i>Loading...</i></div>
+	<div v-if='error' class='row'>Error: {{error_message}}</div>
+	<div v-else-if='loading' class='row'><i>Loading...</i></div>
 	<div v-else class='row'>
 		<div class='col-12 card mb-2 mt-2'>
 			<div class='card-header'>
@@ -68,9 +69,7 @@
 					<tbody>
 						<tr v-for='chr in chromosomes'>
 							<td nowrap>
-								<router-link :to='"/chromosome/"+chr.q'>
-									<wd-link :item='chr.q' as_text='1'></wd-link>
-								</router-link>
+								<named-link :q='chr.q' base='chromosome'></named-link>
 							</td>
 							<td style='text-align:right;font-family:Courier'>
 								{{chr.genes}}
@@ -89,21 +88,40 @@
 <script>
 'use strict';
 
+let species_cache = {} ;
+
 let SpeciesPage = Vue.extend ( {
 	props : ['species_id'] ,
 	template : '#species-template' ,
-	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] } } ,
+	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] , error:false , error_message:'' } } ,
 	created : function () {
 		let me = this ;
+		me.error = false ;
 		if ( /^Q\d+$/.test(me.species_id) ) {
 			me.setSpeciesQ ( me.species_id ) ;
 		} else {
-			// TODO support other identifiers?
+			me.findSpeciesByName ( me.species_id , function ( q ) {
+				if ( typeof q != 'undefined' ) return me.setSpeciesQ(q) ;
+				me.error_message = "Could not find species " + me.species_id ;
+				me.error = true ;
+			} ) ;
 		}
 	} ,
 	updated : function () { tt.updateInterface(this.$el) ; } ,
 	mounted : function () { tt.updateInterface(this.$el) ; } ,
 	methods : {
+		findSpeciesByName : function ( species_name , callback ) {
+			let me = this ;
+			let sparql = 'SELECT DISTINCT ?taxon { ?gene wdt:P31 wd:Q7187 ; wdt:P3382 [] ; wdt:P703 ?taxon . ?taxon rdfs:label "' + $.trim(species_name.replace(/_/g,' ')) + '"@en}' ;
+			wd.loadSPARQL ( sparql , function ( d ) {
+				let qs = [] ;
+				$.each ( d.results.bindings , function ( k , v ) {
+					qs.push ( wd.itemFromBinding ( v.taxon ) ) ;
+				} ) ;
+				if ( qs.length == 1 ) callback ( qs[0] ) ;
+				else callback () ; // Not found, or too many found
+			} ) ;
+		} ,
 		setSpeciesQ : function ( q ) {
 			let me = this ;
 			me.species_q = q ;

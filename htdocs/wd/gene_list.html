@@ -28,14 +28,10 @@
 				<td style='width:120px;text-align:right;font-family:Courier'>{{formatPosition(gene.start)}}</td>
 				<td style='width:120px;text-align:right;font-family:Courier'>{{formatPosition(gene.end)}}</td>
 				<td v-if='show_chromosome'>
-					<router-link v-if='typeof gene.q_chromosome!="undefined"' :to='"/chromosome/"+gene.q_chromosome'>
-						<wd-link :item='gene.q_chromosome' as_text='1'></wd-link>
-					</router-link>
+					<named-link :q='gene.q_chromosome' base='chromosome'></named-link>
 				</td>
 				<td v-if='show_species && typeof gene.species!="undefined"' nowrap>
-					<router-link :to='"/species/"+gene.species'>
-						<wd-link :item='gene.species' as_text='1'></wd-link>
-					</router-link>
+					<named-link :q='gene.species' base='species'></named-link>
 				</td>
 			</tr>
 		</tbody>
@@ -55,7 +51,8 @@ Vue.component ( 'gene-list' , {
 	methods : {
 		formatPosition : function ( p ) {
 			if ( typeof p == 'undefined' || p == '' ) return '' ;
-			return (''+p).replace(/[0-9](?=(?:[0-9]{3})+(?![0-9]))/,'$&,') ;
+			return (p*1).toLocaleString() ;
+//			return (''+p).replace(/[0-9](?=(?:[0-9]{3})+(?![0-9]))/,'$&,') ;
 		}
 	}
 } ) ;
