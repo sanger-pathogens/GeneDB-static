@@ -190,6 +190,12 @@ let Gene = Vue.extend ( {
 	} } ,
 	created : function () {
 		let me = this ;
+		if ( /:pep$/.test ( me.genedb_id ) ) {
+			let new_id = me.genedb_id.replace ( /:pep$/ , '' ) ; // Peptide ID from UniProt
+			new_id = new_id.replace ( /\.1$/ , '' ) ; // Protein => Gene ID
+			me.$router.replace ( '/gene/'+new_id );
+			return ;
+		}
 		me.main_subject = [] ;
 		me.apollo_url = '' ;
 		Promise.all ( [
