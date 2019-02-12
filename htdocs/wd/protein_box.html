@@ -158,7 +158,7 @@
 			</div>
 		</div>
 
-		<div class="card mb-2" style="width:100%">
+		<div class="card mb-2" style="width:100%" v-if='show_curation_box'>
 			<div class="card-header" tt='curation'></div>
 			<div class="card-body">
 				<h5 class="card-title" tt='gene_ontology'></h5>
@@ -167,21 +167,7 @@
 				</div>
 			</div>
 		</div>
-<!--
-		<div v-if='loading_main_subject || main_subject.length>0' class="card mb-2" style="width:100%">
-			<div class="card-header" tt='main_subject'></div>
-			<div v-if='show_all_main_subject' class="card-body">
-				<ul class="list-group list-group-flush">
-					<li v-for='paper_q in main_subject' class="list-group-item">
-						<publication :item='paper_q' num_authors='5'></publication>
-					</li>
-				</ul>
-			</div>
-			<div v-else class="card-body">
-				<a href='#' @click.prevent='loadLiteratureDetails()' tt='show_x_main_subject_papers' :tt1='main_subject.length'></a>
-			</div>
-		</div>
--->
+
 	</div>
 	<div v-else class='row'>
 		<div v-if='possible_items.length>0'>
@@ -197,12 +183,6 @@
 
 <script>
 'use strict';
-
-/*
-TODO: Show all genes on the same chromsome
-For chromosome Q18967858:
-SELECT * { ?q wdt:P3382 ?genedb ; wdt:P1057 wd:Q18967858 ; wdt:P644 ?start ; wdt:P645 ?end }
-*/
 
 Vue.component ( 'go-list' , {
 	template : '#go-list-template' ,
@@ -232,6 +212,7 @@ Vue.component ( 'protein-box' , {
 		type:''
 	} ,
 	go_props : ["P680","P681","P682"] ,
+	show_curation_box : true ,
 	external_ids : ["P352","P214"] ,
 	main_subject : [] , loading_main_subject:false , show_all_main_subject:false
 	} } ,
@@ -279,6 +260,13 @@ Vue.component ( 'protein-box' , {
 						.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
 					me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
 					me.genedb_id = me.i.getFirstStringForProperty('P3382') ;
+
+					me.show_curation_box = false ;
+					$.each ( me.go_props , function ( k , go_prop ) {
+						if ( me.i.hasClaims(go_prop) ) me.show_curation_box = true ;
+					} ) ;
+		console.log(me.show_curation_box);
+
 					me.loadRelatedItems ( resolve , reject ) ;
 				}
 			} ) ;
