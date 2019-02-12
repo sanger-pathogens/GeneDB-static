@@ -118,9 +118,38 @@
 							<td>{{wd.getItem(pid).getLabel()}}</td>
 							<td><a :href="wd.getItem(pid).getFirstStringForProperty('P1630').replace('$1',i.getFirstStringForProperty(pid))" class='external' target='_blank'>{{i.getFirstStringForProperty(pid)}}</a></td>
 						</tr>
+						<tr v-if='i.hasClaims("P352")'><!-- UniProt <=> InterPro -->
+							<td>InterPro</td>
+							<td>
+								<a :href='"http://www.ebi.ac.uk/interpro/protein/"+i.getFirstStringForProperty("P352")' class='external' target='_blank'>
+									{{i.getFirstStringForProperty("P352")}}
+								</a>
+						</tr>
 						<tr>
 							<td tt='wikidata'></td>
 							<td><wd-link :item='q' :label='q'></wd-link></td>
+						</tr>
+						<tr v-if='i.hasClaims("P361")'>
+							<td>Part of</td>
+							<td>
+								<div v-for='qq in i.getClaimItemsForProperty("P361",true)'>
+									<wd-link :item='qq'></wd-link>
+									<span v-if='getInterproURL(qq)!=""'>
+										[<a target='_blank' class='external' :href='getInterproURL(qq)'>InterPro</a>]
+									</span>
+								</div>
+							</td>
+						</tr>
+						<tr v-if='i.hasClaims("P527")'>
+							<td>Has part</td>
+							<td>
+								<div v-for='qq in i.getClaimItemsForProperty("P527",true)'>
+									<wd-link :item='qq'></wd-link>
+									<span v-if='getInterproURL(qq)!=""'>
+										[<a target='_blank' class='external' :href='getInterproURL(qq)'>InterPro</a>]
+									</span>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -250,10 +279,20 @@ Vue.component ( 'protein-box' , {
 						.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
 					me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
 					me.genedb_id = me.i.getFirstStringForProperty('P3382') ;
-					me.loaded = true ;
-					resolve() ;
+					me.loadRelatedItems ( resolve , reject ) ;
 				}
 			} ) ;
+		} ,
+		loadRelatedItems : function ( resolve , reject ) {
+			let me = this ;
+			let to_load = [] ;
+			$.each ( me.i.getClaimItemsForProperty('P361',true) , function ( k , v ) { to_load.push(v)} ) ;
+			$.each ( me.i.getClaimItemsForProperty('P527',true) , function ( k , v ) { to_load.push(v)} ) ;
+			wd.getItemBatch ( to_load , function () {
+				me.loaded = true ;
+				resolve() ;
+			} ) ;
+
 		} ,
 		loadLiteratureDetails : function () {
 			var me = this ;
@@ -282,13 +321,21 @@ Vue.component ( 'protein-box' , {
 			let sparql = 'SELECT ?q ?desc { ?q wdt:P31 wd:Q23173209 ; skos:altLabel ?desc FILTER ( LANG(?desc)="en" ) }' ;
 			wd.loadSPARQL ( sparql , function ( d ) {
 				$.each ( d.results.bindings , function ( dummy , b ) {
-					let q = 'Q' + wd.itemFromBinding ( b.q ) ;
+					let q = wd.itemFromBinding ( b.q ) ;
 					let desc = b.desc.value ;
 					if ( desc == 'evidence used in automatic assertion' ) return ;
 					if ( typeof evidence_codes[q] == 'undefined' ) evidence_codes[q] = desc ;
 				} ) ;
 				resolve() ;
 			} , reject ) ;
+		} ,
+		getInterproURL : function ( q ) {
+			let me = this ;
+			let i = wd.getItem ( q ) ;
+			if ( typeof i == 'undefined' ) return '' ;
+			if ( !i.hasClaims('P2926') ) return '' ;
+			let id = i.getFirstStringForProperty('P2926') ;
+			return 'http://www.ebi.ac.uk/interpro/entry/' + id ;
 		}
 	} ,
 	template:'#protein-box-template'
