@@ -1,12 +1,12 @@
-<template id='species-link-template'>
+<template id='named-link-template'>
 <span>
 	<span v-if='loading'></span>
 	<span v-else-if='error_message!=""'>
 		<i>{{error_message}}</i>
 	</span>
 	<span v-else>
-		<router-link :to='"/species/"+species_name'>
-			{{species_name}}
+		<router-link :to='"/"+base+"/"+label'>
+			{{label}}
 		</router-link>
 	</span>
 </span>
@@ -15,21 +15,21 @@
 <script>
 'use strict';
 
-Vue.component ( 'species-link' , {
-	template : '#species-link-template' ,
-	props : [ 'q' ] ,
-	data : function () { return { loading:true , error_message:'', species_name:'' } } ,
+Vue.component ( 'named-link' , {
+	template : '#named-link-template' ,
+	props : [ 'q' , 'base' ] ,
+	data : function () { return { loading:true , error_message:'', label:'' } } ,
 	created : function () {} ,
 	mounted : function () {
 		let me = this ;
 		wd.getItemBatch ( [me.q] , function () {
 			let i = wd.getItem ( me.q ) ;
 			if ( typeof i == 'undefined' ) {
-				me.error_message = "Unknown species " + q ; // Fallback
+				me.error_message = "Unknown item " + q ; // Fallback
 				me.loading = false ;
 				return ;
 			}
-			me.species_name = i.getLabel('en') ;
+			me.label = i.getLabel('en') ;
 			me.loading = false ;
 		} ) ;
 	} ,

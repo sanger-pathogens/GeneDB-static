@@ -41,7 +41,7 @@
 							</td>
 							<td>
 								<div v-for='taxon_q in i.getClaimItemsForProperty("P703",true)'>
-									<species-link :q='taxon_q'></species-link>
+									<named-link :q='taxon_q' base='species'></named-link>
 								</div>
 							</td>
 						</tr>
@@ -56,9 +56,7 @@
 						<tr>
 							<td tt='location'></td>
 							<td>
-								<router-link :to='"/chromosome/"+(i.getClaimItemsForProperty("1057",true))[0]'>
-									<wd-link :item='(i.getClaimItemsForProperty("1057",true))[0]' as_text='1'></wd-link>
-								</router-link>
+								<named-link :q='(i.getClaimItemsForProperty("1057",true))[0]' base='chromosome'></named-link>
 								:
 								{{i.getFirstStringForProperty("P644")}}
 								&ndash;
@@ -124,7 +122,7 @@
 			<div class="card-body">
 				<div v-for='(orth_genes,taxon_q) in orthologs' style='width:100%'>
 					<div>
-						<species-link :q='taxon_q'></species-link>
+						<names-link :q='taxon_q' base='species'></named-link>
 					</div>
 					<gene-list :genes='orth_genes'></gene-list>
 				</div>

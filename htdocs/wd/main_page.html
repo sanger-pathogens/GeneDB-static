@@ -14,7 +14,7 @@
 				<tbody>
 					<tr v-for='species in by_species'>
 						<td>
-							<species-link :q='species.q'></species-link>
+							<named-link :q='species.q' base='species'></named-link>
 						</td>
 						<td style='text-align:right;'>{{species.num}}</td>
 					</tr>
@@ -30,7 +30,7 @@
 			<ul>
 				<li><router-link to='/gene/PF3D7_0810800'>Gene <i>DHPS</i></router-link></li>
 				<li><router-link to='/go/GO:0042493'>Genes with GO term GO:0042493</router-link></li>
-				<li><router-link to='/chromosome/Q18967851'>All genes on chromosome Pf3D7_08_v3</router-link></li>
+				<li><router-link to='/chromosome/Pf3D7_08_v3'>All genes on chromosome Pf3D7_08_v3</router-link></li>
 			</ul>
 		</div>
 	</div>

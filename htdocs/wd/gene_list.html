@@ -28,12 +28,10 @@
 				<td style='width:120px;text-align:right;font-family:Courier'>{{formatPosition(gene.start)}}</td>
 				<td style='width:120px;text-align:right;font-family:Courier'>{{formatPosition(gene.end)}}</td>
 				<td v-if='show_chromosome'>
-					<router-link v-if='typeof gene.q_chromosome!="undefined"' :to='"/chromosome/"+gene.q_chromosome'>
-						<wd-link :item='gene.q_chromosome' as_text='1'></wd-link>
-					</router-link>
+					<named-link :q='gene.q_chromosome' base='chromosome'></named-link>
 				</td>
 				<td v-if='show_species && typeof gene.species!="undefined"' nowrap>
-					<species-link :q='gene.species'></species-link>
+					<named-link :q='gene.species' base='species'></named-link>
 				</td>
 			</tr>
 		</tbody>

@@ -69,9 +69,7 @@
 					<tbody>
 						<tr v-for='chr in chromosomes'>
 							<td nowrap>
-								<router-link :to='"/chromosome/"+chr.q'>
-									<wd-link :item='chr.q' as_text='1'></wd-link>
-								</router-link>
+								<named-link :q='chr.q' base='chromosome'></named-link>
 							</td>
 							<td style='text-align:right;font-family:Courier'>
 								{{chr.genes}}
@@ -114,7 +112,7 @@ let SpeciesPage = Vue.extend ( {
 	methods : {
 		findSpeciesByName : function ( species_name , callback ) {
 			let me = this ;
-			let sparql = 'SELECT DISTINCT ?taxon { ?gene wdt:P31 wd:Q7187 ; wdt:P3382 [] ; wdt:P703 ?taxon . ?taxon rdfs:label "' + species_name.replace(/_/g,' ') + '"@en}' ;
+			let sparql = 'SELECT DISTINCT ?taxon { ?gene wdt:P31 wd:Q7187 ; wdt:P3382 [] ; wdt:P703 ?taxon . ?taxon rdfs:label "' + $.trim(species_name.replace(/_/g,' ')) + '"@en}' ;
 			wd.loadSPARQL ( sparql , function ( d ) {
 				let qs = [] ;
 				$.each ( d.results.bindings , function ( k , v ) {
