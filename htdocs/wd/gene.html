@@ -124,12 +124,12 @@
 					<div>
 						<names-link :q='taxon_q' base='species'></named-link>
 					</div>
-					<gene-list :genes='orth_genes'></gene-list>
+					<gene-list :genes='orth_genes' show_chromosome='1' show_species='1'></gene-list>
 				</div>
 			</div>
 		</div>
 
-		<div v-if='i.hasClaims("P688")' class="row">
+		<div v-if='i.hasClaims("P688")' style='width:100%'>
 			<div v-for='protein_q in i.getClaimItemsForProperty("P688",true)' style='width:100%'>
 				<protein-box :q='protein_q'></protein-box>
 			</div>
@@ -291,7 +291,8 @@ let Gene = Vue.extend ( {
 					gene.genedb = b.genedb.value ;
 					if ( typeof b.start != 'undefined' ) gene.start = b.start.value*1 ;
 					if ( typeof b.end != 'undefined' ) gene.end = b.end.value*1 ;
-					if ( typeof b.chromosome != 'undefined' ) gene.chromosome = wd.itemFromBinding ( b.chromosome ) ;
+					if ( typeof b.chromosome != 'undefined' ) gene.q_chromosome = wd.itemFromBinding ( b.chromosome ) ;
+					gene.species = wd.itemFromBinding ( b.taxon ) ;
 					let taxon_q = wd.itemFromBinding ( b.taxon ) ;
 					if ( typeof orth[taxon_q] == 'undefined' ) orth[taxon_q] = [] ;
 					orth[taxon_q].push ( gene ) ;
@@ -304,22 +305,6 @@ let Gene = Vue.extend ( {
 			} ) ;
 
 		} ,
-/*
-		loadGeneOntologyEvidenceCodes : function(resolve, reject) { // Global load
-			if ( typeof evidence_codes != 'undefined' ) return resolve() ; // Already loaded
-			evidence_codes = {} ;
-			let sparql = 'SELECT ?q ?desc { ?q wdt:P31 wd:Q23173209 ; skos:altLabel ?desc FILTER ( LANG(?desc)="en" ) }' ;
-			wd.loadSPARQL ( sparql , function ( d ) {
-				$.each ( d.results.bindings , function ( dummy , b ) {
-					let q = 'Q' + wd.itemFromBinding ( b.q ) ;
-					let desc = b.desc.value ;
-					if ( desc == 'evidence used in automatic assertion' ) return ;
-					if ( typeof evidence_codes[q] == 'undefined' ) evidence_codes[q] = desc ;
-				} ) ;
-				resolve() ;
-			} , reject ) ;
-		}
-*/
 	} ,
 	template:'#gene-template'
 } )
