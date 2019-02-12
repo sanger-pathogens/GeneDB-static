@@ -260,6 +260,7 @@ Vue.component ( 'protein-box' , {
 						.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
 					me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
 					me.genedb_id = me.i.getFirstStringForProperty('P3382') ;
+					if ( me.data.aliases.indexOf(me.genedb_id) !== -1 ) me.data.aliases.splice ( me.data.aliases.indexOf(me.genedb_id) , 1 ) ;
 
 					me.show_curation_box = false ;
 					$.each ( me.go_props , function ( k , go_prop ) {

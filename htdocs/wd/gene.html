@@ -281,6 +281,7 @@ let Gene = Vue.extend ( {
 							me.data.aliases = Object.values ( me.i.getAliasesForLanguage("en") )
 								.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
 							me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
+							if ( me.data.aliases.indexOf(me.genedb_id) !== -1 ) me.data.aliases.splice ( me.data.aliases.indexOf(me.genedb_id) , 1 ) ;
 							me.loaded = true ;
 							resolve() ;
 						}
