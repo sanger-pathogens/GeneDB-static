@@ -1,0 +1,88 @@
+<template id='part-template'>
+<div class='container'>
+	<genedb-header></genedb-header>
+	<div v-if='loading'></div>
+	<div v-else>
+		<div class='row'>
+			<h2>
+				Genes with
+				<i><wd-link :item='q' as_text='1'></wd-link></i>
+				<wd-link :item='i.getClaimItemsForProperty("P31",true)[0]' as_text='1'></wd-link>
+			</h2>
+		</div>
+		<div class='row'>
+			<table class="table table-sm table-borderless" style='width:auto'>
+				<tbody>
+					<tr>
+						<td nowrap>Wikidata</td>
+						<td><wd-link :item='q' :label='q'></wd-link></td>
+					</tr>
+					<tr v-if='i.hasClaims("P2926")'>
+						<td nowrap>InterPro</td>
+						<td>
+							<a :href='" http://www.ebi.ac.uk/interpro/entry/"+i.getFirstStringForProperty("P2926")' class='external' target="_blank">
+								{{i.getFirstStringForProperty("P2926")}}
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class='row'>
+			<gene-list :genes='genes' show_chromosome='1' show_species='1'></gene-list>
+		</div>
+	</div>
+	<genedb-footer></genedb-footer>
+</div>
+</template>
+
+<script>
+'use strict';
+
+let PartPage = Vue.extend ( {
+	props : [ 'id' ] ,
+	data : function () { return { loading:true , genes:[] , q:'' , i:{} } } ,
+	created : function () {
+		this.loadFromQ ( this.id ) ;
+	} ,
+	mounted : function () {} ,
+	updated : function () {} ,
+	methods : {
+		loadFromQ : function ( q ) {
+			let me = this ;
+			me.q = q ;
+			me.loading = true ;
+			me.genes = [] ;
+			let sparql = "SELECT DISTINCT ?gene ?genedb_g ?chromosome_q ?start ?end ?species { ?protein wdt:P3382 ?genedb_p ; (wdt:P361|wdt:P527) wd:" + q + " ; wdt:P702 ?gene . ?gene wdt:P3382 ?genedb_g ; wdt:P1057 ?chromosome_q ; wdt:P644 ?start ; wdt:P645 ?end ; wdt:P703 ?species }" ;
+			wd.loadSPARQL ( sparql , function ( d ) {
+				let to_load = [ q ] ;
+				$.each ( d.results.bindings , function ( dummy , b ) {
+					let gene_q = wd.itemFromBinding ( b.gene ) ;
+					let gene = {
+						q : gene_q ,
+						q_chromosome : wd.itemFromBinding ( b.chromosome_q ) ,
+						genedb : b.genedb_g.value ,
+						start : b.start.value * 1 ,
+						end : b.end.value * 1 ,
+						species : wd.itemFromBinding ( b.species )
+					} ;
+					me.genes.push ( gene ) ;
+					to_load.push ( gene_q ) ;
+					to_load.push ( gene.species ) ;
+					to_load.push ( gene.q_chromosome ) ;
+				} ) ;
+				wd.getItemBatch ( to_load , function () {
+					me.i = wd.getItem(q) ;
+					// TODO error
+					me.loading = false ;
+				} ) ;
+
+			} ) ;
+		}
+	} ,
+	template:'#part-template'
+} )
+
+
+
+</script>

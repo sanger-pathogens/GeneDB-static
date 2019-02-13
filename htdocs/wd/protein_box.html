@@ -70,11 +70,11 @@
 					</small>
 				</h5>
 
-				<table class="table table-sm table-borderless">
+				<table class="table table-sm table-borderless" style='width:auto'>
 					<tbody>
 						<tr>
 							<td nowrap>GeneDB ID</td>
-							<td>{{genedb_id}}</td>
+							<td style='width:100%'>{{genedb_id}}</td>
 						</tr>
 						<tr v-if='data.aliases.length>0'>
 							<td nowrap>Alternative names</td>
@@ -83,15 +83,15 @@
 							</td>
 						</tr>
 						<tr>
-							<td tt='protein_name'></td>
+							<td tt='protein_name' nowrap></td>
 							<td><b>{{i.getLabel("en")}}</b></td>
 						</tr>
 						<tr v-if='i.getDesc("en")!=""'>
-							<td tt='description'></td>
+							<td tt='description' nowrap></td>
 							<td>{{i.getDesc()}}</td>
 						</tr>
 						<tr v-if='full_info && i.hasClaims("P703")'>
-							<td>
+							<td nowrap>
 								<wd-link item="P703" as_text="1"></wd-link>
 							</td>
 							<td>
@@ -101,7 +101,7 @@
 							</td>
 						</tr>
 						<tr v-if='i.hasClaims("P279")'>
-							<td tt='protein_type'></td>
+							<td tt='protein_type' nowrap></td>
 							<td>
 								<div v-for='type_q in i.getClaimItemsForProperty("P279",true)'>
 									<wd-link :item='type_q' as_text='1'></wd-link>
@@ -109,18 +109,47 @@
 							</td>
 						</tr>
 						<tr v-if='full_info && gene_genedb_id!=""'>
-							<td tt='encoded_by'></td>
+							<td tt='encoded_by' nowrap></td>
 							<td>
 								<router-link :to='"/gene/"+gene_genedb_id'>{{gene_genedb_id}}</router-link>
 							</td>
 						</tr>
 						<tr v-for='pid in external_ids' v-if='i.hasClaims(pid)'>
-							<td>{{wd.getItem(pid).getLabel()}}</td>
+							<td nowrap>{{wd.getItem(pid).getLabel()}}</td>
 							<td><a :href="wd.getItem(pid).getFirstStringForProperty('P1630').replace('$1',i.getFirstStringForProperty(pid))" class='external' target='_blank'>{{i.getFirstStringForProperty(pid)}}</a></td>
 						</tr>
+						<tr v-if='i.hasClaims("P352")'><!-- UniProt <=> InterPro -->
+							<td nowrap>InterPro</td>
+							<td>
+								<a :href='"http://www.ebi.ac.uk/interpro/protein/"+i.getFirstStringForProperty("P352")' class='external' target='_blank'>
+									{{i.getFirstStringForProperty("P352")}}
+								</a>
+						</tr>
 						<tr>
-							<td tt='wikidata'></td>
+							<td tt='wikidata' nowrap></td>
 							<td><wd-link :item='q' :label='q'></wd-link></td>
+						</tr>
+						<tr v-if='i.hasClaims("P361")'>
+							<td nowrap>Part of</td>
+							<td>
+								<div v-for='qq in i.getClaimItemsForProperty("P361",true)'>
+									<router-link :to='"/part/"+qq'><wd-link :item='qq' as_text='1'></wd-link></router-link>
+									<span v-if='getInterproURL(qq)!=""'>
+										[<a target='_blank' class='external' :href='getInterproURL(qq)'>InterPro</a>]
+									</span>
+								</div>
+							</td>
+						</tr>
+						<tr v-if='i.hasClaims("P527")'>
+							<td nowrap>Has part</td>
+							<td>
+								<div v-for='qq in i.getClaimItemsForProperty("P527",true)'>
+									<router-link :to='"/part/"+qq'><wd-link :item='qq' as_text='1'></wd-link></router-link>
+									<span v-if='getInterproURL(qq)!=""'>
+										[<a target='_blank' class='external' :href='getInterproURL(qq)'>InterPro</a>]
+									</span>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -129,7 +158,7 @@
 			</div>
 		</div>
 
-		<div class="card mb-2" style="width:100%">
+		<div class="card mb-2" style="width:100%" v-if='show_curation_box'>
 			<div class="card-header" tt='curation'></div>
 			<div class="card-body">
 				<h5 class="card-title" tt='gene_ontology'></h5>
@@ -138,21 +167,7 @@
 				</div>
 			</div>
 		</div>
-<!--
-		<div v-if='loading_main_subject || main_subject.length>0' class="card mb-2" style="width:100%">
-			<div class="card-header" tt='main_subject'></div>
-			<div v-if='show_all_main_subject' class="card-body">
-				<ul class="list-group list-group-flush">
-					<li v-for='paper_q in main_subject' class="list-group-item">
-						<publication :item='paper_q' num_authors='5'></publication>
-					</li>
-				</ul>
-			</div>
-			<div v-else class="card-body">
-				<a href='#' @click.prevent='loadLiteratureDetails()' tt='show_x_main_subject_papers' :tt1='main_subject.length'></a>
-			</div>
-		</div>
--->
+
 	</div>
 	<div v-else class='row'>
 		<div v-if='possible_items.length>0'>
@@ -168,12 +183,6 @@
 
 <script>
 'use strict';
-
-/*
-TODO: Show all genes on the same chromsome
-For chromosome Q18967858:
-SELECT * { ?q wdt:P3382 ?genedb ; wdt:P1057 wd:Q18967858 ; wdt:P644 ?start ; wdt:P645 ?end }
-*/
 
 Vue.component ( 'go-list' , {
 	template : '#go-list-template' ,
@@ -203,6 +212,7 @@ Vue.component ( 'protein-box' , {
 		type:''
 	} ,
 	go_props : ["P680","P681","P682"] ,
+	show_curation_box : true ,
 	external_ids : ["P352","P214"] ,
 	main_subject : [] , loading_main_subject:false , show_all_main_subject:false
 	} } ,
@@ -250,10 +260,27 @@ Vue.component ( 'protein-box' , {
 						.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
 					me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
 					me.genedb_id = me.i.getFirstStringForProperty('P3382') ;
-					me.loaded = true ;
-					resolve() ;
+					if ( me.data.aliases.indexOf(me.genedb_id) !== -1 ) me.data.aliases.splice ( me.data.aliases.indexOf(me.genedb_id) , 1 ) ;
+
+					me.show_curation_box = false ;
+					$.each ( me.go_props , function ( k , go_prop ) {
+						if ( me.i.hasClaims(go_prop) ) me.show_curation_box = true ;
+					} ) ;
+
+					me.loadRelatedItems ( resolve , reject ) ;
 				}
 			} ) ;
+		} ,
+		loadRelatedItems : function ( resolve , reject ) {
+			let me = this ;
+			let to_load = [] ;
+			$.each ( me.i.getClaimItemsForProperty('P361',true) , function ( k , v ) { to_load.push(v)} ) ;
+			$.each ( me.i.getClaimItemsForProperty('P527',true) , function ( k , v ) { to_load.push(v)} ) ;
+			wd.getItemBatch ( to_load , function () {
+				me.loaded = true ;
+				resolve() ;
+			} ) ;
+
 		} ,
 		loadLiteratureDetails : function () {
 			var me = this ;
@@ -282,13 +309,21 @@ Vue.component ( 'protein-box' , {
 			let sparql = 'SELECT ?q ?desc { ?q wdt:P31 wd:Q23173209 ; skos:altLabel ?desc FILTER ( LANG(?desc)="en" ) }' ;
 			wd.loadSPARQL ( sparql , function ( d ) {
 				$.each ( d.results.bindings , function ( dummy , b ) {
-					let q = 'Q' + wd.itemFromBinding ( b.q ) ;
+					let q = wd.itemFromBinding ( b.q ) ;
 					let desc = b.desc.value ;
 					if ( desc == 'evidence used in automatic assertion' ) return ;
 					if ( typeof evidence_codes[q] == 'undefined' ) evidence_codes[q] = desc ;
 				} ) ;
 				resolve() ;
 			} , reject ) ;
+		} ,
+		getInterproURL : function ( q ) {
+			let me = this ;
+			let i = wd.getItem ( q ) ;
+			if ( typeof i == 'undefined' ) return '' ;
+			if ( !i.hasClaims('P2926') ) return '' ;
+			let id = i.getFirstStringForProperty('P2926') ;
+			return 'http://www.ebi.ac.uk/interpro/entry/' + id ;
 		}
 	} ,
 	template:'#protein-box-template'

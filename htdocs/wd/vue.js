@@ -24,6 +24,7 @@ $(document).ready ( function () {
 			'/wd/species.html',
 			'/wd/named_link.html',
 			'/wd/go_term.html',
+			'/wd/part.html',
 			'/wd/chromosome.html',
 			'/wd/protein_box.html'
 		] ) ,
@@ -36,6 +37,7 @@ $(document).ready ( function () {
 			  { path: '/go/:go_term', component: GoTerm , props:true },
 			  { path: '/search', component: SearchPage , props:true },
 			  { path: '/search/:query', component: SearchPage , props:true },
+			  { path: '/part/:id', component: PartPage , props:true },
 			  { path: '/quicksearch/', component: QuickSearch , props:true },
 			  { path: '/species/:species_id', component: SpeciesPage , props:true },
 			  { path: '/chromosome/:q_chromosome', component: Chromosome , props:true },

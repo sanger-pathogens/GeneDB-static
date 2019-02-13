@@ -117,19 +117,27 @@
 			</div>
 		</div>
 
+		<div v-if='orthologs_all.length>0' class="card mb-2 mt-2" style="width:100%">
+			<div class="card-header" tt='orthologs'></div>
+			<div class="card-body">
+				<gene-list :genes='orthologs_all' show_chromosome='1' show_species='1'></gene-list>
+			</div>
+		</div>
+
+<!--
 		<div v-if='Object.keys(orthologs).length>0' class="card mb-2 mt-2" style="width:100%">
 			<div class="card-header" tt='orthologs'></div>
 			<div class="card-body">
 				<div v-for='(orth_genes,taxon_q) in orthologs' style='width:100%'>
 					<div>
-						<names-link :q='taxon_q' base='species'></named-link>
+						<named-link :q='taxon_q' base='species'></named-link>
 					</div>
-					<gene-list :genes='orth_genes'></gene-list>
+					<gene-list :genes='orth_genes' show_chromosome='1' show_species='1'></gene-list>
 				</div>
 			</div>
 		</div>
-
-		<div v-if='i.hasClaims("P688")' class="row">
+-->
+		<div v-if='i.hasClaims("P688")' style='width:100%'>
 			<div v-for='protein_q in i.getClaimItemsForProperty("P688",true)' style='width:100%'>
 				<protein-box :q='protein_q'></protein-box>
 			</div>
@@ -180,6 +188,7 @@ let Gene = Vue.extend ( {
 		type:''
 	} ,
 	orthologs : {} ,
+	orthologs_all : [] ,
 	species2apollo : { 'Q311383':'7383' } ,
 	apollo_url : '' ,
 	go_props : ["P680","P681","P682"] ,
@@ -252,6 +261,7 @@ let Gene = Vue.extend ( {
 			var me = this ;
 			let sparql = 'SELECT DISTINCT ?q { VALUES ?v { "'+me.genedb_id+'"  } . ?q wdt:P3382 ?v }' ; // "'+me.genedb_id+'.1"
 			me.orthologs = {} ;
+			me.orthologs_all = [] ;
 			wd.loadSPARQLitems ( sparql , function ( d ) {
 				if ( d.length == 0 ) {
 					me.error_message = "No such gene '" + me.genedb_id + "' on Wikidata" ;
@@ -271,6 +281,7 @@ let Gene = Vue.extend ( {
 							me.data.aliases = Object.values ( me.i.getAliasesForLanguage("en") )
 								.filter(function(value, index, self){return self.indexOf(value) === index}) ; // String unique
 							me.data.aliases.sort ( function(a, b){return a.toUpperCase()>b.toUpperCase() } ) ;
+							if ( me.data.aliases.indexOf(me.genedb_id) !== -1 ) me.data.aliases.splice ( me.data.aliases.indexOf(me.genedb_id) , 1 ) ;
 							me.loaded = true ;
 							resolve() ;
 						}
@@ -285,41 +296,29 @@ let Gene = Vue.extend ( {
 			wd.loadSPARQL ( sparql , function ( d ) {
 				let orth = {} ;
 				let to_load = [] ;
+				let orth_all = [] ;
 				$.each ( d.results.bindings , function ( dummy , b ) {
 					let gene = {} ;
 					gene.q = wd.itemFromBinding ( b.orth ) ;
 					gene.genedb = b.genedb.value ;
 					if ( typeof b.start != 'undefined' ) gene.start = b.start.value*1 ;
 					if ( typeof b.end != 'undefined' ) gene.end = b.end.value*1 ;
-					if ( typeof b.chromosome != 'undefined' ) gene.chromosome = wd.itemFromBinding ( b.chromosome ) ;
+					if ( typeof b.chromosome != 'undefined' ) gene.q_chromosome = wd.itemFromBinding ( b.chromosome ) ;
+					gene.species = wd.itemFromBinding ( b.taxon ) ;
 					let taxon_q = wd.itemFromBinding ( b.taxon ) ;
 					if ( typeof orth[taxon_q] == 'undefined' ) orth[taxon_q] = [] ;
 					orth[taxon_q].push ( gene ) ;
+					orth_all.push ( gene ) ;
 					to_load.push ( gene.q ) ;
 					to_load.push ( taxon_q ) ;
 				} )
 				wd.getItemBatch ( to_load , function () {
 					me.orthologs = orth ;
+					me.orthologs_all = orth_all ;
 				} ) ;
 			} ) ;
 
 		} ,
-/*
-		loadGeneOntologyEvidenceCodes : function(resolve, reject) { // Global load
-			if ( typeof evidence_codes != 'undefined' ) return resolve() ; // Already loaded
-			evidence_codes = {} ;
-			let sparql = 'SELECT ?q ?desc { ?q wdt:P31 wd:Q23173209 ; skos:altLabel ?desc FILTER ( LANG(?desc)="en" ) }' ;
-			wd.loadSPARQL ( sparql , function ( d ) {
-				$.each ( d.results.bindings , function ( dummy , b ) {
-					let q = 'Q' + wd.itemFromBinding ( b.q ) ;
-					let desc = b.desc.value ;
-					if ( desc == 'evidence used in automatic assertion' ) return ;
-					if ( typeof evidence_codes[q] == 'undefined' ) evidence_codes[q] = desc ;
-				} ) ;
-				resolve() ;
-			} , reject ) ;
-		}
-*/
 	} ,
 	template:'#gene-template'
 } )
