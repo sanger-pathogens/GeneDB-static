@@ -30,18 +30,20 @@ Vue.component ( 'genedb-header' , {
   } ,
 	methods : {
     addSearch : function () {
-      if ( this.search_added ) return ;
-      if ( this.is_loaded && $("#search-form").length > 0 ) {
+      let me = this ;
+      if ( me.search_added ) return ;
+      if ( me.is_loaded && $("#search-form").length > 0 ) {
         $("#search-form-find").keydown ( function () { $("#search-form-button").removeClass('disabled') });
         $("#search-form").submit(function() {
             var query = $('input[name="find"]').val();
-            window.location.href = '/#/search/'+query;
+            me.$router.push ( '/search/'+encodeURIComponent(query) );
+//            window.location.href = '/#/search/'+query;
             return false;
         });
-        this.search_added = true ;
+        me.search_added = true ;
         return ;
       }
-      setTimeout ( this.addSearch , 100 ) ;
+      setTimeout ( me.addSearch , 100 ) ;
     }
 	}
 } ) ;

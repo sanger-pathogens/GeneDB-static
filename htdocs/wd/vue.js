@@ -6,7 +6,7 @@ let wd = new WikiData() ;
 
 
 $(document).ready ( function () {
-	if ( window.location.hash=='' || window.location.hash=='#' ) return ;
+//	if ( window.location.hash=='' || window.location.hash=='#' ) return ;
 	$('#app').show() ;
 	$('#main_body').hide() ;
 	vue_components.toolname = 'genedb' ;
@@ -17,6 +17,7 @@ $(document).ready ( function () {
 			'/wd/genedb_header.html',
 			'/wd/genedb_footer.html',
 			'/wd/main_page.html',
+			'/wd/index_page.html',
 			'/wd/search_page.html',
 			'/wd/gene_list.html',
 			'/wd/gene.html',
@@ -32,6 +33,8 @@ $(document).ready ( function () {
 	] )	.then ( () => {
 			wd_link_wd = wd ;
 			const routes = [
+			  { path: '', component: IndexPage , props:true },
+			  { path: '/', component: IndexPage , props:true },
 			  { path: '/wd', component: MainPage , props:true },
 			  { path: '/gene/:genedb_id', component: Gene , props:true },
 			  { path: '/go/:go_term', component: GoTerm , props:true },
@@ -42,7 +45,7 @@ $(document).ready ( function () {
 			  { path: '/species/:species_id', component: SpeciesPage , props:true },
 			  { path: '/chromosome/:q_chromosome', component: Chromosome , props:true },
 			] ;
-			router = new VueRouter({routes}) ;
+			router = new VueRouter({routes}) ; // mode: 'history',
 			app = new Vue ( { router } ) .$mount('#app') ;
 		} ) ;
 } ) ;
