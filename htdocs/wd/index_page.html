@@ -2,7 +2,9 @@
 <div id='main_body' class='container'>
 
     <!-- START MAIN WRAPPER -->
-    <div class="main-wrapper">
+    <div v-if="loading" class="main-wrapper">
+    </div>
+    <div v-else class="main-wrapper">
 
       <!-- HEADER INCLUDE -->
 		<genedb-header></genedb-header>
@@ -109,17 +111,17 @@
 'use strict';
 
 let IndexPage = Vue.extend ( {
-	data : function () { return { groups:{
+	data : function () { return { loading:true , groups:{
 		apicomplexa:{entries:[],name:'Apicomplexan Protozoa',img_src:'img/dataset-apicomplexan-protozoa.jpg'},
 		kinetoplastids:{entries:[],name:'Kinetoplastid Protozoa',img_src:'img/dataset-kinetoplastid-protozoa.jpg'},
 		helminths:{entries:[],name:'Parasitic Helminths',img_src:'img/dataset-parasitic-helminths.jpg'},
 		fungi:{entries:[],name:'Fungi',img_src:'img/dataset-fungi.jpg'},
 	} } } ,
 	created : function () {
+		history.pushState("", document.title, window.location.pathname + window.location.search); // Remove hash from URL
 	} ,
 	mounted : function () {
 		this.loadDatasets () ;
-//		this.fixLayout() ;
 	} ,
 	methods : {
 		loadDatasets : function () {
@@ -134,26 +136,25 @@ let IndexPage = Vue.extend ( {
 				    output.push({ key: key, value: value.common_name});
 				  });
 
-				  output = output.sort(function (a, b) {
+				  if ( typeof me.groups[name] == 'undefined' ) me.groups[name] = { name:name } ; // Fallback: dummy fill
+				  me.groups[name].selection = '' ;
+				  me.groups[name].entries = output.sort(function (a, b) {
 				      return a.value.localeCompare( b.value );
 				  });
-
-				  if ( typeof me.groups[name] == 'undefined' ) me.groups[name] = { name:name } ; // Fallback: dummy fill
-
-				  me.groups[name].selection = '' ;
-				  me.groups[name].entries = output ;
 				});
 			});
+			me.loading = false ;
 		} ,
 		onSelect : function ( o , id ) {
 			let me = this ;
 			let select = $(o);
 
+			// Reset all other selections
 			$.each ( me.groups , function ( k , v ) {
 				if(id==k) return; 
 				Vue.set ( me.groups[k] , 'selection' , '' ) ; 
 				$('#'+k).val('') ;
-			} ) ; // Reset all other selections
+			} ) ;
 
 			$('.custom-button') // Reset all buttons
 				.addClass('disabled')

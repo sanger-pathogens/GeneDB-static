@@ -33,6 +33,7 @@ $(document).ready ( function () {
 	] )	.then ( () => {
 			wd_link_wd = wd ;
 			const routes = [
+			  { path: '', component: IndexPage , props:true },
 			  { path: '/', component: IndexPage , props:true },
 			  { path: '/wd', component: MainPage , props:true },
 			  { path: '/gene/:genedb_id', component: Gene , props:true },
@@ -44,7 +45,7 @@ $(document).ready ( function () {
 			  { path: '/species/:species_id', component: SpeciesPage , props:true },
 			  { path: '/chromosome/:q_chromosome', component: Chromosome , props:true },
 			] ;
-			router = new VueRouter({routes}) ;
+			router = new VueRouter({routes}) ; // mode: 'history',
 			app = new Vue ( { router } ) .$mount('#app') ;
 		} ) ;
 } ) ;
