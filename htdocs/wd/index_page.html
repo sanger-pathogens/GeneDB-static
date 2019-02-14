@@ -1,0 +1,217 @@
+<template id='index-page-template'>
+<div id='main_body' class='container'>
+
+    <!-- START MAIN WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- HEADER INCLUDE -->
+		<genedb-header></genedb-header>
+      <!-- START MAIN BODY CONTENT -->
+      <div class="main-content">
+        <div class="row">
+          <!-- START LEFT CONTENT -->
+          <div class="col-lg-9 col-md-12" id="mainLeftContent">
+            <div class="row">
+              <!-- START DATASET CONTAINER -->
+              <div class="col-lg-12" id="datasetContainer">
+                <h1>Datasets</h1>
+                <!-- START DATASET PANEL -->
+                <section class="dataset main-content-panel">
+                  <div class="bg-light-grey border-rounded">
+                    <div class="row">
+                      <!-- START Apicomplexan Protozoa -->
+                      <div class="col-lg-6 col-md-12">
+                        <div class="dataset-panel text-center" id="ApicomplexanProtozoaPanel">
+                          <h3 class="card-title">Apicomplexan Protozoa</h3>
+                          <img src="img/dataset-apicomplexan-protozoa.jpg" class="rounded mx-auto d-block" alt="apicomplexan protozoa">
+                          <div class="input-group">
+                            <select class="custom-select select-link form-control" id="apicomplexa">
+                              <option selected value="">Choose...</option>
+                            </select>
+                            <span class="input-group-btn">
+                              <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END Apicomplexan Protozoa -->
+                      <!-- START Kinetoplastid Protozoa -->
+                      <div class="col-lg-6 col-md-12">
+                        <div class="dataset-panel text-center" id="kinetoplastidProtozoaPanel">
+                          <h3 class="card-title">Kinetoplastid Protozoa</h3>
+                          <img src="img/dataset-kinetoplastid-protozoa.jpg" class="rounded mx-auto d-block" alt="kinetoplastid protozoa">
+                          <div class="input-group">
+                            <select class="custom-select select-link form-control" id="kinetoplastids">
+                              <option selected value="">Choose...</option>
+                            </select>
+                            <span class="input-group-btn">
+                              <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END Kinetoplastid Protozoa -->
+                    </div>
+                    <div class="row">
+                      <!-- START Parasitic Helminths -->
+                      <div class="col-lg-6 col-md-12">
+                        <div class="dataset-panel text-center" id="parasiticHelminthsPanel">
+                          <h3 class="card-title">Parasitic Helminths</h3>
+                          <img src="img/dataset-parasitic-helminths.jpg" class="rounded mx-auto d-block" alt="parasitic helminths">
+                          <div class="input-group">
+                            <select class="custom-select select-link form-control" id="helminths">
+                              <option selected value="">Choose...</option>
+                            </select>
+                            <span class="input-group-btn">
+                              <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END Parasitic Helminths -->
+                      <!-- START Fungi -->
+                      <div class="col-lg-6 col-md-12">
+                        <div class="dataset-panel text-center" id="fungiPanel">
+                          <h3 class="card-title">Fungi</h3>
+                          <img src="img/dataset-fungi.jpg" class="rounded mx-auto d-block" alt="fungi">
+                          <div class="input-group">
+                            <select class="custom-select select-link form-control" id="fungi">
+                              <option selected value="">Choose...</option>
+                              <option value="fungi">Fungi</option>
+                            </select>
+                            <span class="input-group-btn">
+                              <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END Fungi -->
+                    </div>
+                  </div>
+                </section>
+                <!-- END DATASET PANEL -->
+              </div>
+              <!-- END DATASET CONTAINER -->
+            </div>
+          </div>
+          <!-- END LEFT CONTENT -->
+          <!-- START RIGHT CONTENT -->
+          <div class="col-lg-3 col-md-12">
+            <!-- START NEWS -->
+            <section class="main-content-panel" id="newsSection">
+              <h1 class="card-title">News</h1>
+              <div class="card bg-light-grey border-rounded" id="news">
+                <div class="card-body">
+                  <p class="card-text">GeneDB has been updated. You can now view gene structures and functional annotations in <a href='https://apollo.genedb.org/jbrowse/' target='_blank'>Apollo</a> 
+			which is based on <a href='https://jbrowse.org/' target='_blank'>JBrowse</a>. 
+			This site will be updated on a weekly basis. For more information, please see the <a href='./faqs.html'>FAQs</a>.
+                  </p>
+                </div>
+              </div>
+            </section>
+            <!-- END NEWS -->
+            <!-- START INFORMATION -->
+            <section class="main-content-panel-last" id="informationSection">
+              <h1 class="card-title">Information</h1>
+              <div class="card bg-light-blue border-rounded" id="information">
+                <div class="card-body">
+                  <p class="card-text">
+                    Data
+                    <span>
+                      <i class="fas fa-angle-double-right card-link-icon"></i>
+                      <a href="data-release.html" class="card-link">Data Release Policy</a>
+                    </span>
+                  </p>
+                  <p class="card-text">
+                    Software
+                    <span>
+                      <i class="fas fa-angle-double-right card-link-icon"></i>
+                      <a href="https://www.sanger.ac.uk/science/tools/artemis-comparison-tool-act" target="_blank" class="card-link">ACT</a>
+                    </span>
+                    <span>
+                      <i class="fas fa-angle-double-right card-link-icon"></i>
+                      <a href="https://www.sanger.ac.uk/science/tools/artemis" target="_blank" class="card-link">Artemis</a>
+                    <span>
+                  </p>
+                </div>
+              </div>
+            </section>
+            <!-- END INFORMATION -->
+          </div>
+          <!-- END RIGHT CONTENT -->
+        </div>
+      </div>
+      <!-- END MAIN BODY CONTENT -->
+
+      <!-- FOOTER INCLUDE -->
+		<genedb-footer></genedb-footer>
+    </div>
+    <!-- END MAIN WRAPPER -->
+  
+</div>
+</template>
+
+<script>
+'use strict';
+
+let IndexPage = Vue.extend ( {
+	data : function () { return { group_options:{} } } ,
+	created : function () {
+	} ,
+	mounted : function () {
+		this.loadDatasets () ;
+		this.fixLayout() ;
+	} ,
+	methods : {
+		loadDatasets : function () {
+		  $.get("data/datasets.json", function( data ){ 
+		    $.each(data, function(name, values) {
+
+		      let output = [];
+
+		      $.each(values, function(index, value){
+		        let key = value.genus + ' ' + value.species;
+		        output.push({ key: key, value: value.common_name});
+		      });
+
+		      output = output.sort(function (a, b) {
+		          return a.value.localeCompare( b.value );
+		      });
+
+		      me.group_options[name] = output ;
+
+		      let select = $('#'+name);
+
+		      select.empty();
+		      select.append('<option value="">Choose...</option>');
+
+		      $.each(output, function(key, value) {
+		        select.append('<option value="' + value.value + '">' + value.key + '</option>');
+		      });
+		    });
+		  });
+		} ,
+		fixLayout : function () {
+		  // Forward main content selected option to apollo
+		  $('.select-link').on('change', function(){
+		    let select = $(this);
+		    $('.select-link').not(select).val('');
+		    $('.custom-button').addClass('disabled').attr('href', '#');
+		    let dataset = select.parent();
+		    let link = $('a', dataset);
+		    if( select.attr('id') == 'parasiteVectors') {
+		      link.attr('href', 'parasite-vectors.html');
+		    } else {
+		      link.attr('href', 'https://apollo.genedb.org/'+select.val()+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=');
+		    }
+		    if( select.val() != '' ){
+		      link.removeClass('disabled');
+		    }
+
+		  });
+		}
+	} ,
+	template : '#index-page-template'
+} ) ;
+
+</script>
