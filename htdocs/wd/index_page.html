@@ -19,73 +19,27 @@
                 <section class="dataset main-content-panel">
                   <div class="bg-light-grey border-rounded">
                     <div class="row">
-                      <!-- START Apicomplexan Protozoa -->
-                      <div class="col-lg-6 col-md-12">
-                        <div class="dataset-panel text-center" id="ApicomplexanProtozoaPanel">
-                          <h3 class="card-title">Apicomplexan Protozoa</h3>
-                          <img src="img/dataset-apicomplexan-protozoa.jpg" class="rounded mx-auto d-block" alt="apicomplexan protozoa">
+
+                    <!-- START SPECIES GROUP BOXES -->
+                      <div v-for='(data,id) in groups' class="col-lg-6 col-md-12">
+                        <div class="dataset-panel text-center" :id="data.name.replace(/\s+/g,'')+'Panel'">
+                          <h3 class="card-title">{{data.name}}</h3>
+                          <img :src="data.img_src" class="rounded mx-auto d-block" :alt="data.img_src.replace(/^.*\//,'').replace(/\.[a-z]+$/,'')">
                           <div class="input-group">
-                            <select class="custom-select select-link form-control" id="apicomplexa">
+                            <select class="custom-select select-link form-control" :id="id" @change='onSelect(this,id)' v-model='data.selection'>
                               <option selected value="">Choose...</option>
+                              <option v-for='entry in data.entries' :value='entry.value'>
+                              	{{entry.key}}
+                              </option>
                             </select>
                             <span class="input-group-btn">
-                              <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
+                              <a href="#" target="_blank" :id="id+'_button'" class="btn btn-dark custom-button disabled">Go</a>
                             </span>
                           </div>
                         </div>
                       </div>
-                      <!-- END Apicomplexan Protozoa -->
-                      <!-- START Kinetoplastid Protozoa -->
-                      <div class="col-lg-6 col-md-12">
-                        <div class="dataset-panel text-center" id="kinetoplastidProtozoaPanel">
-                          <h3 class="card-title">Kinetoplastid Protozoa</h3>
-                          <img src="img/dataset-kinetoplastid-protozoa.jpg" class="rounded mx-auto d-block" alt="kinetoplastid protozoa">
-                          <div class="input-group">
-                            <select class="custom-select select-link form-control" id="kinetoplastids">
-                              <option selected value="">Choose...</option>
-                            </select>
-                            <span class="input-group-btn">
-                              <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END Kinetoplastid Protozoa -->
-                    </div>
-                    <div class="row">
-                      <!-- START Parasitic Helminths -->
-                      <div class="col-lg-6 col-md-12">
-                        <div class="dataset-panel text-center" id="parasiticHelminthsPanel">
-                          <h3 class="card-title">Parasitic Helminths</h3>
-                          <img src="img/dataset-parasitic-helminths.jpg" class="rounded mx-auto d-block" alt="parasitic helminths">
-                          <div class="input-group">
-                            <select class="custom-select select-link form-control" id="helminths">
-                              <option selected value="">Choose...</option>
-                            </select>
-                            <span class="input-group-btn">
-                              <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END Parasitic Helminths -->
-                      <!-- START Fungi -->
-                      <div class="col-lg-6 col-md-12">
-                        <div class="dataset-panel text-center" id="fungiPanel">
-                          <h3 class="card-title">Fungi</h3>
-                          <img src="img/dataset-fungi.jpg" class="rounded mx-auto d-block" alt="fungi">
-                          <div class="input-group">
-                            <select class="custom-select select-link form-control" id="fungi">
-                              <option selected value="">Choose...</option>
-                              <option value="fungi">Fungi</option>
-                            </select>
-                            <span class="input-group-btn">
-                              <a href="#" target="_blank" class="btn btn-dark custom-button disabled">Go</a>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END Fungi -->
+                      <!-- END SPECIES GROUP BOXES -->
+
                     </div>
                   </div>
                 </section>
@@ -155,60 +109,59 @@
 'use strict';
 
 let IndexPage = Vue.extend ( {
-	data : function () { return { group_options:{} } } ,
+	data : function () { return { groups:{
+		apicomplexa:{entries:[],name:'Apicomplexan Protozoa',img_src:'img/dataset-apicomplexan-protozoa.jpg'},
+		kinetoplastids:{entries:[],name:'Kinetoplastid Protozoa',img_src:'img/dataset-kinetoplastid-protozoa.jpg'},
+		helminths:{entries:[],name:'Parasitic Helminths',img_src:'img/dataset-parasitic-helminths.jpg'},
+		fungi:{entries:[],name:'Fungi',img_src:'img/dataset-fungi.jpg'},
+	} } } ,
 	created : function () {
 	} ,
 	mounted : function () {
 		this.loadDatasets () ;
-		this.fixLayout() ;
+//		this.fixLayout() ;
 	} ,
 	methods : {
 		loadDatasets : function () {
-		  $.get("data/datasets.json", function( data ){ 
-		    $.each(data, function(name, values) {
+			let me = this ;
+			$.get("data/datasets.json", function( data ){ 
+				$.each(data, function(name, values) {
 
-		      let output = [];
+				  let output = [];
 
-		      $.each(values, function(index, value){
-		        let key = value.genus + ' ' + value.species;
-		        output.push({ key: key, value: value.common_name});
-		      });
+				  $.each(values, function(index, value){
+				    let key = value.genus + ' ' + value.species;
+				    output.push({ key: key, value: value.common_name});
+				  });
 
-		      output = output.sort(function (a, b) {
-		          return a.value.localeCompare( b.value );
-		      });
+				  output = output.sort(function (a, b) {
+				      return a.value.localeCompare( b.value );
+				  });
 
-		      me.group_options[name] = output ;
+				  if ( typeof me.groups[name] == 'undefined' ) me.groups[name] = { name:name } ; // Fallback: dummy fill
 
-		      let select = $('#'+name);
-
-		      select.empty();
-		      select.append('<option value="">Choose...</option>');
-
-		      $.each(output, function(key, value) {
-		        select.append('<option value="' + value.value + '">' + value.key + '</option>');
-		      });
-		    });
-		  });
+				  me.groups[name].selection = '' ;
+				  me.groups[name].entries = output ;
+				});
+			});
 		} ,
-		fixLayout : function () {
-		  // Forward main content selected option to apollo
-		  $('.select-link').on('change', function(){
-		    let select = $(this);
-		    $('.select-link').not(select).val('');
-		    $('.custom-button').addClass('disabled').attr('href', '#');
-		    let dataset = select.parent();
-		    let link = $('a', dataset);
-		    if( select.attr('id') == 'parasiteVectors') {
-		      link.attr('href', 'parasite-vectors.html');
-		    } else {
-		      link.attr('href', 'https://apollo.genedb.org/'+select.val()+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=');
-		    }
-		    if( select.val() != '' ){
-		      link.removeClass('disabled');
-		    }
+		onSelect : function ( o , id ) {
+			let me = this ;
+			let select = $(o);
 
-		  });
+			$.each ( me.groups , function ( k , v ) {
+				if(id==k) return; 
+				Vue.set ( me.groups[k] , 'selection' , '' ) ; 
+				$('#'+k).val('') ;
+			} ) ; // Reset all other selections
+
+			$('.custom-button') // Reset all buttons
+				.addClass('disabled')
+				.attr('href', '#');
+			if ( me.groups[id].selection == '' ) return ; // No selection, leave button deactivated
+			$('#'+id+'_button') // Set go button
+				.removeClass('disabled')
+				.attr('href', 'https://apollo.genedb.org/'+me.groups[id].selection+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=');
 		}
 	} ,
 	template : '#index-page-template'
