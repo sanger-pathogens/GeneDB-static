@@ -229,7 +229,9 @@ let Gene = Vue.extend ( {
 		} ,
 		loadLiterature : function () {
 			var me = this ;
-			let sparql = 'SELECT DISTINCT ?q { ?q wdt:P921 wd:'+me.q+' }' ;
+			let values = [ me.q ] ;
+			$.each ( me.i.getClaimItemsForProperty("P688",true) , function ( dummy , pq ) { values.push ( pq ) } ) ;
+			let sparql = 'SELECT DISTINCT ?q { VALUES ?topic {wd:' + values.join(' wd:') + '} ?q wdt:P921 ?topic }' ;
 			me.show_all_main_subject = false ;
 			wd.loadSPARQLitems ( sparql , function ( d ) {
 				if ( d.length == 0 ) return ;
