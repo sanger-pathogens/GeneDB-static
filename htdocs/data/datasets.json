@@ -14,6 +14,7 @@
       "genus": "Leishmania",
       "species": "major Friedlin",
       "strain": "Friedlin",
+      "q": "Q61779016",
       "version": null
     },
     {
@@ -46,6 +47,7 @@
       "genus": "Trypanosoma",
       "species": "brucei TREU927",
       "strain": "TREU927",
+      "q": "Q61779006",
       "version": null
     },
     {
@@ -96,6 +98,7 @@
       "genus": "Plasmodium",
       "species": "falciparum 3D7",
       "strain": "3D7",
+      "q": "Q61779043",
       "version": 3
     },
     {
@@ -104,6 +107,7 @@
       "genus": "Plasmodium",
       "species": "knowlesi",
       "strain": null,
+      "q": "Q241594",
       "version": 2
     },
     {
@@ -112,6 +116,7 @@
       "genus": "Plasmodium",
       "species": "berghei",
       "strain": null,
+      "q": "Q65021",
       "version": 3
     },
     {
@@ -120,6 +125,7 @@
       "genus": "Plasmodium",
       "species": "yoelii 17X",
       "strain": "17X",
+      "q": "Q61779086",
       "version": 3
     },
     {
@@ -128,6 +134,7 @@
       "genus": "Plasmodium",
       "species": "chabaudi",
       "strain": null,
+      "q": "Q7201860",
       "version": 3
     },
     {
@@ -136,6 +143,7 @@
       "genus": "Plasmodium",
       "species": "reichenowi",
       "strain": null,
+      "q": "Q19730945",
       "version": 3
     },
     {
@@ -144,6 +152,7 @@
       "genus": "Plasmodium",
       "species": "gallinaceum",
       "strain": null,
+      "q": "Q7201888",
       "version": 1
     },
     {
@@ -152,6 +161,7 @@
       "genus": "Plasmodium",
       "species": "relictum",
       "strain": null,
+      "q": "Q20722177",
       "version": 1
     },
     {
@@ -160,6 +170,7 @@
       "genus": "Plasmodium",
       "species": "vivax P01",
       "strain": "P01",
+      "q": "Q61779062",
       "version": 2
     },
     {
@@ -168,6 +179,7 @@
       "genus": "Plasmodium",
       "species": "ovale curtisi",
       "strain": null,
+      "q": "Q7201933",
       "version": 1
     },
     {
@@ -176,6 +188,7 @@
       "genus": "Plasmodium",
       "species": "malariae",
       "strain": null,
+      "q": "Q133969",
       "version": 1
     }
   ],
@@ -186,6 +199,7 @@
       "genus": "Schistosoma",
       "species": "mansoni",
       "strain": null,
+      "q": "Q2324689",
       "version": null
     },
     {
@@ -236,6 +250,7 @@
       "genus": "Aspergillus",
       "species": "fumigatus Af293",
       "strain": null,
+      "q": "Q61779030",
       "version": null
     },
     {
@@ -252,6 +267,7 @@
       "genus": "Aspergillus",
       "species": "niger CBS 513.88",
       "strain": null,
+      "q": "Q61779022",
       "version": null
     },
     {
