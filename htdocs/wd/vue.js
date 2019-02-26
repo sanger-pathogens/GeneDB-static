@@ -24,6 +24,7 @@ $(document).ready ( function () {
 //			'/wd/quicksearch.html',
 			'/wd/species.html',
 			'/wd/named_link.html',
+			'/wd/go_list.html',
 			'/wd/go_term.html',
 			'/wd/part.html',
 			'/wd/chromosome.html',

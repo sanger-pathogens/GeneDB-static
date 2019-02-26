@@ -1,36 +1,36 @@
 <template id='gene-list-template'>
 <div class='mt-2'>
-	<table class='table table-striped'>
+	<table class='table table-striped wrapping-table'>
 		<thead>
 			<tr>
-				<th tt='gene_name'></th>
-				<th tt='genedb_id'></th>
-				<th tt='gene_description'></th>
-				<th tt='gene_start'></th>
-				<th tt='gene_end'></th>
-				<th v-if='show_chromosome' tt='chromosome'></th>
-				<th v-if='show_species' tt='species'></th>
+				<th>Gene Name</th>
+				<th>GeneDB ID</th>
+				<th>Description</th>
+				<th>Start</th>
+				<th>End</th>
+				<th v-if='show_chromosome'>Chromosome</th>
+				<th v-if='show_species'>Species</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr v-for='gene in genes'>
-				<td nowrap style='width:200px;'>
+				<td data-title="Gene Name" class='gene-list-name'>
 					<router-link :to='"/gene/"+gene.genedb'>
 						<wd-link :item='gene.q' as_text='1'></wd-link>
 					</router-link>
 				</td>
-				<td style='width:150px;'>{{gene.genedb}}</td>
-				<td>
+				<td data-title="GeneDB ID" class='gene-list-id'>{{gene.genedb}}</td>
+				<td data-title="Description" class='gene-list-desc'>
 					<span v-if='typeof gene.i != "undefined"'>
-						{{gene.i.getDesc()}}
+						{{gene.i.getDesc('en')}}
 					</span>
 				</td>
-				<td style='width:120px;text-align:right;font-family:Courier'>{{formatPosition(gene.start)}}</td>
-				<td style='width:120px;text-align:right;font-family:Courier'>{{formatPosition(gene.end)}}</td>
-				<td v-if='show_chromosome'>
+				<td data-title="Start" class='gene-list-start'>{{formatPosition(gene.start)}}</td>
+				<td data-title="End" class='gene-list-end'>{{formatPosition(gene.end)}}</td>
+				<td v-if='show_chromosome' data-title="Chromosome" class='gene-list-chromosome'>
 					<named-link :q='gene.q_chromosome' base='chromosome'></named-link>
 				</td>
-				<td v-if='show_species && typeof gene.species!="undefined"' nowrap>
+				<td v-if='show_species && typeof gene.species!="undefined"' data-title="Species" class='gene-list-species'>
 					<named-link :q='gene.species' base='species'></named-link>
 				</td>
 			</tr>

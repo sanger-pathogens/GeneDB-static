@@ -206,7 +206,6 @@ let Gene = Vue.extend ( {
 		me.apollo_url = '' ;
 		Promise.all ( [
 			new Promise( me.loadByGeneDB ) ,
-//			new Promise( me.loadGeneOntologyEvidenceCodes )
 		] )	.then ( () => {
 			if ( me.q != '' ) me.loadLiterature() ;
 			me.generateApolloURL() ;
