@@ -40,3 +40,64 @@ a{color:#004797}
 .footer-panel{padding-left:0 30px}
 #search-form-find{border:1px solid black;border-top-left-radius:4px;border-bottom-left-radius:4px;}
 #search-form-button{border-top-left-radius:0px;border-bottom-left-radius:0px;}
+
+/* Responsive tables */
+@media only screen and (min-width: 1009px) {
+	td.gene-list-name {width:200px;}
+	td.gene-list-id {width:150px;}
+	td.gene-list-desc {}
+	td.gene-list-start {width:120px;}
+	td.gene-list-end {width:120px;}
+	td.gene-list-chromosome {}
+	td.gene-list-species {}
+}
+
+@media only screen and (max-width: 1008px) {
+	
+	/* Force table to not be like tables anymore */
+	.wrapping-table table, 
+	.wrapping-table thead, 
+	.wrapping-table tbody, 
+	.wrapping-table th, 
+	.wrapping-table td, 
+	.wrapping-table tr { 
+		display: block; 
+	}
+ 
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.wrapping-table thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+ 
+	.wrapping-table tr { border: 1px solid #ccc; }
+ 
+	.wrapping-table td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+		white-space: normal;
+		text-align:left;
+	}
+ 
+	.wrapping-table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		text-align:left;
+		font-weight: bold;
+	}
+ 
+	/*
+	Label the data
+	*/
+	.wrapping-table td:before { content: attr(data-title); }
+}
