@@ -1,61 +1,3 @@
-<template id='go-list-template'>
-	<div v-if='loaded && claims.length>0' style="display:flex;flex-direction:row;" class='card'>
-		<div style="width:20%;padding:2px;">
-			<wd-link :item='go_prop' as_text='1'></wd-link>
-		</div>
-		<div style="display:flex;flex-direction:column;width:80%">
-			<ul class="list-group list-group-flush">
-				<li v-for='claim in claims' class="list-group-item" style="display:flex;flex-direction:row">
-					<div style='width:20%'>
-						<wd-link :item='claim.mainsnak.datavalue.value.id' as_text='1'></wd-link>
-						<br/>
-						(
-						<span v-for='go_term in wd.getItem(claim.mainsnak.datavalue.value.id).getStringsForProperty("P686")' class='mr-1'>
-							<router-link :to='"/go/"+go_term'>{{go_term}}</router-link>
-						</span>
-						)
-					</div>
-					<div style='width:80%;display:flex;flex-direction:column;'>
-						<div v-for='(qualifiers,qprop) in (claim.qualifiers||{})' style='display:flex;flex-direction:row;width:100%'>
-							<div v-if='qprop=="P459"' v-for='qual in qualifiers'>
-								<wd-link :item='qprop' as_text='1'></wd-link>: 
-								<wd-link :item='qual.datavalue.value.id'></wd-link>
-							</div>
-							<div v-if='qprop=="P3519"' v-for='qual in qualifiers'>
-								With/from
-								<wd-link :item='qprop' as_text='1'></wd-link>:
-								<a class='external' target='_blank' :href='"http://pfam.xfam.org/family?acc="+qual.datavalue.value'>{{qual.datavalue.value}}</a>
-							</div>
-						</div>
-						<div v-for='ref in (claim.references||[])' style='width:100%'>
-							<div style='width:30%;display:flex;flex-direction:column'>
-								<div v-for='dm in (ref.snaks.P459||[])'>
-									{{evidence_codes[dm.datavalue.value.id]}}
-								</div>
-							</div>
-							<div style='width:70%;display:flex;flex-direction:column'>
-								<div v-for='si in (ref.snaks.P248||[])'>
-									<publication :item='si.datavalue.value.id'></publication>
-								</div>
-								<div v-for='ref_url in (ref.snaks.P854||[])'>
-									<div v-if='go_ref_pattern.test(ref_url.datavalue.value)'>
-										GOREF :
-										<a target='_blank' class='external' :href='ref_url.datavalue.value'>
-											{{go_ref_pattern.exec(ref_url.datavalue.value)[1]}}
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
-</template>
-
-
-
 <template id='protein-box-template'>
 <div>
 	<div v-if='loading' class='row'><i>Loading...</i></div>
@@ -184,27 +126,6 @@
 <script>
 'use strict';
 
-Vue.component ( 'go-list' , {
-	template : '#go-list-template' ,
-	props : [ 'go_prop' , 'claims' ] ,
-	data : function () { return { loaded:false , go_ref_pattern:new RegExp('//github\\.com/geneontology/go-site/blob/master/metadata/gorefs/goref-(\\d+).md$') } } ,
-	created : function () {
-		let me = this ;
-		let to_load = [] ;
-		$.each ( me.claims , function ( dummy , claim ) {
-			if ( typeof claim.mainsnak == 'undefined' ) return ;
-			if ( typeof claim.mainsnak.datavalue == 'undefined' ) return ;
-			let q = claim.mainsnak.datavalue.value.id ;
-			to_load.push ( q ) ;
-		} ) ;
-		wd.getItemBatch ( to_load , function () {
-			me.loaded = true ;
-		} ) ;
-	}
-} ) ;
-
-let evidence_codes ;
-
 Vue.component ( 'protein-box' , {
 	props : [ 'q' , 'full_info' ] ,
 	data : function () { return { loading:true , genedb_id:'' , gene_genedb_id:'' , loaded:false , q:'' , i:{} , possible_items:[] , error_message:'' , data:{
@@ -222,7 +143,7 @@ Vue.component ( 'protein-box' , {
 		Promise.all ( [
 			new Promise( me.loadItem ) ,
 			new Promise( me.loadExternalIDs ) ,
-			new Promise( me.loadGeneOntologyEvidenceCodes )
+//			new Promise( me.loadGeneOntologyEvidenceCodes )
 		] )	.then ( () => {
 			if ( me.q != '' ) me.loadLiterature() ;
 			me.loading = false ;
@@ -302,20 +223,6 @@ Vue.component ( 'protein-box' , {
 				me.main_subject = d ;
 				if ( d.length <= 20 ) me.loadLiteratureDetails() ;
 			} ) ;
-		} ,
-		loadGeneOntologyEvidenceCodes : function(resolve, reject) { // Global load
-			if ( typeof evidence_codes != 'undefined' ) return resolve() ; // Already loaded
-			evidence_codes = {} ;
-			let sparql = 'SELECT ?q ?desc { ?q wdt:P31 wd:Q23173209 ; skos:altLabel ?desc FILTER ( LANG(?desc)="en" ) }' ;
-			wd.loadSPARQL ( sparql , function ( d ) {
-				$.each ( d.results.bindings , function ( dummy , b ) {
-					let q = wd.itemFromBinding ( b.q ) ;
-					let desc = b.desc.value ;
-					if ( desc == 'evidence used in automatic assertion' ) return ;
-					if ( typeof evidence_codes[q] == 'undefined' ) evidence_codes[q] = desc ;
-				} ) ;
-				resolve() ;
-			} , reject ) ;
 		} ,
 		getInterproURL : function ( q ) {
 			let me = this ;

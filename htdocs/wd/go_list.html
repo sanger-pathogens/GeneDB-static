@@ -1,0 +1,104 @@
+<template id='go-list-template'>
+	<div v-if='loaded && claims.length>0' class='card go-list'>
+		<div class='go-list-left'>
+			<wd-link :item='go_prop' as_text='1'></wd-link>
+		</div>
+		<div class='go-list-right'>
+			<ul class="list-group list-group-flush">
+				<li v-for='claim in claims' class="list-group-item go-list-item">
+					<div class='go-list-item-goterm'>
+						<div class='go-list-item-goterm1'>
+							<wd-link :item='claim.mainsnak.datavalue.value.id' as_text='1'></wd-link>
+						</div>
+						<div class='go-list-item-goterm2'>
+							(<router-link v-for='go_term in wd.getItem(claim.mainsnak.datavalue.value.id).getStringsForProperty("P686")' class='mr-1' :to='"/go/"+go_term'>{{go_term}}</router-link>)
+						</div>
+					</div>
+					<div class='go-list-item-details'>
+						<div v-for='(qualifiers,qprop) in (claim.qualifiers||{})' class='go-list-item-qualifiers'>
+							<div v-if='qprop=="P459"' v-for='qual in qualifiers'>
+								<wd-link :item='qprop' as_text='1'></wd-link>: 
+								<wd-link :item='qual.datavalue.value.id'></wd-link>
+							</div>
+							<div v-if='qprop=="P3519"' v-for='qual in qualifiers'>
+								With/from
+								<wd-link :item='qprop' as_text='1'></wd-link>:
+								<a class='external' target='_blank' :href='"http://pfam.xfam.org/family?acc="+qual.datavalue.value'>{{qual.datavalue.value}}</a>
+							</div>
+						</div>
+						<div v-for='ref in (claim.references||[])' class='go-list-item-references'>
+							<div class='go-list-item-reference1'>
+								<div v-for='dm in (ref.snaks.P459||[])'>
+									{{evidence_codes[dm.datavalue.value.id]}}
+								</div>
+							</div>
+							<div class='go-list-item-reference2'>
+								<div v-for='si in (ref.snaks.P248||[])'>
+									<publication :item='si.datavalue.value.id'></publication>
+								</div>
+								<div v-for='ref_url in (ref.snaks.P854||[])'>
+									<div v-if='go_ref_pattern.test(ref_url.datavalue.value)'>
+										GOREF :
+										<a target='_blank' class='external' :href='ref_url.datavalue.value'>
+											{{go_ref_pattern.exec(ref_url.datavalue.value)[1]}}
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</template>
+
+
+
+<script>
+'use strict';
+
+let evidence_codes ;
+
+Vue.component ( 'go-list' , {
+	template : '#go-list-template' ,
+	props : [ 'go_prop' , 'claims' ] ,
+	data : function () { return { loaded:false , go_ref_pattern:new RegExp('//github\\.com/geneontology/go-site/blob/master/metadata/gorefs/goref-(\\d+).md$') } } ,
+	created : function () {
+		let me = this ;
+		Promise.all ( [
+			new Promise( me.loadItems ) ,
+			new Promise( me.loadGeneOntologyEvidenceCodes )
+		] )	.then ( () => {
+			me.loaded = true ;
+		} ) ;
+	} ,
+	methods : {
+		loadItems : function(resolve,reject){
+			let me = this ;
+			let to_load = [] ;
+			$.each ( me.claims , function ( dummy , claim ) {
+				if ( typeof claim.mainsnak == 'undefined' ) return ;
+				if ( typeof claim.mainsnak.datavalue == 'undefined' ) return ;
+				let q = claim.mainsnak.datavalue.value.id ;
+				to_load.push ( q ) ;
+			} ) ;
+			wd.getItemBatch ( to_load , resolve ) ;
+		} ,
+		loadGeneOntologyEvidenceCodes : function(resolve, reject) { // Global load
+			if ( typeof evidence_codes != 'undefined' ) return resolve() ; // Already loaded
+			evidence_codes = {} ;
+			let sparql = 'SELECT ?q ?desc { ?q wdt:P31 wd:Q23173209 ; skos:altLabel ?desc FILTER ( LANG(?desc)="en" ) }' ;
+			wd.loadSPARQL ( sparql , function ( d ) {
+				$.each ( d.results.bindings , function ( dummy , b ) {
+					let q = wd.itemFromBinding ( b.q ) ;
+					let desc = b.desc.value ;
+					if ( desc == 'evidence used in automatic assertion' ) return ;
+					if ( typeof evidence_codes[q] == 'undefined' ) evidence_codes[q] = desc ;
+				} ) ;
+				resolve() ;
+			} , reject ) ;
+		} ,
+	}
+} ) ;
+</script>
