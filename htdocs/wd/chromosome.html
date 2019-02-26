@@ -43,7 +43,8 @@ let Chromosome = Vue.extend ( {
 	methods : {
 		findChromosomeByName : function ( name , callback ) {
 			let me = this ;
-			let sparql = 'SELECT DISTINCT ?chr { ?gene wdt:P31 wd:Q7187 ; wdt:P3382 [] ; wdt:P1057 ?chr . ?chr rdfs:label "'+$.trim(name)+'"@en }' ;
+			// Get the chromosome with the most genes (avoiding some leftovers from species=>strain move)
+			let sparql = 'SELECT ?chr (count(?chr) AS ?cnt) { ?gene wdt:P31 wd:Q7187 ; wdt:P3382 [] ; wdt:P1057 ?chr . ?chr rdfs:label "'+$.trim(name)+'"@en } GROUP BY ?chr ORDER BY DESC(?cnt) LIMIT 1' ;
 			wd.loadSPARQL ( sparql , function ( d ) {
 				let qs = [] ;
 				$.each ( d.results.bindings , function ( k , v ) {
