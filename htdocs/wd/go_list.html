@@ -15,6 +15,11 @@
 						</div>
 					</div>
 					<div class='go-list-item-details'>
+						<div v-if='(claim.qualifiers||{}).P6477' v-for='qual in claim.qualifiers.P6477'>
+							<div v-if='qual.datavalue.value.id=="Q186290"'>
+								<b>does not have this GO property</b>
+							</div>
+						</div>
 						<div v-for='(qualifiers,qprop) in (claim.qualifiers||{})' class='go-list-item-qualifiers'>
 							<div v-if='qprop=="P459"' v-for='qual in qualifiers'>
 								<wd-link :item='qprop' as_text='1'></wd-link>: 
