@@ -20,11 +20,20 @@
 								<wd-link :item='qprop' as_text='1'></wd-link>: 
 								<wd-link :item='qual.datavalue.value.id'></wd-link>
 							</div>
-							<div v-if='qprop=="P3519"' v-for='qual in qualifiers'>
-								With/from
-								<wd-link :item='qprop' as_text='1'></wd-link>:
-								<a class='external' target='_blank' :href='"http://pfam.xfam.org/family?acc="+qual.datavalue.value'>{{qual.datavalue.value}}</a>
+
+							<div v-if='qprop=="P2283"' v-for='qual in qualifiers'>
+								<wd-link :item='qprop' as_text='1'></wd-link>: 
+								<wd-link :item='qual.datavalue.value.id'></wd-link>
 							</div>
+
+							<div v-for='wfp in with_from_props'>
+								<div v-if='qprop==wfp' v-for='qual in qualifiers'>
+<!--									With/from -->
+									<wd-link :item='qprop' as_text='1'></wd-link>: 
+									<a target='_blank' class='external' :href='getPropertyTargetURL(qprop,qual.datavalue.value)'>{{qual.datavalue.value}}</a>
+								</div>
+							</div>
+
 						</div>
 						<div v-for='ref in (claim.references||[])' class='go-list-item-references'>
 							<div class='go-list-item-reference1'>
@@ -63,7 +72,9 @@ let evidence_codes ;
 Vue.component ( 'go-list' , {
 	template : '#go-list-template' ,
 	props : [ 'go_prop' , 'claims' ] ,
-	data : function () { return { loaded:false , go_ref_pattern:new RegExp('//github\\.com/geneontology/go-site/blob/master/metadata/gorefs/goref-(\\d+).md$') } } ,
+	data : function () { return { loaded:false , go_ref_pattern:new RegExp('//github\\.com/geneontology/go-site/blob/master/metadata/gorefs/goref-(\\d+).md$') ,
+		with_from_props : ['P2926','P352','P3519']
+	} } ,
 	created : function () {
 		let me = this ;
 		Promise.all ( [
@@ -76,7 +87,7 @@ Vue.component ( 'go-list' , {
 	methods : {
 		loadItems : function(resolve,reject){
 			let me = this ;
-			let to_load = [] ;
+			let to_load = me.with_from_props.slice() ;
 			$.each ( me.claims , function ( dummy , claim ) {
 				if ( typeof claim.mainsnak == 'undefined' ) return ;
 				if ( typeof claim.mainsnak.datavalue == 'undefined' ) return ;
@@ -84,6 +95,14 @@ Vue.component ( 'go-list' , {
 				to_load.push ( q ) ;
 			} ) ;
 			wd.getItemBatch ( to_load , resolve ) ;
+		} ,
+		getPropertyTargetURL : function ( prop , value ) {
+			let me = this ;
+			let i = wd.getItem(prop) ;
+			if ( typeof i == 'undefined' ) return '' ;
+			let url_pattern = i.getFirstStringForProperty('P1630');
+			if ( url_pattern == '' ) return '' ;
+			return url_pattern.replace ( /\$1/ , encodeURIComponent(value) ) ;
 		} ,
 		loadGeneOntologyEvidenceCodes : function(resolve, reject) { // Global load
 			if ( typeof evidence_codes != 'undefined' ) return resolve() ; // Already loaded
