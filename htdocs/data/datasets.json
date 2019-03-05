@@ -6,81 +6,9 @@
       "genus": "Leishmania",
       "species": "braziliensis MHOM/BR/75/M2904",
       "strain": "MHOM/BR/75/M2904",
-      "version": null
-    },
-    {
-      "abbreviation": "Lmajor",
-      "common_name": "Lmajor",
-      "genus": "Leishmania",
-      "species": "major Friedlin",
-      "strain": "Friedlin",
-      "q": "Q61779016",
-      "version": null
-    },
-    {
-      "abbreviation": "Linfantum",
-      "common_name": "Linfantum",
-      "genus": "Leishmania",
-      "species": "infantum JPCM5 ",
-      "strain": "JPCM5",
-      "version": null
-    },
-    {
-      "abbreviation": "Tcongolense",
-      "common_name": "Tcongolense",
-      "genus": "Trypanosoma",
-      "species": "congolense",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "TbruceiLister427",
-      "common_name": "TbruceiLister427",
-      "genus": "Trypanosoma",
-      "species": "brucei Lister 427",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "Tbruceibrucei927",
-      "common_name": "Tbruceibrucei927",
-      "genus": "Trypanosoma",
-      "species": "brucei TREU927",
-      "strain": "TREU927",
-      "q": "Q61779006",
-      "version": null
-    },
-    {
-      "abbreviation": "Tbruceigambiense",
-      "common_name": "Tbruceigambiense",
-      "genus": "Trypanosoma",
-      "species": "brucei gambiense",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "Tvivax",
-      "common_name": "Tvivax",
-      "genus": "Trypanosoma",
-      "species": "vivax",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "Tcruzi",
-      "common_name": "Tcruzi",
-      "genus": "Trypanosoma",
-      "species": "cruzi",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "Lmexicana",
-      "common_name": "Lmexicana",
-      "genus": "Leishmania",
-      "species": "mexicana",
-      "strain": null,
-      "version": null
+      "taxon_id": "420245",
+      "version": null,
+      "wikidata_id": null
     },
     {
       "abbreviation": "LdonovaniBPK282A1",
@@ -88,45 +16,111 @@
       "genus": "Leishmania",
       "species": "donovani",
       "strain": "BPK282A1",
-      "version": null
+      "taxon_id": "981087",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Linfantum",
+      "common_name": "Linfantum",
+      "genus": "Leishmania",
+      "species": "infantum JPCM5 ",
+      "strain": "JPCM5",
+      "taxon_id": "435258",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Lmajor",
+      "common_name": "Lmajor",
+      "genus": "Leishmania",
+      "species": "major Friedlin",
+      "strain": "Friedlin",
+      "taxon_id": "347515",
+      "version": null,
+      "wikidata_id": "Q61779016"
+    },
+    {
+      "abbreviation": "Lmexicana",
+      "common_name": "Lmexicana",
+      "genus": "Leishmania",
+      "species": "mexicana",
+      "strain": null,
+      "taxon_id": "5665",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Tbruceigambiense",
+      "common_name": "Tbruceigambiense",
+      "genus": "Trypanosoma",
+      "species": "brucei gambiense",
+      "strain": null,
+      "taxon_id": "31285",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "TbruceiLister427",
+      "common_name": "TbruceiLister427",
+      "genus": "Trypanosoma",
+      "species": "brucei Lister 427",
+      "strain": null,
+      "taxon_id": "5691",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Tbruceibrucei927",
+      "common_name": "Tbruceibrucei927",
+      "genus": "Trypanosoma",
+      "species": "brucei TREU927",
+      "strain": "TREU927",
+      "taxon_id": "185431",
+      "version": null,
+      "wikidata_id": "Q61779006"
+    },
+    {
+      "abbreviation": "Tcongolense",
+      "common_name": "Tcongolense",
+      "genus": "Trypanosoma",
+      "species": "congolense",
+      "strain": null,
+      "taxon_id": "5692",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Tcruzi",
+      "common_name": "Tcruzi",
+      "genus": "Trypanosoma",
+      "species": "cruzi",
+      "strain": null,
+      "taxon_id": "5693",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Tvivax",
+      "common_name": "Tvivax",
+      "genus": "Trypanosoma",
+      "species": "vivax",
+      "strain": null,
+      "taxon_id": "5699",
+      "version": null,
+      "wikidata_id": null
     }
   ],
   "apicomplexa": [
-    {
-      "abbreviation": "Pfalciparum",
-      "common_name": "Pfalciparum",
-      "genus": "Plasmodium",
-      "species": "falciparum 3D7",
-      "strain": "3D7",
-      "q": "Q61779043",
-      "version": 3
-    },
-    {
-      "abbreviation": "Pknowlesi",
-      "common_name": "Pknowlesi",
-      "genus": "Plasmodium",
-      "species": "knowlesi",
-      "strain": null,
-      "q": "Q241594",
-      "version": 2
-    },
     {
       "abbreviation": "Pberghei",
       "common_name": "Pberghei",
       "genus": "Plasmodium",
       "species": "berghei",
       "strain": null,
-      "q": "Q65021",
-      "version": 3
-    },
-    {
-      "abbreviation": "Pyoelii",
-      "common_name": "Pyoelii",
-      "genus": "Plasmodium",
-      "species": "yoelii 17X",
-      "strain": "17X",
-      "q": "Q61779086",
-      "version": 3
+      "taxon_id": "5821",
+      "version": "3",
+      "wikidata_id": "Q65021"
     },
     {
       "abbreviation": "Pchabaudi",
@@ -134,17 +128,19 @@
       "genus": "Plasmodium",
       "species": "chabaudi",
       "strain": null,
-      "q": "Q7201860",
-      "version": 3
+      "taxon_id": "5825",
+      "version": "3",
+      "wikidata_id": "Q7201860"
     },
     {
-      "abbreviation": "Preichenowi",
-      "common_name": "Preichenowi",
+      "abbreviation": "Pfalciparum",
+      "common_name": "Pfalciparum",
       "genus": "Plasmodium",
-      "species": "reichenowi",
-      "strain": null,
-      "q": "Q19730945",
-      "version": 3
+      "species": "falciparum 3D7",
+      "strain": "3D7",
+      "taxon_id": "36329",
+      "version": "3",
+      "wikidata_id": "Q61779043"
     },
     {
       "abbreviation": "Pgallinaceum",
@@ -152,35 +148,19 @@
       "genus": "Plasmodium",
       "species": "gallinaceum",
       "strain": null,
-      "q": "Q7201888",
-      "version": 1
+      "taxon_id": "5849",
+      "version": "1",
+      "wikidata_id": "Q7201888"
     },
     {
-      "abbreviation": "Prelictum",
-      "common_name": "Prelictum",
+      "abbreviation": "Pknowlesi",
+      "common_name": "Pknowlesi",
       "genus": "Plasmodium",
-      "species": "relictum",
+      "species": "knowlesi",
       "strain": null,
-      "q": "Q20722177",
-      "version": 1
-    },
-    {
-      "abbreviation": "PvivaxP01",
-      "common_name": "PvivaxP01",
-      "genus": "Plasmodium",
-      "species": "vivax P01",
-      "strain": "P01",
-      "q": "Q61779062",
-      "version": 2
-    },
-    {
-      "abbreviation": "Povale",
-      "common_name": "Povale",
-      "genus": "Plasmodium",
-      "species": "ovale curtisi",
-      "strain": null,
-      "q": "Q7201933",
-      "version": 1
+      "taxon_id": "5850",
+      "version": "2",
+      "wikidata_id": "Q241594"
     },
     {
       "abbreviation": "Pmalariae",
@@ -188,19 +168,71 @@
       "genus": "Plasmodium",
       "species": "malariae",
       "strain": null,
-      "q": "Q133969",
-      "version": 1
+      "taxon_id": "5858",
+      "version": "1",
+      "wikidata_id": "Q133969"
+    },
+    {
+      "abbreviation": "Povale",
+      "common_name": "Povale",
+      "genus": "Plasmodium",
+      "species": "ovale curtisi",
+      "strain": null,
+      "taxon_id": "36330",
+      "version": "1",
+      "wikidata_id": "Q7201933"
+    },
+    {
+      "abbreviation": "Preichenowi",
+      "common_name": "Preichenowi",
+      "genus": "Plasmodium",
+      "species": "reichenowi",
+      "strain": null,
+      "taxon_id": "5854",
+      "version": "3",
+      "wikidata_id": "Q19730945"
+    },
+    {
+      "abbreviation": "Prelictum",
+      "common_name": "Prelictum",
+      "genus": "Plasmodium",
+      "species": "relictum",
+      "strain": null,
+      "taxon_id": "85471",
+      "version": "1",
+      "wikidata_id": "Q20722177"
+    },
+    {
+      "abbreviation": "PvivaxP01",
+      "common_name": "PvivaxP01",
+      "genus": "Plasmodium",
+      "species": "vivax P01",
+      "strain": "P01",
+      "taxon_id": "5855",
+      "version": "2",
+      "wikidata_id": "Q61779062"
+    },
+    {
+      "abbreviation": "Pyoelii",
+      "common_name": "Pyoelii",
+      "genus": "Plasmodium",
+      "species": "yoelii 17X",
+      "strain": "17X",
+      "taxon_id": "1323249",
+      "version": "3",
+      "wikidata_id": "Q61779086"
     }
   ],
   "helminths": [
     {
-      "abbreviation": "Smansoni",
-      "common_name": "Smansoni",
-      "genus": "Schistosoma",
-      "species": "mansoni",
+      "abbreviation": "Egranulosus",
+      "common_name": "Egranulosus",
+      "genus": "Echinococcus",
+      "species": "granulosus",
       "strain": null,
-      "q": "Q2324689",
-      "version": null
+      "taxon_id": "6210",
+      "version": null,
+      "wikidata_id": null
     },
     {
       "abbreviation": "Emultilocularis",
@@ -208,7 +240,9 @@
       "genus": "Echinococcus",
       "species": "multilocularis",
       "strain": null,
-      "version": null
+      "taxon_id": "6211",
+      "version": "2",
+      "wikidata_id": null
     },
     {
       "abbreviation": "Hmicrostoma",
@@ -216,7 +250,19 @@
       "genus": "Hymenolepis",
       "species": "microstoma",
       "strain": null,
-      "version": null
+      "taxon_id": "85433",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Smansoni",
+      "common_name": "Smansoni",
+      "genus": "Schistosoma",
+      "species": "mansoni",
+      "strain": null,
+      "taxon_id": "6183",
+      "version": null,
+      "wikidata_id": "Q2324689"
     },
     {
       "abbreviation": "Tsolium",
@@ -224,34 +270,21 @@
       "genus": "Taenia",
       "species": "solium",
       "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "Egranulosus",
-      "common_name": "Egranulosus",
-      "genus": "Echinococcus",
-      "species": "granulosus",
-      "strain": null,
-      "version": null
+      "taxon_id": "6204",
+      "version": null,
+      "wikidata_id": null
     }
   ],
   "fungi": [
-    {
-      "abbreviation": "CneoformansneoformansJEC21",
-      "common_name": "CneoformansneoformansJEC21",
-      "genus": "Cryptococcus",
-      "species": "neoformans var. neoformans JEC21",
-      "strain": null,
-      "version": null
-    },
     {
       "abbreviation": "AfumigatusAf293",
       "common_name": "AfumigatusAf293",
       "genus": "Aspergillus",
       "species": "fumigatus Af293",
       "strain": null,
-      "q": "Q61779030",
-      "version": null
+      "taxon_id": "746128",
+      "version": null,
+      "wikidata_id": "Q61779030"
     },
     {
       "abbreviation": "AnidulansFGSCA4",
@@ -259,7 +292,9 @@
       "genus": "Aspergillus",
       "species": "nidulans FGSC A4",
       "strain": null,
-      "version": null
+      "taxon_id": "162425",
+      "version": null,
+      "wikidata_id": null
     },
     {
       "abbreviation": "AnigerCBS51388",
@@ -267,8 +302,9 @@
       "genus": "Aspergillus",
       "species": "niger CBS 513.88",
       "strain": null,
-      "q": "Q61779022",
-      "version": null
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": "Q61779022"
     },
     {
       "abbreviation": "AoryzaeRIB40",
@@ -276,7 +312,9 @@
       "genus": "Aspergillus",
       "species": "oryzae RIB40",
       "strain": null,
-      "version": null
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
     },
     {
       "abbreviation": "BcinereaB0510",
@@ -284,7 +322,9 @@
       "genus": "Botrytis",
       "species": "cinerea B05.10",
       "strain": null,
-      "version": null
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
     },
     {
       "abbreviation": "CimmitisRS",
@@ -292,7 +332,9 @@
       "genus": "Coccidioides",
       "species": "immitis RS",
       "strain": null,
-      "version": null
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
     },
     {
       "abbreviation": "CposadasiiSilveira",
@@ -300,71 +342,9 @@
       "genus": "Coccidioides",
       "species": "posadasii str. Silveira",
       "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "FgraminearumPH1",
-      "common_name": "FgraminearumPH1",
-      "genus": "Fusarium",
-      "species": "graminearum PH-1",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "HcapsulatumNAm1",
-      "common_name": "HcapsulatumNAm1",
-      "genus": "Histoplasma",
-      "species": "capsulatum NAm1",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "Moryzae7015",
-      "common_name": "Moryzae7015",
-      "genus": "Magnaporthe",
-      "species": "oryzae 70-15",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "MglobosaCBS7966",
-      "common_name": "MglobosaCBS7966",
-      "genus": "Malassezia",
-      "species": "globosa CBS 7966",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "NcrassaOR74A",
-      "common_name": "NcrassaOR74A",
-      "genus": "Neurospora",
-      "species": "crassa OR74A",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "PjiroveciiSE8",
-      "common_name": "PjiroveciiSE8",
-      "genus": "Pneumocystis",
-      "species": "jirovecii SE8",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "TreeseiQM6a",
-      "common_name": "TreeseiQM6a",
-      "genus": "Trichoderma",
-      "species": "reesei QM6a",
-      "strain": null,
-      "version": null
-    },
-    {
-      "abbreviation": "Umaydis521",
-      "common_name": "Umaydis521",
-      "genus": "Ustilago",
-      "species": "maydis 521",
-      "strain": null,
-      "version": null
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
     },
     {
       "abbreviation": "CneoformansH99",
@@ -372,7 +352,99 @@
       "genus": "Cryptococcus",
       "species": "neoformans var. grubii H99",
       "strain": null,
-      "version": null
+      "taxon_id": "235443",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "CneoformansneoformansJEC21",
+      "common_name": "CneoformansneoformansJEC21",
+      "genus": "Cryptococcus",
+      "species": "neoformans var. neoformans JEC21",
+      "strain": null,
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "FgraminearumPH1",
+      "common_name": "FgraminearumPH1",
+      "genus": "Fusarium",
+      "species": "graminearum PH-1",
+      "strain": null,
+      "taxon_id": null,
+      "version": "1",
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "HcapsulatumNAm1",
+      "common_name": "HcapsulatumNAm1",
+      "genus": "Histoplasma",
+      "species": "capsulatum NAm1",
+      "strain": null,
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Moryzae7015",
+      "common_name": "Moryzae7015",
+      "genus": "Magnaporthe",
+      "species": "oryzae 70-15",
+      "strain": null,
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "MglobosaCBS7966",
+      "common_name": "MglobosaCBS7966",
+      "genus": "Malassezia",
+      "species": "globosa CBS 7966",
+      "strain": null,
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "NcrassaOR74A",
+      "common_name": "NcrassaOR74A",
+      "genus": "Neurospora",
+      "species": "crassa OR74A",
+      "strain": null,
+      "taxon_id": "367110",
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "PjiroveciiSE8",
+      "common_name": "PjiroveciiSE8",
+      "genus": "Pneumocystis",
+      "species": "jirovecii SE8",
+      "strain": null,
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "TreeseiQM6a",
+      "common_name": "TreeseiQM6a",
+      "genus": "Trichoderma",
+      "species": "reesei QM6a",
+      "strain": null,
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
+    },
+    {
+      "abbreviation": "Umaydis521",
+      "common_name": "Umaydis521",
+      "genus": "Ustilago",
+      "species": "maydis 521",
+      "strain": null,
+      "taxon_id": null,
+      "version": null,
+      "wikidata_id": null
     }
   ]
 }
