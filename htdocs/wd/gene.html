@@ -108,8 +108,16 @@
 		</div>
 
 		<div v-if='orthologs_all.length>0' class="card mb-2 mt-2" style="width:100%">
-			<div class="card-header" tt='orthologs'></div>
-			<div class="card-body">
+			<div class="card-header">
+				<div style='float:right'>
+					<a @click.prevent='orthologs_collapsed=!orthologs_collapsed' style='cursor:pointer'>
+						<span v-if='!orthologs_collapsed' title='Hide orthologs'>&#9660;</span>
+						<span v-else title='Show orthologs'>&#9654;</span>
+					</a>
+				</div>
+				Orthologs [{{orthologs_all.length}}]
+			</div>
+			<div v-if='!orthologs_collapsed' class="card-body">
 				<gene-list :genes='orthologs_all' show_chromosome='1' show_species='1'></gene-list>
 			</div>
 		</div>
@@ -177,6 +185,7 @@ let Gene = Vue.extend ( {
 		aliases:[] ,
 		type:''
 	} ,
+	orthologs_collapsed : true,
 	orthologs : {} ,
 	orthologs_all : [] ,
 	species2apollo : { 'Q311383':'7383' } ,
@@ -318,6 +327,7 @@ let Gene = Vue.extend ( {
 					to_load.push ( taxon_q ) ;
 				} )
 				wd.getItemBatch ( to_load , function () {
+					me.orthologs_collapsed = orth_all.length > 2 ;
 					me.orthologs = orth ;
 					me.orthologs_all = orth_all ;
 				} ) ;
