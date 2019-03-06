@@ -78,22 +78,12 @@
 							<td tt='see_also'></td>
 							<td><i>Not in Wikidata - yet!</i></td>
 						</tr>-->
-						<tr>
-							<td tt='plasmodb'></td>
-							<td><a target='_blank' class='external' :href='"http://plasmodb.org/gene/"+genedb_id'>{{genedb_id}}</a></td>
-						</tr>
-						<tr>
-							<td>MPMP</td>
+
+						<tr v-for='(data,db) in species_for_database' v-if='showLink(db)'>
+							<td>{{db}}</td>
 							<td>
-								<a target='_blank' class='external' :href='"http://mpmp.huji.ac.il/pfid?pfid="+encodeURIComponent(genedb_id)'>{{genedb_id}}</a>
-								<small>[Malaria Parasite Metabolic Pathways]</small>
-							</td>
-						</tr>
-						<tr>
-							<td>RMGM</td>
-							<td>
-								<a target='_blank' class='external' :href='"https://www.pberghei.eu/index.php?cat=geneid&q="+encodeURIComponent(genedb_id)'>{{genedb_id}}</a>
-								<small>[Rodent Malaria genetically modified Parasites]</small>
+								<a target='_blank' class='external' :href='data.url+encodeURIComponent(genedb_id)'>{{genedb_id}}</a>
+								<small v-if='typeof data.note != "undefined"'>{{data.note}}</small>
 							</td>
 						</tr>
 						<tr v-if='i.hasClaims("P591")'>
@@ -192,7 +182,15 @@ let Gene = Vue.extend ( {
 	species2apollo : { 'Q311383':'7383' } ,
 	apollo_url : '' ,
 	go_props : ["P680","P681","P682"] ,
-	main_subject : [] , loading_main_subject:false , show_all_main_subject:false
+	main_subject : [] , loading_main_subject:false , show_all_main_subject:false ,
+	species_for_database : {
+		"PlasmoDB" : { "valid_species": [ "Q65021","Q7201860","Q61779043","Q7201888","Q241594","Q133969","Q7201933","Q19730945","Q20722177","Q61779062","Q61779086" ] , "url" : "http://plasmodb.org/gene/" } ,
+		"MPMP" : { "valid_species": [ "Q61779043" ] , "note" : "Malaria Parasite Metabolic Pathways" , "url" : "http://mpmp.huji.ac.il/pfid?pfid=" } ,
+		"RMGM" : { "valid_species": [ "Q65021","Q61779043","Q61779086" ] , "note" : "Rodent Malaria genetically modified Parasites" , "url" : "https://www.pberghei.eu/index.php?cat=geneid&q=" } ,
+		"TrypCyc" : { "valid_species": [ "Q61779006" ] , "url" : "http://147.99.108.66/TRYPANO/NEW-IMAGE?type=GENE&object=" } ,
+		"TriTrypDB" : { "valid_species": [ "Q61779006","Q61779016" ] , "url" : "http://tritrypdb.org/tritrypdb/app/record/gene/" } ,
+		"FungiDB" : { "valid_species" : [ "Q61779030","Q61779022" ] , "url" : "http://fungidb.org/fungidb/app/record/gene/" }
+	}
 	} } ,
 	created : function () {
 		let me = this ;
@@ -318,8 +316,17 @@ let Gene = Vue.extend ( {
 					me.orthologs_all = orth_all ;
 				} ) ;
 			} ) ;
-
 		} ,
+		showLink : function ( db ) {
+			let me = this ;
+			let ret = false ;
+			if ( typeof me.species_for_database[db] != 'undefined' ) {
+				$.each ( me.i.getClaimItemsForProperty("P703",true) , function ( k , taxon_q ) {
+					if ( me.species_for_database[db].valid_species.indexOf(taxon_q) != -1 ) ret = true ;
+				} ) ;
+			}
+			return ret ;
+		}
 	} ,
 	template:'#gene-template'
 } )
