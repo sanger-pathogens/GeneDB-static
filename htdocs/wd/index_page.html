@@ -130,22 +130,19 @@ let IndexPage = Vue.extend ( {
 	methods : {
 		loadDatasets : function () {
 			let me = this ;
-			$.get("data/datasets.json", function( data ){ 
-				$.each(data, function(name, values) {
+			$.each(main_config, function(name, values) {
+			  let output = [];
 
-				  let output = [];
+			  $.each(values, function(index, value){
+			    let key = value.genus + ' ' + value.species;
+			    output.push({ key: key, value: value.common_name});
+			  });
 
-				  $.each(values, function(index, value){
-				    let key = value.genus + ' ' + value.species;
-				    output.push({ key: key, value: value.common_name});
-				  });
-
-				  if ( typeof me.groups[name] == 'undefined' ) me.groups[name] = { name:name } ; // Fallback: dummy fill
-				  me.groups[name].selection = '' ;
-				  me.groups[name].entries = output.sort(function (a, b) {
-				      return a.value.localeCompare( b.value );
-				  });
-				});
+			  if ( typeof me.groups[name] == 'undefined' ) me.groups[name] = { name:name } ; // Fallback: dummy fill
+			  me.groups[name].selection = '' ;
+			  me.groups[name].entries = output.sort(function (a, b) {
+			      return a.value.localeCompare( b.value );
+			  });
 			});
 			me.loading = false ;
 		} ,

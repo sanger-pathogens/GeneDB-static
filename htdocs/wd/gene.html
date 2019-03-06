@@ -242,7 +242,13 @@ let Gene = Vue.extend ( {
 			let taxa = me.i.getClaimItemsForProperty("P703",true) ;
 			if ( taxa.length == 0 ) return ;
 			let taxon_q = taxa[0] ;
-			if ( typeof me.species2apollo[taxon_q] == 'undefined' ) return ;
+			let species_key = '' ;
+			$.each ( main_config , function ( group , species_list ) {
+				$.each ( species_list , function ( dummy , species ) {
+					if ( species.wikidata_id == taxon_q ) species_key = species.abbreviation ;
+				} ) ;
+			} ) ;
+			if ( species_key == '' ) return ;
 			let chromosomes = (me.i.getClaimItemsForProperty("1057",true)) ;
 			if ( chromosomes.length == 0 ) return ;
 			let chr_q = chromosomes[0] ;
@@ -253,7 +259,7 @@ let Gene = Vue.extend ( {
 				let start = me.i.getFirstStringForProperty("P644") ;
 				let end = me.i.getFirstStringForProperty("P645") ;
 				if ( chr_label == '' || start == '' || end == '' ) return ;
-				me.apollo_url = "https://apollo.genedb.org/" + me.species2apollo[taxon_q] + "/jbrowse/index.html?loc="+chr_label+"%3A"+start+".."+end+"&tracks=DNA%2CAnnotations%2Ccentromere%2CmRNA%2Cgene&highlight=" ;
+				me.apollo_url = "https://apollo.genedb.org/" + species_key + "/jbrowse/index.html?loc="+chr_label+"%3A"+start+".."+end+"&tracks=DNA%2CAnnotations%2Ccentromere%2CmRNA%2Cgene&highlight=" ;
 			} ) ;
 		} ,
 		loadByGeneDB : function(resolve, reject) {
