@@ -3,7 +3,7 @@
 let router ;
 let app ;
 let wd = new WikiData() ;
-
+let main_config ;
 
 $(document).ready ( function () {
 //	if ( window.location.hash=='' || window.location.hash=='#' ) return ;
@@ -30,6 +30,12 @@ $(document).ready ( function () {
 			'/wd/chromosome.html',
 			'/wd/protein_box.html'
 		] ) ,
+		new Promise(function(resolve, reject) {
+			$.get("data/datasets.json", function( data ){ 
+				main_config = data ;
+				resolve();
+			} ) .fail(reject) ;
+		} ) ,
 //		new Promise(function(resolve, reject) { resolve() } )
 	] )	.then ( () => {
 			wd_link_wd = wd ;
