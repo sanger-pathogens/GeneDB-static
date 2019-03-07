@@ -74,7 +74,7 @@ Vue.component ( 'gene-search-box' , {
 				list:'search',
 				srnamespace:0,
 				srlimit:500,
-				srsearch:the_query+' haswbstatement:P3382',
+				srsearch:the_query+' haswbstatement:P3382', // with GeneDB ID
 				format:'json'
 			} , function ( d ) {
 				let to_load = [] ;
@@ -87,14 +87,24 @@ Vue.component ( 'gene-search-box' , {
 					$.each ( to_load , function ( k , q ) {
 						let i = wd.getItem ( q ) ;
 						if ( typeof i == 'undefined' ) return ;
-						if ( !i.hasClaimItemLink('P31','Q7187') ) return ; // Not a gene
-						gene_items.push ( q ) ;
+						if ( i.hasClaimItemLink('P31','Q8054') ) { // Protein, try to find gene
+							let targets = i.getClaimItemsForProperty('P702',true) ;
+							if ( targets.length == 0 ) return ; // No "encoded by"
+							q = targets[0] ;
+							gene_items.push ( q ) ;
+						} else {
+							if ( !i.hasClaimItemLink('P31','Q7187') ) return ; // Not a gene
+							gene_items.push ( q ) ;
+						}
 					} ) ;
-					me.query_cache[the_query] = gene_items ;
-					me.results = gene_items ;
-					me.setGenesFromResults() ;
-					me.last_query = the_query ;
-					me.searching = false ;
+					gene_items = gene_items.filter ( function ( value , index , self ) { return self.indexOf(value) === index } ) ; // Unique
+					wd.getItemBatch ( gene_items , function () { // Make sure they are all loaded, even the ones inferred from proteins
+						me.query_cache[the_query] = gene_items ;
+						me.results = gene_items ;
+						me.setGenesFromResults() ;
+						me.last_query = the_query ;
+						me.searching = false ;
+					} ) ;
 				} ) ;
 			} ) ;
 		} ,

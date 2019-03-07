@@ -33,9 +33,9 @@
 
 							<div v-for='wfp in with_from_props'>
 								<div v-if='qprop==wfp' v-for='qual in qualifiers'>
-<!--									With/from -->
 									<wd-link :item='qprop' as_text='1'></wd-link>: 
-									<a target='_blank' class='external' :href='getPropertyTargetURL(qprop,qual.datavalue.value)'>{{qual.datavalue.value}}</a>
+									<router-link v-if='qprop=="P3382"' :to='"/gene/"+qual.datavalue.value'>{{qual.datavalue.value}}</router-link>
+									<a v-else target='_blank' class='external' :href='getPropertyTargetURL(qprop,qual.datavalue.value)'>{{qual.datavalue.value}}</a>
 								</div>
 							</div>
 
@@ -78,7 +78,7 @@ Vue.component ( 'go-list' , {
 	template : '#go-list-template' ,
 	props : [ 'go_prop' , 'claims' ] ,
 	data : function () { return { loaded:false , go_ref_pattern:new RegExp('//github\\.com/geneontology/go-site/blob/master/metadata/gorefs/goref-(\\d+).md$') ,
-		with_from_props : ['P2926','P352','P3519']
+		with_from_props : ['P2926','P352','P3519','P3382']
 	} } ,
 	created : function () {
 		let me = this ;
