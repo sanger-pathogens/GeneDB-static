@@ -93,6 +93,14 @@
 								</div>
 							</td>
 						</tr>
+						<tr v-if='i.hasClaims("P1343")'>
+							<td nowrap>Described by</td>
+							<td style="font-size:10pt;">
+								<div v-for='qq in i.getClaimItemsForProperty("P1343",true)'>
+									<publication :item='qq'></publication>
+								</div>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 
@@ -197,6 +205,7 @@ Vue.component ( 'protein-box' , {
 			let to_load = [] ;
 			$.each ( me.i.getClaimItemsForProperty('P361',true) , function ( k , v ) { to_load.push(v)} ) ;
 			$.each ( me.i.getClaimItemsForProperty('P527',true) , function ( k , v ) { to_load.push(v)} ) ;
+			$.each ( me.i.getClaimItemsForProperty('P1343',true) , function ( k , v ) { to_load.push(v)} ) ;
 			wd.getItemBatch ( to_load , function () {
 				me.loaded = true ;
 				resolve() ;
