@@ -22,10 +22,14 @@
 								</div>
 							</td>
 						</tr>
-						<tr v-if='ftp_url!=""'>
-							<td nowrap>FTP</td>
+						<tr v-if='organism.abbreviation!=""'>
+							<td nowrap>Download</td>
 							<td>
-								<a :href='ftp_url' class='external' target='_blank'>{{ftp_url}}</a>
+								<a :href="'ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/'+organism.abbreviation" class='external' target='_blank'>
+									{{organism.genus}}
+									{{organism.species}}
+									on the Sanger FTP site
+								</a>
 							</td>
 						</tr>
 						<tr>
@@ -99,11 +103,11 @@ let species_cache = {} ;
 let SpeciesPage = Vue.extend ( {
 	props : ['species_id'] ,
 	template : '#species-template' ,
-	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] , ftp_url:'' , error:false , error_message:'' } } ,
+	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] , organism:'' , error:false , error_message:'' } } ,
 	created : function () {
 		let me = this ;
 		me.error = false ;
-		me.ftp_url = '' ;
+		me.organism = {} ;
 		if ( /^Q\d+$/.test(me.species_id) ) {
 			me.setSpeciesQ ( me.species_id ) ;
 		} else {
@@ -158,7 +162,7 @@ let SpeciesPage = Vue.extend ( {
 			$.each ( main_config , function ( group , list ) {
 				$.each ( list , function ( dummy , organism ) {
 					if ( organism.wikidata_id != q ) return ;
-					me.ftp_url = 'ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/' + organism.abbreviation ;
+					me.organism = organism;
 				} ) ;
 			} ) ;
 		} ,
