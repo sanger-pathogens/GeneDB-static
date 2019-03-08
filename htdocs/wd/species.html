@@ -22,6 +22,12 @@
 								</div>
 							</td>
 						</tr>
+						<tr v-if='ftp_url!=""'>
+							<td nowrap>FTP</td>
+							<td>
+								<a :href='ftp_url' class='external' target='_blank'>{{ftp_url}}</a>
+							</td>
+						</tr>
 						<tr>
 							<td nowrap tt='wikidata'></td>
 							<td>
@@ -93,10 +99,11 @@ let species_cache = {} ;
 let SpeciesPage = Vue.extend ( {
 	props : ['species_id'] ,
 	template : '#species-template' ,
-	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] , error:false , error_message:'' } } ,
+	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] , ftp_url:'' , error:false , error_message:'' } } ,
 	created : function () {
 		let me = this ;
 		me.error = false ;
+		me.ftp_url = '' ;
 		if ( /^Q\d+$/.test(me.species_id) ) {
 			me.setSpeciesQ ( me.species_id ) ;
 		} else {
@@ -146,12 +153,22 @@ let SpeciesPage = Vue.extend ( {
 				resolve() ;
 			} , reject ) ;
 		} ,
+		setFTPlink : function ( q ) {
+			let me = this ;
+			$.each ( main_config , function ( group , list ) {
+				$.each ( list , function ( dummy , organism ) {
+					if ( organism.wikidata_id != q ) return ;
+					me.ftp_url = 'ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/' + organism.abbreviation ;
+				} ) ;
+			} ) ;
+		} ,
 		loadSpeciesItem : function (resolve, reject) {
 			let me = this ;
 			let to_load = me.external_props.slice(0);
 			to_load.push ( me.species_q ) ;
 			wd.getItemBatch ( to_load , function () {
 				me.i = wd.getItem(me.species_q) ;
+				me.setFTPlink (me.species_q) ;
 				resolve();
 			} ) ;
 		}
