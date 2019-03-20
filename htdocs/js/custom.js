@@ -38,11 +38,7 @@ jQuery(document).ready(function(){
     $('.custom-button').addClass('disabled').attr('href', '#');
     var dataset = select.parent();
     var link = $('a', dataset);
-    if( select.attr('id') == 'parasiteVectors') {
-      link.attr('href', 'parasite-vectors.html');
-    } else {
-      link.attr('href', 'https://apollo.genedb.org/'+select.val()+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=');
-    }
+    link.attr('href', 'https://apollo.genedb.org/'+select.val()+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=');
     if( select.val() != '' ){
       link.removeClass('disabled');
     }
