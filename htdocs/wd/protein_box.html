@@ -105,14 +105,15 @@
 										<wd-link :item='qprop' as_text='1'></wd-link>: 
 										<tt>{{qual.datavalue.value}}</tt>
 									</div>
-									<div v-if='qprop=="P3382"' v-for='qual in qualifiers'>
-										With/from:
-										<router-link :to='"/gene/"+qual.datavalue.value'>
-											{{qual.datavalue.value}}
-										</router-link>
+									<div v-for='wfp in with_from_props'>
+										<div v-if='qprop==wfp' v-for='qual in qualifiers'>
+											<wd-link :item='qprop' as_text='1'></wd-link>: 
+											<router-link v-if='qprop=="P3382"' :to='"/gene/"+qual.datavalue.value'>{{qual.datavalue.value}}</router-link>
+											<a v-else target='_blank' class='external' :href='getPropertyTargetURL(qprop,qual.datavalue.value)'>{{qual.datavalue.value}}</a>
+										</div>
 									</div>
 								</div>
-								<div style="font-size:10pt;">
+								<div style="font-size:10pt;" v-if='claim.mainsnak.snaktype=="value"'>
 									<publication :item='i.getClaimTargetItemID(claim)'></publication>
 								</div>
 							</td>
@@ -157,6 +158,7 @@ Vue.component ( 'protein-box' , {
 		type:''
 	} ,
 	go_props : ["P680","P681","P682"] ,
+	with_from_props : ['P2926','P352','P3519','P3382'],
 	show_curation_box : true ,
 	external_ids : ["P352","P214"] ,
 	main_subject : [] , loading_main_subject:false , show_all_main_subject:false
@@ -216,6 +218,14 @@ Vue.component ( 'protein-box' , {
 				}
 			} ) ;
 		} ,
+		getPropertyTargetURL : function ( prop , value ) {
+			let me = this ;
+			let i = wd.getItem(prop) ;
+			if ( typeof i == 'undefined' ) return '' ;
+			let url_pattern = i.getFirstStringForProperty('P1630');
+			if ( url_pattern == '' ) return '' ;
+			return url_pattern.replace ( /\$1/ , encodeURIComponent(value) ) ;
+		} ,
 		loadRelatedItems : function ( resolve , reject ) {
 			let me = this ;
 			let to_load = [] ;
@@ -237,7 +247,10 @@ Vue.component ( 'protein-box' , {
 			} ) ;
 		} ,
 		loadExternalIDs : function (resolve, reject) {
-			wd.getItemBatch ( this.external_ids , function () { resolve() } ) ;
+			let me = this ;
+			let to_load = me.with_from_props.slice() ;
+			$.each ( me.external_ids , function ( dummy , q ) { to_load.push(q) } ) ;
+			wd.getItemBatch ( to_load , function () { resolve() } ) ;
 		} ,
 		loadLiterature : function () {
 			var me = this ;
