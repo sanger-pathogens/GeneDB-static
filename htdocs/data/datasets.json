@@ -8,7 +8,7 @@
       "strain": "MHOM/BR/75/M2904",
       "taxon_id": "420245",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62115934"
     },
     {
       "abbreviation": "LdonovaniBPK282A1",
@@ -18,7 +18,7 @@
       "strain": "BPK282A1",
       "taxon_id": "981087",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62115964"
     },
     {
       "abbreviation": "Linfantum",
@@ -28,7 +28,7 @@
       "strain": "JPCM5",
       "taxon_id": "435258",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62115984"
     },
     {
       "abbreviation": "Lmajor",
@@ -48,7 +48,7 @@
       "strain": null,
       "taxon_id": "5665",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q2493771"
     },
     {
       "abbreviation": "Tbruceigambiense",
@@ -58,7 +58,7 @@
       "strain": null,
       "taxon_id": "31285",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q9396337"
     },
     {
       "abbreviation": "TbruceiLister427",
@@ -68,7 +68,7 @@
       "strain": null,
       "taxon_id": "5691",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116063"
     },
     {
       "abbreviation": "Tbruceibrucei927",
@@ -88,7 +88,7 @@
       "strain": null,
       "taxon_id": "5692",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q292607"
     },
     {
       "abbreviation": "Tcruzi",
@@ -98,7 +98,7 @@
       "strain": null,
       "taxon_id": "5693",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q150162"
     },
     {
       "abbreviation": "Tvivax",
@@ -108,7 +108,7 @@
       "strain": null,
       "taxon_id": "5699",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q2456810"
     }
   ],
   "apicomplexa": [
@@ -179,7 +179,7 @@
       "species": "ovale curtisi",
       "strain": null,
       "taxon_id": "36330",
-      "version": "1",
+      "version": "2",
       "wikidata_id": "Q7201933"
     },
     {
@@ -232,7 +232,7 @@
       "strain": null,
       "taxon_id": "6210",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q630200"
     },
     {
       "abbreviation": "Emultilocularis",
@@ -242,7 +242,7 @@
       "strain": null,
       "taxon_id": "6211",
       "version": "2",
-      "wikidata_id": null
+      "wikidata_id": "Q669922"
     },
     {
       "abbreviation": "Hmicrostoma",
@@ -252,7 +252,7 @@
       "strain": null,
       "taxon_id": "85433",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q5956543"
     },
     {
       "abbreviation": "Smansoni",
@@ -272,7 +272,7 @@
       "strain": null,
       "taxon_id": "6204",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q565708"
     }
   ],
   "fungi": [
@@ -294,7 +294,7 @@
       "strain": null,
       "taxon_id": "162425",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116148"
     },
     {
       "abbreviation": "AnigerCBS51388",
@@ -314,7 +314,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116170"
     },
     {
       "abbreviation": "BcinereaB0510",
@@ -324,7 +324,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116238"
     },
     {
       "abbreviation": "CimmitisRS",
@@ -334,7 +334,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116268"
     },
     {
       "abbreviation": "CposadasiiSilveira",
@@ -344,7 +344,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116279"
     },
     {
       "abbreviation": "CneoformansH99",
@@ -354,7 +354,7 @@
       "strain": null,
       "taxon_id": "235443",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116300"
     },
     {
       "abbreviation": "CneoformansneoformansJEC21",
@@ -364,7 +364,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116321"
     },
     {
       "abbreviation": "FgraminearumPH1",
@@ -374,7 +374,7 @@
       "strain": null,
       "taxon_id": null,
       "version": "1",
-      "wikidata_id": null
+      "wikidata_id": "Q62116341"
     },
     {
       "abbreviation": "HcapsulatumNAm1",
@@ -384,7 +384,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116373"
     },
     {
       "abbreviation": "Moryzae7015",
@@ -394,7 +394,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116413"
     },
     {
       "abbreviation": "MglobosaCBS7966",
@@ -404,7 +404,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116430"
     },
     {
       "abbreviation": "NcrassaOR74A",
@@ -414,7 +414,7 @@
       "strain": null,
       "taxon_id": "367110",
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116449"
     },
     {
       "abbreviation": "PjiroveciiSE8",
@@ -424,7 +424,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116457"
     },
     {
       "abbreviation": "TreeseiQM6a",
@@ -434,7 +434,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116459"
     },
     {
       "abbreviation": "Umaydis521",
@@ -444,7 +444,7 @@
       "strain": null,
       "taxon_id": null,
       "version": null,
-      "wikidata_id": null
+      "wikidata_id": "Q62116467"
     }
   ]
 }
