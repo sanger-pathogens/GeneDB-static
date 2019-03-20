@@ -93,11 +93,27 @@
 								</div>
 							</td>
 						</tr>
-						<tr v-if='i.hasClaims("P1343")'>
-							<td nowrap>Described by</td>
-							<td style="font-size:10pt;">
-								<div v-for='qq in i.getClaimItemsForProperty("P1343",true)'>
-									<publication :item='qq'></publication>
+						<tr v-for='claim in i.getClaimsForProperty("P1343")'>
+							<td nowrap>Evidence</td>
+							<td>
+								<div v-for='(qualifiers,qprop) in (claim.qualifiers||{})' class='go-list-item-qualifiers'>
+									<div v-if='qprop=="P459"' v-for='qual in qualifiers'>
+										<wd-link :item='qprop' as_text='1'></wd-link>: 
+										<wd-link :item='qual.datavalue.value.id'></wd-link>
+									</div>
+									<div v-if='qprop=="P1810"' v-for='qual in qualifiers'>
+										<wd-link :item='qprop' as_text='1'></wd-link>: 
+										<tt>{{qual.datavalue.value}}</tt>
+									</div>
+									<div v-if='qprop=="P3382"' v-for='qual in qualifiers'>
+										With/from:
+										<router-link :to='"/gene/"+qual.datavalue.value'>
+											{{qual.datavalue.value}}
+										</router-link>
+									</div>
+								</div>
+								<div style="font-size:10pt;">
+									<publication :item='i.getClaimTargetItemID(claim)'></publication>
 								</div>
 							</td>
 						</tr>
