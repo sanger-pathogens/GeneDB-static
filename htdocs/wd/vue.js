@@ -21,6 +21,7 @@ $(document).ready ( function () {
 			'/wd/search_page.html',
 			'/wd/gene_list.html',
 			'/wd/gene.html',
+			'/wd/evidence_claim.html',
 //			'/wd/quicksearch.html',
 			'/wd/species.html',
 			'/wd/named_link.html',
