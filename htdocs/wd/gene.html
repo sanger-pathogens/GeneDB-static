@@ -68,16 +68,9 @@
 							<td>
 								<div v-for='protein_q in i.getClaimItemsForProperty("P688",true)'>
 									<wd-link :item='protein_q'></wd-link>
-<!--									<router-link :to='"/protein/"+protein_q'>
-										<wd-link :item='protein_q' as_textg='1'></wd-link>
-									</router-link>-->
 								</div>
 							</td>
 						</tr>
-<!--						<tr>
-							<td tt='see_also'></td>
-							<td><i>Not in Wikidata - yet!</i></td>
-						</tr>-->
 
 						<tr v-for='(data,db) in species_for_database' v-if='showLink(db)'>
 							<td>{{db}}</td>
