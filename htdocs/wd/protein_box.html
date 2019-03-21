@@ -93,12 +93,10 @@
 								</div>
 							</td>
 						</tr>
-						<tr v-if='i.hasClaims("P1343")'>
-							<td nowrap>Described by</td>
-							<td style="font-size:10pt;">
-								<div v-for='qq in i.getClaimItemsForProperty("P1343",true)'>
-									<publication :item='qq'></publication>
-								</div>
+						<tr v-for='claim in i.getClaimsForProperty("P1343")'>
+							<td nowrap>Evidence</td>
+							<td>
+								<evidence-claim :item='i' :claim='claim'></evidence-claim>
 							</td>
 						</tr>
 					</tbody>
@@ -221,7 +219,8 @@ Vue.component ( 'protein-box' , {
 			} ) ;
 		} ,
 		loadExternalIDs : function (resolve, reject) {
-			wd.getItemBatch ( this.external_ids , function () { resolve() } ) ;
+			let me = this ;
+			wd.getItemBatch ( me.external_ids , function () { resolve() } ) ;
 		} ,
 		loadLiterature : function () {
 			var me = this ;
