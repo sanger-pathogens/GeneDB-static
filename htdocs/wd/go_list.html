@@ -24,6 +24,9 @@
 							<div v-if='qprop=="P459"' v-for='qual in qualifiers'>
 								<wd-link :item='qprop' as_text='1'></wd-link>: 
 								<wd-link :item='qual.datavalue.value.id'></wd-link>
+									<span v-if="typeof get_evidence_code(qual.datavalue.value.id)!='undefined'">
+										[{{get_evidence_code(qual.datavalue.value.id)}}]
+									</span>
 							</div>
 
 							<div v-if='qprop=="P2283"' v-for='qual in qualifiers'>
@@ -33,7 +36,8 @@
 
 							<div v-for='wfp in with_from_props'>
 								<div v-if='qprop==wfp' v-for='qual in qualifiers'>
-									<wd-link :item='qprop' as_text='1'></wd-link>: 
+									<span v-if='qprop=="P3382"'>with/from</span>
+									<wd-link v-else  :item='qprop' as_text='1'></wd-link>: 
 									<router-link v-if='qprop=="P3382"' :to='"/gene/"+qual.datavalue.value'>{{qual.datavalue.value}}</router-link>
 									<a v-else target='_blank' class='external' :href='getPropertyTargetURL(qprop,qual.datavalue.value)'>{{qual.datavalue.value}}</a>
 								</div>
@@ -43,7 +47,9 @@
 						<div v-for='ref in (claim.references||[])' class='go-list-item-references'>
 							<div class='go-list-item-reference1'>
 								<div v-for='dm in (ref.snaks.P459||[])'>
-									{{evidence_codes[dm.datavalue.value.id]}}
+									<span v-if="typeof get_evidence_code(dm.datavalue.value.id)!='undefined'">
+										{{get_evidence_code(dm.datavalue.value.id)}}
+									</span>
 								</div>
 							</div>
 							<div class='go-list-item-reference2'>
@@ -72,8 +78,6 @@
 <script>
 'use strict';
 
-let evidence_codes ;
-
 Vue.component ( 'go-list' , {
 	template : '#go-list-template' ,
 	props : [ 'go_prop' , 'claims' ] ,
@@ -84,7 +88,6 @@ Vue.component ( 'go-list' , {
 		let me = this ;
 		Promise.all ( [
 			new Promise( me.loadItems ) ,
-			new Promise( me.loadGeneOntologyEvidenceCodes )
 		] )	.then ( () => {
 			me.loaded = true ;
 		} ) ;
@@ -109,20 +112,9 @@ Vue.component ( 'go-list' , {
 			if ( url_pattern == '' ) return '' ;
 			return url_pattern.replace ( /\$1/ , encodeURIComponent(value) ) ;
 		} ,
-		loadGeneOntologyEvidenceCodes : function(resolve, reject) { // Global load
-			if ( typeof evidence_codes != 'undefined' ) return resolve() ; // Already loaded
-			evidence_codes = {} ;
-			let sparql = 'SELECT ?q ?desc { ?q wdt:P31 wd:Q23173209 ; skos:altLabel ?desc FILTER ( LANG(?desc)="en" ) }' ;
-			wd.loadSPARQL ( sparql , function ( d ) {
-				$.each ( d.results.bindings , function ( dummy , b ) {
-					let q = wd.itemFromBinding ( b.q ) ;
-					let desc = b.desc.value ;
-					if ( desc == 'evidence used in automatic assertion' ) return ;
-					if ( typeof evidence_codes[q] == 'undefined' ) evidence_codes[q] = desc ;
-				} ) ;
-				resolve() ;
-			} , reject ) ;
-		} ,
+		get_evidence_code : function ( id ) {
+			return evidence_codes[id]
+		}
 	}
 } ) ;
 </script>
