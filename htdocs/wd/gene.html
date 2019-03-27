@@ -227,7 +227,7 @@ let Gene = Vue.extend ( {
 			me.show_all_main_subject = false ;
 			wd.loadSPARQLitems ( sparql , function ( d ) {
 				if ( d.length == 0 ) return ;
-				me.main_subject = d ;
+				me.main_subject = d.filter(function(q){return ignore_publications.indexOf(q)==-1}) ;
 				if ( d.length <= 20 ) me.loadLiteratureDetails() ;
 			} ) ;
 		} ,
