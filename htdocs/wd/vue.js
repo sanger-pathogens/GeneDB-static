@@ -4,6 +4,7 @@ let router ;
 let app ;
 let wd = new WikiData() ;
 let main_config ;
+let evidence_codes ;
 
 $(document).ready ( function () {
 //	if ( window.location.hash=='' || window.location.hash=='#' ) return ;
@@ -37,6 +38,23 @@ $(document).ready ( function () {
 				resolve();
 			} ) .fail(reject) ;
 		} ) ,
+		new Promise(
+			function(resolve, reject) { // Global load of evidence codes
+				if ( typeof evidence_codes != 'undefined' ) return resolve() ; // Already loaded
+				evidence_codes = {} ;
+				let sparql = 'SELECT ?q ?desc { ?q wdt:P31 wd:Q23173209 ; skos:altLabel ?desc FILTER ( LANG(?desc)="en" ) }' ;
+				wd.loadSPARQL ( sparql , function ( d ) {
+					$.each ( d.results.bindings , function ( dummy , b ) {
+						let q = wd.itemFromBinding ( b.q ) ;
+						let desc = b.desc.value ;
+						if ( desc == 'evidence used in automatic assertion' ) return ;
+						if ( typeof evidence_codes[q] == 'undefined' ) evidence_codes[q] = desc ;
+					} ) ;
+					resolve() ;
+				} , reject ) ;
+			} 
+
+			),
 //		new Promise(function(resolve, reject) { resolve() } )
 	] )	.then ( () => {
 			wd_link_wd = wd ;

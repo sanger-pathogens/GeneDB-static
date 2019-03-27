@@ -4,6 +4,9 @@
 		<div v-if='qprop=="P459"' v-for='qual in qualifiers'>
 			<wd-link :item='qprop' as_text='1'></wd-link>: 
 			<wd-link :item='qual.datavalue.value.id'></wd-link>
+			<span v-if="typeof evidence_codes[qual.datavalue.value.id]!='undefined'">
+				[{{evidence_codes[qual.datavalue.value.id]}}]
+			</span>
 		</div>
 		<div v-if='qprop=="P1810"' v-for='qual in qualifiers'>
 			<wd-link :item='qprop' as_text='1'></wd-link>: 
@@ -14,7 +17,8 @@
 		</div>
 		<div v-for='wfp in with_from_props'>
 			<div v-if='qprop==wfp' v-for='qual in qualifiers'>
-				<wd-link :item='qprop' as_text='1'></wd-link>: 
+				<span v-if='qprop=="P3382"'>with/from</span>
+				<wd-link v-else  :item='qprop' as_text='1'></wd-link>: 
 				<router-link v-if='qprop=="P3382"' :to='"/gene/"+qual.datavalue.value'>{{qual.datavalue.value}}</router-link>
 				<a v-else target='_blank' class='external' :href='getPropertyTargetURL(qprop,qual.datavalue.value)'>{{qual.datavalue.value}}</a>
 			</div>
