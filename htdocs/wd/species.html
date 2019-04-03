@@ -6,18 +6,26 @@
 	<div v-else class='row'>
 		<div class='col-12 card mb-2 mt-2'>
 			<div class='card-header'>
-				<div v-if='i.hasClaims("P18")' style='float:right'>
-					<commons-thumbnail :filename='i.getFirstStringForProperty("P18")' width='100'></commons-thumbnail>
+				<div v-if='derived.image_url!=""' style='float:right'>
+					<commons-thumbnail :filename='derived.image_url' width='100'></commons-thumbnail>
 				</div>
 				<h1>{{i.getLabel()}}</h1>
 			</div>
 			<div class='card-body'>
 				<table class='table table-sm table-borderless'>
 					<tbody>
-						<tr v-if='i.hasClaims("P2975")'>
+						<tr v-if='derived.apollo_url!=""'>
+							<td nowrap>Apollo</td>
+							<td style='width:100%'>
+								<a :href="derived.apollo_url">
+									<strong>{{organism.genus}} {{organism.species}} in Apollo</strong>
+								</a>
+							</td>
+						</tr>
+						<tr v-if='derived.invades.length>0'>
 							<td nowrap tt='invades'></td>
 							<td style='width:100%'>
-								<div v-for='q2 in i.getClaimItemsForProperty("P2975",true)'>
+								<div v-for='q2 in derived.invades'>
 									<wd-link :item='q2' as_text='1'></wd-link>
 								</div>
 							</td>
@@ -103,7 +111,9 @@ let species_cache = {} ;
 let SpeciesPage = Vue.extend ( {
 	props : ['species_id'] ,
 	template : '#species-template' ,
-	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] , organism:'' , error:false , error_message:'' } } ,
+	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] , organism:'' , error:false , error_message:'' , parent_q:'' ,
+		derived:{apollo_url:'',image_url:'',invades:[]}
+	} } ,
 	created : function () {
 		let me = this ;
 		me.error = false ;
@@ -111,16 +121,32 @@ let SpeciesPage = Vue.extend ( {
 		if ( /^Q\d+$/.test(me.species_id) ) {
 			me.setSpeciesQ ( me.species_id ) ;
 		} else {
-			me.findSpeciesByName ( me.species_id , function ( q ) {
-				if ( typeof q != 'undefined' ) return me.setSpeciesQ(q) ;
-				me.error_message = "Could not find species " + me.species_id ;
-				me.error = true ;
-			} ) ;
+			let q = me.getSpeciesQ ( me.species_id ) ;
+			if ( typeof q != 'undefined' && q != '' ) {
+				me.setSpeciesQ ( q ) ;
+			} else {
+				me.findSpeciesByName ( me.species_id , function ( q ) {
+					if ( typeof q != 'undefined' ) return me.setSpeciesQ(q) ;
+					me.error_message = "Could not find species " + me.species_id ;
+					me.error = true ;
+				} ) ;
+			}
 		}
 	} ,
 	updated : function () { tt.updateInterface(this.$el) ; } ,
 	mounted : function () { tt.updateInterface(this.$el) ; } ,
 	methods : {
+		getSpeciesQ : function ( species_name ) {
+			let me = this ;
+			let ret = '' ;
+			$.each ( main_config , function ( group , species_list ) {
+				$.each ( species_list , function ( dummy , species ) {
+					if ( species.abbreviation == species_name ) ret = species.wikidata_id ;
+					if ( species.common_name == species_name ) ret = species.wikidata_id ;
+				} ) ;
+			} ) ;
+			return ret ;
+		} ,
 		findSpeciesByName : function ( species_name , callback ) {
 			let me = this ;
 			let sparql = 'SELECT DISTINCT ?taxon { ?gene wdt:P31 wd:Q7187 ; wdt:P3382 [] ; wdt:P703 ?taxon . ?taxon rdfs:label "' + $.trim(species_name.replace(/_/g,' ')) + '"@en}' ;
@@ -133,9 +159,24 @@ let SpeciesPage = Vue.extend ( {
 				else callback () ; // Not found, or too many found
 			} ) ;
 		} ,
+		setApolloURL : function () {
+			let me = this ;
+			me.derived.apollo_url = '' ;
+			let species_key = '' ;
+			$.each ( main_config , function ( group , species_list ) {
+				$.each ( species_list , function ( dummy , species ) {
+					if ( species.wikidata_id == me.species_q ) species_key = species.abbreviation ;
+				} ) ;
+			} ) ;
+			if ( species_key != '' ) {
+				me.derived.apollo_url = "https://apollo.genedb.org/" + species_key + "/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=";
+			}
+		} ,
 		setSpeciesQ : function ( q ) {
 			let me = this ;
 			me.species_q = q ;
+			me.derived = {apollo_url:'',image_url:'',invades:[]} ;
+			me.setApolloURL() ;
 			Promise.all ( [
 				new Promise( me.loadSpeciesItem ) ,
 				new Promise( me.loadSpeciesData )
@@ -166,14 +207,33 @@ let SpeciesPage = Vue.extend ( {
 				} ) ;
 			} ) ;
 		} ,
+		setDerived : function ( i ) {
+			if ( typeof i == 'undefined' ) return ; // Paranoia
+			let me = this ;
+			if ( i.hasClaims("P18") && me.derived.image_url=='' ) me.derived.image_url = i.getFirstStringForProperty("P18") ;
+			if ( i.hasClaims("P2975") && me.derived.invades.length == 0 ) me.derived.invades = i.getClaimItemsForProperty("P2975",true) ;
+		} ,
 		loadSpeciesItem : function (resolve, reject) {
 			let me = this ;
+			me.parent_q = '' ;
 			let to_load = me.external_props.slice(0);
 			to_load.push ( me.species_q ) ;
-			wd.getItemBatch ( to_load , function () {
-				me.i = wd.getItem(me.species_q) ;
-				me.setFTPlink (me.species_q) ;
-				resolve();
+			let sparql = "SELECT ?q { wd:" + me.species_q + " wdt:P171* ?q . ?q wdt:P105 wd:Q7432 } LIMIT 1" ;
+			wd.loadSPARQL ( sparql , function ( d ) {
+				$.each ( d.results.bindings , function ( k , v ) {
+					me.parent_q = wd.itemFromBinding ( v.q ) ;
+					to_load.push ( me.parent_q ) ;
+				} ) ;
+				wd.getItemBatch ( to_load , function () {
+					me.i = wd.getItem(me.species_q) ;
+					me.setDerived(me.i) ;
+					if ( me.parent_q != '' ) {
+						let ip = wd.getItem(me.parent_q) ;
+						me.setDerived(ip) ;
+					}
+					me.setFTPlink (me.species_q) ;
+					resolve();
+				} ) ;
 			} ) ;
 		}
 	}
