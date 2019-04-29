@@ -20,7 +20,9 @@
 Vue.component ( 'gene-search-box' , {
 	template : '#gene-search-box-template' ,
 	props : [ 'initial_query' , 'open_search_page' ] ,
-	data : function () { return { query:'' , results:[] , timeout:'' , query_cache:{} , searching:false , genes:[] , last_query:'' } } ,
+	data : function () { return { query:'' , results:[] , timeout:'' , query_cache:{} , searching:false , genes:[] , last_query:'' , 
+		valid_p31:['Q7187','Q201448' , 'Q215980' , 'Q277338' ,'Q284416' , 'Q427087' , 'Q284578' ]
+	} } ,
 	mounted : function () {
 		let me = this ;
 		setTimeout ( function () {
@@ -93,7 +95,7 @@ Vue.component ( 'gene-search-box' , {
 							q = targets[0] ;
 							gene_items.push ( q ) ;
 						} else {
-							if ( !i.hasClaimItemLink('P31','Q7187') ) return ; // Not a gene
+							if ( !me.is_valid_p31(i) ) return ; // Not a gene or similar
 							gene_items.push ( q ) ;
 						}
 					} ) ;
@@ -107,6 +109,14 @@ Vue.component ( 'gene-search-box' , {
 					} ) ;
 				} ) ;
 			} ) ;
+		} ,
+		is_valid_p31 : function ( i ) {
+			let me = this ;
+			let ret = false ;
+			$.each ( me.valid_p31 , function ( dummy , q ) {
+				if ( i.hasClaimItemLink('P31',q) ) ret = true ;
+			} ) ;
+			return ret ;
 		} ,
 		setGenesFromResults : function () {
 			var me = this ;
