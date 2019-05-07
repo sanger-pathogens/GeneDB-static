@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div style="font-size:10pt;" v-if='claim.mainsnak.snaktype=="value"'>
+	<div v-if='typeof no_main_link=="undefined"' style="font-size:10pt;" v-if='claim.mainsnak.snaktype=="value"'>
 		<publication :item='item.getClaimTargetItemID(claim)'></publication>
 	</div>
 </div>
@@ -35,7 +35,7 @@
 
 Vue.component ( 'evidence-claim' , {
 	template : '#evidence-claim-template' ,
-	props : [ 'item' , 'claim' ] ,
+	props : [ 'item' , 'claim' , 'no_main_link' ] ,
 	data : function () { return { loading:true , with_from_props : ['P2926','P352','P3519','P3382','P3523'] } } ,
 	created : function () {} ,
 	mounted : function () {
