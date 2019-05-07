@@ -45,9 +45,25 @@
 						<tr v-if='i.hasClaims("P279")'>
 							<td tt='protein_type' nowrap></td>
 							<td>
-								<div v-for='type_q in i.getClaimItemsForProperty("P279",true)'>
-									<wd-link :item='type_q' as_text='1'></wd-link>
-								</div>
+								<table style='border:0px'>
+									<tr v-for='claim in i.getClaimsForProperty("P279")'>
+										<td nowrap>
+											<wd-link :item='i.getClaimTargetItemID(claim)' as_text='1'></wd-link>
+										</td>
+										<td style='font-size:10pt'>
+											<evidence-claim :item='i' :claim='claim' no_main_link='1'></evidence-claim>
+
+											<!-- TODO should be the same as in go_list? -->
+											<div>
+												<div v-for='ref in (claim.references||[])' class='go-list-item-references'>
+													<div v-for='si in (ref.snaks.P248||[])'>
+														<publication v-if='si.datavalue.value.id!="Q5531047"' :item='si.datavalue.value.id'></publication>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</table>
 							</td>
 						</tr>
 						<tr v-if='full_info && gene_genedb_id!=""'>
