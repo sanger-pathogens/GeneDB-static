@@ -163,8 +163,8 @@ let IndexPage = Vue.extend ( {
 			if ( me.groups[id].selection == '' ) return ; // No selection, leave button deactivated
 			$('#'+id+'_button') // Set go button
 				.removeClass('disabled')
-        //.attr('href', '#/species/'+me.groups[id].selection // Opens species page
-				.attr('href', 'https://apollo.genedb.org/'+me.groups[id].selection+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=' // Opens Apollo
+        .attr('href', '#/species/'+me.groups[id].selection // Opens species page
+				//.attr('href', 'https://apollo.genedb.org/'+me.groups[id].selection+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=' // Opens Apollo
         ) ;
 		}
 	} ,
