@@ -221,6 +221,16 @@
       "taxon_id": "1323249",
       "version": "3",
       "wikidata_id": "Q61779086"
+    },
+    {
+      "abbreviation": "TgondiiME49",
+      "common_name": "TgondiiME49",
+      "genus": "Toxoplasma",
+      "species": "gondii",
+      "strain": "ME49",
+      "taxon_id": "508771",
+      "version": null,
+      "wikidata_id": "Q64152539"
     }
   ],
   "helminths": [
