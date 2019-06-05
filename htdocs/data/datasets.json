@@ -380,10 +380,10 @@
       "abbreviation": "FgraminearumPH1",
       "common_name": "FgraminearumPH1",
       "genus": "Fusarium",
-      "species": "graminearum PH-1",
-      "strain": null,
+      "species": "graminearum",
+      "strain": "PH-1",
       "taxon_id": null,
-      "version": "1",
+      "version": "2",
       "wikidata_id": "Q62116341"
     },
     {
