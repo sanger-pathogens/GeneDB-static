@@ -200,6 +200,18 @@ let Gene = Vue.extend ( {
 		Promise.all ( [
 			new Promise( me.loadByGeneDB ) ,
 		] )	.then ( () => {
+			// Paranoia: protein => redirect gene
+			if ( typeof me.i != 'undefined' ) {
+				let encoded_by = me.i.getClaimItemsForProperty("P702",true) ;
+				if ( encoded_by.length > 0 ) {
+					wd.getItemBatch ( encoded_by , function () {
+						let i = wd.getItem(encoded_by[0]) ;
+						if ( typeof i != 'undefined' && i.hasClaims("P3382") ) {
+							me.$router.replace ( '/gene/'+ i.getFirstStringForProperty("P3382") );
+						}
+					} ) ;
+				}
+			}
 			if ( me.q != '' ) me.loadLiterature() ;
 			me.generateApolloURL() ;
 			me.loading = false ;
