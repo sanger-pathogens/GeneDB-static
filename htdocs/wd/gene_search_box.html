@@ -76,7 +76,7 @@ Vue.component ( 'gene-search-box' , {
 				list:'search',
 				srnamespace:0,
 				srlimit:500,
-				srsearch:the_query+' haswbstatement:P3382', // with GeneDB ID
+				srsearch:'"'+the_query+'" haswbstatement:P3382', // with GeneDB ID
 				format:'json'
 			} , function ( d ) {
 				let to_load = [] ;
