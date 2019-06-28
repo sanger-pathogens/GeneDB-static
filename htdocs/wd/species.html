@@ -9,7 +9,7 @@
 				<div v-if='derived.image_url!=""' style='float:right'>
 					<commons-thumbnail :filename='derived.image_url' width='100'></commons-thumbnail>
 				</div>
-				<h1>{{i.getLabel()}}</h1>
+				<h1><i>{{i.getLabel()}}</i></h1>
 			</div>
 			<div class='card-body'>
 				<table class='table table-sm table-borderless'>
@@ -18,12 +18,12 @@
 							<td nowrap>Apollo</td>
 							<td style='width:100%'>
 								<a :href="derived.apollo_url" target='_blank'>
-									<strong>{{organism.genus}} {{organism.species}} in Apollo</strong>
+									<strong><i>{{organism.genus}} {{organism.species}}</i> in Apollo</strong>
 								</a>
 							</td>
 						</tr>
 						<tr v-if='derived.invades.length>0'>
-							<td nowrap tt='invades'></td>
+							<td nowrap>Infects</td>
 							<td style='width:100%'>
 								<div v-for='q2 in derived.invades'>
 									<wd-link :item='q2' as_text='1'></wd-link>
@@ -34,8 +34,7 @@
 							<td nowrap>Download</td>
 							<td>
 								<a :href="'ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/'+organism.abbreviation" class='external' target='_blank'>
-									{{organism.genus}}
-									{{organism.species}}
+									<i>{{organism.genus}} {{organism.species}}</i>
 									on the Sanger FTP site
 								</a>
 							</td>
@@ -43,14 +42,18 @@
 						<tr>
 							<td nowrap tt='wikidata'></td>
 							<td>
-								<wd-link :item='species_q' smallq='1'></wd-link>
+								<i>
+									<wd-link :item='species_q' smallq='1'></wd-link>
+								</i>
 							</td>
 						</tr>
 						<tr>
 							<td nowrap tt='publications'></td>
 							<td>
 								<a :href='"https://tools.wmflabs.org/scholia/topic/"+species_q' class='external' target='_blank'>
-									<wd-link :item='species_q' as_text='1'></wd-link>
+									<i>
+										<wd-link :item='species_q' as_text='1'></wd-link>
+									</i>
 								</a>
 							</td>
 						</tr>
