@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div v-if='typeof no_main_link=="undefined"' style="font-size:10pt;" v-if='claim.mainsnak.snaktype=="value"'>
+	<div v-if='typeof no_main_link=="undefined" && typeof claim.mainsnak.datavalue!="undefined"' style="font-size:10pt;" v-if='claim.mainsnak.snaktype=="value"'>
 		<publication :item='item.getClaimTargetItemID(claim)'></publication>
 	</div>
 </div>

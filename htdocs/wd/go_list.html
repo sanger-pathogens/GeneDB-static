@@ -29,6 +29,12 @@
 									</span>
 							</div>
 
+							<div v-if='qprop=="P585"' v-for='qual in qualifiers'>
+								<span v-if='typeof ((qual.datavalue||{}).value||{}).time!="undefined"'>
+									Added to CHADO: {{qual.datavalue.value.time.substr(1).substr(0,10)}}
+								</span>
+							</div>
+
 							<div v-if='qprop=="P2283"' v-for='qual in qualifiers'>
 								<wd-link :item='qprop' as_text='1'></wd-link>: 
 								<wd-link :item='qual.datavalue.value.id'></wd-link>
