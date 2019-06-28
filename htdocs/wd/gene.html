@@ -28,15 +28,15 @@
 							</td>
 						</tr>
 						<tr>
-							<td tt='gene_name'></td>
+							<td nowrap tt='gene_name'></td>
 							<td><b>{{i.getLabel("en")}}</b></td>
 						</tr>
 						<tr v-if='i.getDesc("en")!=""'>
-							<td tt='description'></td>
+							<td nowrap tt='description'></td>
 							<td>{{i.getDesc()}}</td>
 						</tr>
 						<tr v-if='i.hasClaims("P703")'><!--FIXME-->
-							<td>
+							<td nowrap>
 								<wd-link item="P703" as_text="1"></wd-link>
 							</td>
 							<td>
@@ -46,7 +46,7 @@
 							</td>
 						</tr>
 						<tr v-if='i.hasClaims("P279")'>
-							<td tt='gene_type'></td>
+							<td nowrap tt='gene_type'></td>
 							<td>
 								<div v-for='type_q in i.getClaimItemsForProperty("P279",true)'>
 									<wd-link :item='type_q' as_text='1'></wd-link>
@@ -54,7 +54,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td tt='location'></td>
+							<td nowrap tt='location'></td>
 							<td>
 								<named-link :q='(i.getClaimItemsForProperty("1057",true))[0]' base='chromosome'></named-link>
 								:
@@ -64,7 +64,7 @@
 							</td>
 						</tr>
 						<tr v-if='i.hasClaims("P688")'>
-							<td>Product</td>
+							<td nowrap>Product</td>
 							<td>
 								<div v-for='protein_q in i.getClaimItemsForProperty("P688",true)'>
 									<wd-link :item='protein_q'></wd-link>
@@ -73,14 +73,14 @@
 						</tr>
 
 						<tr v-for='(data,db) in species_for_database' v-if='showLink(db)'>
-							<td>{{db}}</td>
+							<td nowrap>{{db}}</td>
 							<td>
 								<a target='_blank' class='external' :href='data.url+encodeURIComponent(genedb_id)'>{{genedb_id}}</a>
 								<small v-if='typeof data.note != "undefined"'>{{data.note}}</small>
 							</td>
 						</tr>
 						<tr v-if='i.hasClaims("P591")'>
-							<td>EC Number</td>
+							<td nowrap>EC Number</td>
 							<td>
 								<div v-for='ec in i.getStringsForProperty("P591")'>
 									<a target='_blank' class='external' :href='"http://enzyme.expasy.org/EC/"+encodeURIComponent(ec)'>{{ec}}</a>
@@ -88,11 +88,11 @@
 							</td>
 						</tr>
 						<tr v-if='apollo_url!=""'>
-							<td tt='apollo'></td>
+							<td nowrap tt='apollo'></td>
 							<td><a target='_blank' class='external' :href='apollo_url'>View this gene in Apollo</a></td>
 						</tr>
 						<tr>
-							<td tt='wikidata'></td>
+							<td nowrap tt='wikidata'></td>
 							<td><wd-link :item='q' :label='q'></wd-link></td>
 						</tr>
 						<tr v-for='claim in i.getClaimsForProperty("P1343")'>
