@@ -189,7 +189,8 @@ let SpeciesPage = Vue.extend ( {
 		} ,
 		loadSpeciesData : function (resolve, reject) {
 			var me = this ;
-			let sparql = "SELECT ?chr (count(?gene) AS ?cnt) { ?chr wdt:P703 wd:" + me.species_q + " . ?gene wdt:P31 wd:Q7187 ; wdt:P3382 [] ; wdt:P1057 ?chr } GROUP BY ?chr ORDER BY ?chr" ;
+			let sparql = "SELECT ?chr (count(?gene) AS ?cnt) { ?chr wdt:P703 wd:" + me.species_q + " . ?gene wdt:P3382 [] ; wdt:P1057 ?chr } GROUP BY ?chr ORDER BY ?chr" ;
+			// removed: wdt:P31 wd:Q7187 ;
 			wd.loadSPARQL ( sparql , function ( d ) {
 				me.chromosomes = [] ;
 				$.each ( d.results.bindings , function ( k , v ) {
