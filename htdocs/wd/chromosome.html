@@ -12,6 +12,11 @@
 				Genes on chromosome <wd-link :item='q_chr'></wd-link>
 			</div>
 		</div>
+		<div class='row' v-if='species_apollo!=""&&chromosome_name!=""'>
+			<a :href='"https://apollo.genedb.org/"+species_apollo+"/jbrowse/index.html?loc="+chromosome_name+"&tracks=DNA%2CAnnotations%2Ccentromere%2CmRNA%2Cgene&highlight="'>
+				View chromosome in Apollo
+			</a>
+		</div>
 		<div class='row'>
 			<gene-list :genes='genes'></gene-list>
 		</div>
@@ -26,7 +31,7 @@
 
 let Chromosome = Vue.extend ( {
 	props : [ 'q_chromosome' ] ,
-	data : function () { return { loading:true , genes:[] , q_chr:'' , error_message:'' } } ,
+	data : function () { return { loading:true , genes:[] , q_chr:'' , error_message:'' , species_q:'' , species_apollo:'' , chromosome_name:'' } } ,
 	created : function () {
 		var me = this ;
 		if ( /^Q\d+$/.test(me.q_chromosome) ) {
@@ -58,18 +63,27 @@ let Chromosome = Vue.extend ( {
 			let me = this ;
 			me.q_chr = q ;
 			me.genes = [] ;
-			let sparql = 'SELECT DISTINCT ?q ?genedb ?start ?end { ?q wdt:P1057 wd:'+me.q_chr+' ; wdt:P3382 ?genedb OPTIONAL { ?q wdt:P644 ?start } OPTIONAL { ?q wdt:P645 ?end } } ORDER BY (?start*1)' ;
+			let sparql = 'SELECT DISTINCT ?q ?genedb ?start ?end ?species { ?q wdt:P1057 wd:'+me.q_chr+' ; wdt:P703 ?species ; wdt:P3382 ?genedb OPTIONAL { ?q wdt:P644 ?start } OPTIONAL { ?q wdt:P645 ?end } } ORDER BY (?start*1)' ;
 			wd.loadSPARQL ( sparql , function ( d ) {
 				let to_load = [ me.q_chr ] ;
 				$.each ( d.results.bindings , function ( dummy , b ) {
-					let q = b.q.value.replace(/^.+\/Q/,'Q') ; ;
+					me.species_q = b.species.value.replace(/^.+\/Q/,'Q') ;
+					let q = b.q.value.replace(/^.+\/Q/,'Q') ;
 					let start = (typeof b.start=='undefined') ? '' : b.start.value*1 ;
 					let end = (typeof b.end=='undefined') ? '' : b.end.value*1 ;
 					me.genes.push ( { q:q , start:start , end:end , genedb:b.genedb.value } ) ;
 					to_load.push ( q ) ;
 				} ) ;
+				$.each ( main_config , function ( group , list ) {
+					$.each ( list , function ( dummy , data ) {
+						if ( data.wikidata_id == me.species_q ) me.species_apollo = data.abbreviation ;
+					} ) ;
+				} ) ;
+				console.log(JSON.stringify(me.species_q),JSON.stringify(me.species_apollo));
 				me.genes.sort ( function ( a , b ) { return a.start*1 - b.start*1 } ) ;
 				wd.getItemBatch ( to_load , function () {
+					let chr = wd.getItem ( me.q_chr ) ;
+					me.chromosome_name = chr.getLabel();
 					$.each ( me.genes , function ( k , v ) {
 						v.i = wd.getItem ( v.q ) ;
 					} ) ;
