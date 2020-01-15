@@ -11,7 +11,7 @@
 							<wd-link :item='claim.mainsnak.datavalue.value.id' as_text='1'></wd-link>
 						</div>
 						<div class='go-list-item-goterm2'>
-							(<router-link v-for='go_term in wd.getItem(claim.mainsnak.datavalue.value.id).getStringsForProperty("P686")' class='mr-1' :to='"/go/"+go_term'>{{go_term}}</router-link>)
+							(<router-link v-for='go_term in get_go_terms(claim.mainsnak.datavalue.value.id)' class='mr-1' :to='"/go/"+go_term'>{{go_term}}</router-link>)
 						</div>
 					</div>
 					<div class='go-list-item-details'>
@@ -117,6 +117,19 @@ Vue.component ( 'go-list' , {
 			let url_pattern = i.getFirstStringForProperty('P1630');
 			if ( url_pattern == '' ) return '' ;
 			return url_pattern.replace ( /\$1/ , encodeURIComponent(value) ) ;
+		} ,
+		get_go_terms : function ( q ) {
+			let me = this ;
+			let i = wd.getItem(q) ;
+			let claims = i.getClaimsForProperty("P686") ;
+			let ret = [] ;
+			$.each ( claims , function ( dummy , claim ) {
+				if ( claim.rank == 'deprecated' ) return ;
+				if ( typeof claim.qualifers!='undefined' && typeof claim.qualifers.P2241!='undefined' ) return ;
+				let go_term = i.getClaimTargetString ( claim ) ;
+				ret.push ( go_term ) ;
+			} ) ;
+			return ret //wd.getItem(q).getStringsForProperty("P686")
 		} ,
 		get_evidence_code : function ( id ) {
 			return evidence_codes[id]
