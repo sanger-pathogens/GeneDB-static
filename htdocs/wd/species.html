@@ -14,14 +14,6 @@
 			<div class='card-body'>
 				<table class='table table-sm table-borderless'>
 					<tbody>
-						<tr v-if='derived.apollo_url!=""'>
-							<td nowrap>Apollo</td>
-							<td style='width:100%'>
-								<a :href="derived.apollo_url" target='_blank'>
-									<strong><i>{{organism.genus}} {{organism.species}}</i> in Apollo</strong>
-								</a>
-							</td>
-						</tr>
 						<tr v-if='derived.invades.length>0'>
 							<td nowrap>Infects</td>
 							<td style='width:100%'>
@@ -115,7 +107,7 @@ let SpeciesPage = Vue.extend ( {
 	props : ['species_id'] ,
 	template : '#species-template' ,
 	data : function () { return { loading:true , species_q:'' , i:{} , external_props:['P685','P486'] , chromosomes:[] , organism:'' , error:false , error_message:'' , parent_q:'' ,
-		derived:{apollo_url:'',image_url:'',invades:[]}
+		derived:{image_url:'',invades:[]}
 	} } ,
 	created : function () {
 		let me = this ;
@@ -162,24 +154,10 @@ let SpeciesPage = Vue.extend ( {
 				else callback () ; // Not found, or too many found
 			} ) ;
 		} ,
-		setApolloURL : function () {
-			let me = this ;
-			me.derived.apollo_url = '' ;
-			let species_key = '' ;
-			$.each ( main_config , function ( group , species_list ) {
-				$.each ( species_list , function ( dummy , species ) {
-					if ( species.wikidata_id == me.species_q ) species_key = species.abbreviation ;
-				} ) ;
-			} ) ;
-			if ( species_key != '' ) {
-				me.derived.apollo_url = "https://apollo.genedb.org/" + species_key + "/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=";
-			}
-		} ,
 		setSpeciesQ : function ( q ) {
 			let me = this ;
 			me.species_q = q ;
-			me.derived = {apollo_url:'',image_url:'',invades:[]} ;
-			me.setApolloURL() ;
+			me.derived = {image_url:'',invades:[]} ;
 			Promise.all ( [
 				new Promise( me.loadSpeciesItem ) ,
 				new Promise( me.loadSpeciesData )

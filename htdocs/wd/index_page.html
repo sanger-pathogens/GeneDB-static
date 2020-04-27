@@ -58,8 +58,7 @@
               <h1 class="card-title">News</h1>
               <div class="card bg-light-grey border-rounded" id="news">
                 <div class="card-body">
-                  <p class="card-text">GeneDB has been updated. You can now view species and search for genes, and view structures and functional annotations in <a href='https://apollo.genedb.org/jbrowse/' target='_blank'>Apollo</a> 
-			which is based on <a href='https://jbrowse.org/' target='_blank'>JBrowse</a>. 
+                  <p class="card-text">GeneDB has been updated.
 			This site will be updated on a weekly basis. For more information, please see the <a href='./faqs.html'>FAQs</a>.
                   </p>
                 </div>
@@ -164,7 +163,6 @@ let IndexPage = Vue.extend ( {
 			$('#'+id+'_button') // Set go button
 				.removeClass('disabled')
         .attr('href', '#/species/'+me.groups[id].selection // Opens species page
-				//.attr('href', 'https://apollo.genedb.org/'+me.groups[id].selection+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=' // Opens Apollo
         ) ;
 		}
 	} ,

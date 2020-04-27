@@ -87,10 +87,6 @@
 								</div>
 							</td>
 						</tr>
-						<tr v-if='apollo_url!=""'>
-							<td nowrap tt='apollo'></td>
-							<td><a target='_blank' class='external' :href='apollo_url'>View this gene in Apollo</a></td>
-						</tr>
 						<tr>
 							<td nowrap tt='wikidata'></td>
 							<td><wd-link :item='q' :label='q'></wd-link></td>
@@ -153,7 +149,6 @@
 		</div>
 		<div v-else>
 			{{error_message}}.
-			<span>Maybe try <a href='https://apollo.genedb.org' class='external'>WebApollo</a>?</span>
 		</div>
 	</div>
 	<genedb-footer></genedb-footer>
@@ -174,8 +169,6 @@ let Gene = Vue.extend ( {
 	orthologs_collapsed : true,
 	orthologs : {} ,
 	orthologs_all : [] ,
-	species2apollo : { 'Q311383':'7383' } ,
-	apollo_url : '' ,
 	go_props : ["P680","P681","P682"] ,
 	main_subject : [] , loading_main_subject:false , show_all_main_subject:false ,
 	species_for_database : {
@@ -196,7 +189,6 @@ let Gene = Vue.extend ( {
 			return ;
 		}
 		me.main_subject = [] ;
-		me.apollo_url = '' ;
 		Promise.all ( [
 			new Promise( me.loadByGeneDB ) ,
 		] )	.then ( () => {
@@ -213,7 +205,6 @@ let Gene = Vue.extend ( {
 				}
 			}
 			if ( me.q != '' ) me.loadLiterature() ;
-			me.generateApolloURL() ;
 			me.loading = false ;
 		} , () => {
 			me.loading = false ;
@@ -241,32 +232,6 @@ let Gene = Vue.extend ( {
 				if ( d.length == 0 ) return ;
 				me.main_subject = d.filter(function(q){return ignore_publications.indexOf(q)==-1}) ;
 				if ( d.length <= 20 ) me.loadLiteratureDetails() ;
-			} ) ;
-		} ,
-		generateApolloURL : function () {
-			var me = this ;
-			if ( typeof me.i == 'undefined' ) return ;
-			let taxa = me.i.getClaimItemsForProperty("P703",true) ;
-			if ( taxa.length == 0 ) return ;
-			let taxon_q = taxa[0] ;
-			let species_key = '' ;
-			$.each ( main_config , function ( group , species_list ) {
-				$.each ( species_list , function ( dummy , species ) {
-					if ( species.wikidata_id == taxon_q ) species_key = species.abbreviation ;
-				} ) ;
-			} ) ;
-			if ( species_key == '' ) return ;
-			let chromosomes = (me.i.getClaimItemsForProperty("1057",true)) ;
-			if ( chromosomes.length == 0 ) return ;
-			let chr_q = chromosomes[0] ;
-			wd.getItemBatch ( [chr_q] , function () {
-				let chr_i = wd.getItem ( chr_q ) ;
-				if ( typeof chr_i == 'undefined' ) return ;
-				let chr_label = chr_i.getLabel('en') ;
-				let start = me.i.getFirstStringForProperty("P644") ;
-				let end = me.i.getFirstStringForProperty("P645") ;
-				if ( chr_label == '' || start == '' || end == '' ) return ;
-				me.apollo_url = "https://apollo.genedb.org/" + species_key + "/jbrowse/index.html?loc="+chr_label+"%3A"+start+".."+end+"&tracks=DNA%2CAnnotations%2Ccentromere%2CmRNA%2Cgene&highlight=" ;
 			} ) ;
 		} ,
 		loadByGeneDB : function(resolve, reject) {

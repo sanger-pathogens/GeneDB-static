@@ -31,17 +31,9 @@ jQuery(document).ready(function(){
     });
   });
 
-  // Forward main content selected option to apollo
   $('.select-link').on('change', function(){
     var select = $(this);
     $('.select-link').not(select).val('');
     $('.custom-button').addClass('disabled').attr('href', '#');
-    var dataset = select.parent();
-    var link = $('a', dataset);
-    link.attr('href', 'https://apollo.genedb.org/'+select.val()+'/jbrowse/index.html?tracks=DNA%2CAnnotations%2Cgene%2CmRNA&highlight=');
-    if( select.val() != '' ){
-      link.removeClass('disabled');
-    }
-
   });
 });
